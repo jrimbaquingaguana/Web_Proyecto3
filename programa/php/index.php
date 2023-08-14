@@ -72,7 +72,7 @@ include('dbconnection.php');
                         ?>
                                 <tr class="<?php echo $fila_clase; ?>">
                                     <td><?php echo $cnt; ?></td>
-                                    <td><?php echo $row['codigo']; ?></td>
+                                    <td><?php echo $row['ID']; ?></td>
                                     <td><?php echo $row['nombre']; ?> 
                                     <td><?php echo $row['cantidad']; ?></td>
                                     <td><?php echo $row['precio']; ?></td>
