@@ -34,7 +34,7 @@ if (isset($_POST['submit2'])) {
         
         // Calcular la suma
         $sumaTotalCantidad = $valorCantidad + $valorNuevo;
-        $sumaTotalPrecio= $valorPrecio1+$valorPrecio;
+        $sumaTotalPrecio= ($valorPrecio1+$valorPrecio)/2;
         
         // Actualizar la base de datos con el nuevo valor
         $sqlActualizar = "UPDATE inventario SET cantidad = $sumaTotalCantidad, precio = $sumaTotalPrecio WHERE ID = $valorEscogido";
@@ -67,6 +67,9 @@ if (isset($_POST['submit2'])) {
 }
 $imagen='';
     if(isset($_FILES["foto"])){
+      $nombre1=$_POST["nombre"];
+      $cantidad=$_POST["cantidad4"];
+      $precio=$_POST["precio4"];
       $file=$_FILES["foto"];
       $nombre=$file["name"];
       $tipo=$file["type"];
@@ -85,16 +88,16 @@ $imagen='';
       else if($size>3*1024*1024){
           echo "Error, el tamaño máxmo permito es un 3MB";
   
-      }else{
-          $src=$carpeta.$nombre;
-          move_uploaded_file($ruta_provicional, $src);
-          $imagen="../fotos/".$nombre;
-
-          $query=mysqli_query($con, "INSERT INTO inventario (foto) VALUES ('$imagen')");
-          if ($query) {
-          echo "<script>alert('You have successfully inserted the data');</script>";
-          echo "<script type='text/javascript'> document.location ='index.php'; </script>";
-        }
+        }else{
+            $src=$carpeta.$nombre;
+            move_uploaded_file($ruta_provicional, $src);
+            $imagen="../fotos/".$nombre;
+  
+            $query=mysqli_query($con, "INSERT INTO inventario (nombre,cantidad,precio,foto) VALUES ('$nombre1','$cantidad','$precio','$imagen')");
+            if ($query) {
+            echo "<script>alert('You have successfully inserted the data');</script>";
+            echo "<script type='text/javascript'> document.location ='index.php'; </script>";
+          }
   
   }
 }
@@ -131,29 +134,68 @@ $imagen='';
     
     <div id="formulario1" style="display: none;">
         
-    <form  method="post" enctype="multipart/form-data">
+    <form  method="post" enctype="multipart/form-data" onsubmit="return validarNombre()">
 		<h2>Comprar</h2>
-		<p class="hint-text">Fill below form.</p>
-        <div class="form-group">
-			<div class="row">
-			
-			</div>        	
-        </div>
-        <div class="form-group">
-        </div>
-        <div class="form-group">
-        </div>
-        <div class="form-group">
-			<label for="unidades">Seleccione una unidad de medida:</label>
-			
-		</div>
+        <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required>
+    <br><br>
+    
+    <label for="cantidad">Cantidad:</label>
+    <input type="number" id="cantidad4" name="cantidad4" min="1" required>
+    <br><br>
+    
+    <label for="precio">Precio:</label>
+    <input type="number" id="precio4" name="precio4" min="0.01" step="0.01" required>
+    <br><br>
 		
     
 		      
       
 		<div class="form-group">
     <input type="file" name="foto"><br><br>
-	<input type="submit" value="Guardar">
+    <label for="codigo">Selecciona la persona encargada de comprar el producto:</label>
+    <select id="codigo2" name="codigo2">
+
+    <?php
+        $servername = "localhost";
+        $username = "jose";
+        $password = "040500";
+        $dbname = "proyecto_web";
+
+        // Crear conexión
+        $conn = new mysqli($servername, $username, $password, $dbname);
+
+        // Verificar la conexión
+        if ($conn->connect_error) {
+            die("Conexión fallida: " . $conn->connect_error);
+        }
+
+        // Obtener códigos existentes desde la base de datos
+        $sql = "SELECT id_usuario,nombreu FROM usuarios WHERE rol='Bodegero' or rol='Administrador' ";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo '<option value="' . $row['id_usuario'] . '">' . $row['nombreu'] . '</option>';
+            }
+        }
+
+        // Cerrar la conexión
+        $conn->close();
+        ?>
+
+        
+    
+    
+    </select>
+    <select id="codigo2" name="codigo2">
+    <option value="0">Nueva Compra</option>
+
+    </select>
+
+    
+    <button type="submit" class="btn btn-success btn-lg btn-block" name="foto">Enviar</button>
+
         </div>
 		<div class="form-group">
         <?php
@@ -165,6 +207,7 @@ $imagen='';
           <p>Hora actual: <?php echo $hora_actual; ?></p>
           <p>Fecha actual: <?php echo $fecha_actual; ?></p>
         </div>
+
     </form>
 
 </div> 
@@ -339,9 +382,10 @@ $imagen='';
                     <tbody>
                         <?php
                         if (isset($_POST['submit3'])) {
+    
                             $consulta = $_POST['consulta'];
                             $condicion = "ID_compra = '$consulta'";
-                            $ret = mysqli_query($con, "SELECT * FROM compra INNER JOIN usuarios ON usuarios.id_usuario=compra.codigo_usuario INNER JOIN inventario ON compra.codigo_usuario=inventario.id");
+                            $ret = mysqli_query($con, "SELECT * FROM compra INNER JOIN usuarios ON usuarios.id_usuario=compra.codigo_usuario INNER JOIN inventario ON compra.codigo_usuario=inventario.id WHERE $condicion ");
                             
                             $cnt = 1;
                             $row = mysqli_num_rows($ret);

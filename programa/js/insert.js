@@ -70,3 +70,17 @@ document.getElementById("precio1").addEventListener("input", function() {
         this.setCustomValidity("");
     }
 });
+
+
+function validarNombre() {
+    var nombre = document.getElementById("nombre").value;
+    var letrasRegex = /^[a-zA-Z\s]*$/; // Expresión regular para validar letras y espacios
+
+    if (!nombre.match(letrasRegex)) {
+        alert("El nombre solo debe contener letras y espacios.");
+        
+        return false;
+    }
+
+    return true;
+}
