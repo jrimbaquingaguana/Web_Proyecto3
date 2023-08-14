@@ -12,6 +12,7 @@ if (isset($_POST['submit2'])) {
     $valorNuevo = $_POST['cantidad1'];
     $valorPrecio = $_POST['precio1'];
     $valorEscogido=$_POST['codigo1'];
+    $codigo_Usuario=$_POST['codigo2'];
 
     
     // Crear conexión
@@ -37,7 +38,7 @@ if (isset($_POST['submit2'])) {
         
         // Actualizar la base de datos con el nuevo valor
         $sqlActualizar = "UPDATE inventario SET cantidad = $sumaTotalCantidad, precio = $sumaTotalPrecio WHERE ID = $valorEscogido";
-        
+
         if ($conn->query($sqlActualizar) === TRUE) {
         } else {
             echo "Error al actualizar la base de datos: " . $conn->error;
@@ -47,6 +48,22 @@ if (isset($_POST['submit2'])) {
     }
         // Cerrar la conexión
         $conn->close();
+       
+        $valorNuevo = $_POST['cantidad1'];
+    $valorPrecio = $_POST['precio1'];
+    $valorEscogido=$_POST['codigo1'];
+    $codigo_Usuario=$_POST['codigo2'];
+        $query=mysqli_query($con, "insert into compra(codigo_usuario,codigo_inventario, cantidadc, precioc) value('$codigo_Usuario','$valorEscogido', '$valorNuevo', '$valorPrecio')");
+
+        if ($query) {
+        echo "<script>alert('You have successfully inserted the data');</script>";
+       // echo "<script type='text/javascript'> document.location ='../index.php'; </script>";
+      }
+      else
+        {
+          echo "<script>alert('Something Went Wrong. Please try again');</script>";
+        }
+
 }
 $imagen='';
     if(isset($_FILES["foto"])){
@@ -179,7 +196,7 @@ $imagen='';
     <input type="number" id="precio1" name="precio1" step="0.01" min="0.01" required>
     <br><br>
     
-    <label for="codigo">Selecciona un Código:</label>
+    <label for="codigo">Selecciona un Código del material:</label>
     <select id="codigo1" name="codigo1">
 
     <?php
@@ -203,6 +220,41 @@ $imagen='';
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 echo '<option value="' . $row['ID'] . '">' . $row['nombre'] . '</option>';
+            }
+        }
+
+        // Cerrar la conexión
+        $conn->close();
+        ?>
+
+        
+    
+    
+    </select>
+    <label for="codigo">Selecciona la persona encargada de comprar el producto:</label>
+    <select id="codigo2" name="codigo2">
+
+    <?php
+        $servername = "localhost";
+        $username = "jose";
+        $password = "040500";
+        $dbname = "proyecto_web";
+
+        // Crear conexión
+        $conn = new mysqli($servername, $username, $password, $dbname);
+
+        // Verificar la conexión
+        if ($conn->connect_error) {
+            die("Conexión fallida: " . $conn->connect_error);
+        }
+
+        // Obtener códigos existentes desde la base de datos
+        $sql = "SELECT id_usuario,nombreu FROM usuarios WHERE rol='Bodegero' or rol='Administrador' ";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo '<option value="' . $row['id_usuario'] . '">' . $row['nombreu'] . '</option>';
             }
         }
 
