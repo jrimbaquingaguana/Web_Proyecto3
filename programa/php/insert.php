@@ -13,6 +13,7 @@ if (isset($_POST['submit2'])) {
     $valorPrecio = $_POST['precio1'];
     $valorEscogido=$_POST['codigo1'];
     $codigo_Usuario=$_POST['codigo2'];
+    $unidad=$_POST['unidad'];
 
     
     // Crear conexión
@@ -37,7 +38,7 @@ if (isset($_POST['submit2'])) {
         $sumaTotalPrecio= ($valorPrecio1+$valorPrecio)/2;
         
         // Actualizar la base de datos con el nuevo valor
-        $sqlActualizar = "UPDATE inventario SET cantidad = $sumaTotalCantidad, precio = $sumaTotalPrecio WHERE ID = $valorEscogido";
+        $sqlActualizar = "UPDATE inventario SET cantidad = $sumaTotalCantidad, precio_promedio = $sumaTotalPrecio WHERE ID = $valorEscogido";
 
         if ($conn->query($sqlActualizar) === TRUE) {
         } else {
@@ -54,7 +55,7 @@ if (isset($_POST['submit2'])) {
     $valorEscogido=$_POST['codigo1'];
     $codigo_Usuario=$_POST['codigo2'];
         $query=mysqli_query($con, "insert into compra(codigo_usuario,codigo_inventario, cantidadc, precioc) value('$codigo_Usuario','$valorEscogido', '$valorNuevo', '$valorPrecio')");
-
+        
         if ($query) {
         echo "<script>alert('You have successfully inserted the data');</script>";
        // echo "<script type='text/javascript'> document.location ='../index.php'; </script>";
@@ -67,6 +68,7 @@ if (isset($_POST['submit2'])) {
 }
 $imagen='';
     if(isset($_FILES["foto"])){
+      $unidades=$_POST["unidad"]
       $nombre1=$_POST["nombre"];
       $cantidad=$_POST["cantidad4"];
       $precio=$_POST["precio4"];
@@ -92,8 +94,8 @@ $imagen='';
             $src=$carpeta.$nombre;
             move_uploaded_file($ruta_provicional, $src);
             $imagen="../fotos/".$nombre;
-  
-            $query=mysqli_query($con, "INSERT INTO inventario (nombre,cantidad,precio,foto) VALUES ('$nombre1','$cantidad','$precio','$imagen')");
+            
+            $query=mysqli_query($con, "INSERT INTO inventario (nombre,cantidad,precio,foto,unidad) VALUES ('$nombre1','$cantidad','$precio','$imagen','$unidad)");
             if ($query) {
             echo "<script>alert('You have successfully inserted the data');</script>";
             echo "<script type='text/javascript'> document.location ='index.php'; </script>";
@@ -171,7 +173,7 @@ $imagen='';
         }
 
         // Obtener códigos existentes desde la base de datos
-        $sql = "SELECT id_usuario,nombreu FROM usuarios WHERE rol='Bodegero' or rol='Administrador' ";
+        $sql = "SELECT id_usuario,nombreu FROM usuarios WHERE rol='Comprador' or rol='Administrador' ";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -183,11 +185,38 @@ $imagen='';
         // Cerrar la conexión
         $conn->close();
         ?>
+        
 
         
     
     
     </select>
+    <br>
+  <label for="unidad">Selecciona la unidad:</label>
+  <select id="unidad" name="unidad">
+    <optgroup label="Volumen">
+      <option value="litros">Litros</option>
+      <option value="mililitros">Mililitros</option>
+      <option value="decilitros">Decilitros</option>
+      <option value="centilitros">Centilitros</option>
+      <option value="microlitros">Microlitros</option>
+    </optgroup>
+    <optgroup label="Peso">
+      <option value="kilogramos">Kilogramos</option>
+      <option value="gramos">Gramos</option>
+      <option value="hectogramos">Hectogramos</option>
+      <option value="decagramos">Decagramos</option>
+      <option value="decigramos">Decigramos</option>
+    </optgroup>
+    <optgroup label="Peso">
+      <option value="Entero">Entero</option>
+    </optgroup>
+    
+  </select>
+  <br>
+
+
+
     <select id="codigo2" name="codigo2">
     <option value="0">Nueva Compra</option>
 
@@ -292,7 +321,7 @@ $imagen='';
         }
 
         // Obtener códigos existentes desde la base de datos
-        $sql = "SELECT id_usuario,nombreu FROM usuarios WHERE rol='Bodegero' or rol='Administrador' ";
+        $sql = "SELECT id_usuario,nombreu FROM usuarios WHERE rol='Comprador' or rol='Administrador' ";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
