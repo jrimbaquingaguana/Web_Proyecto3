@@ -52,8 +52,11 @@ include('dbconnection.php');
                             <th>Nombre </th>
                             <th>Cantidad </th>
                             <th>Precio unitario </th>
+                            <th>Precio promedio</th>
                             <th>Fecha de la ultima compra</th>
+                            <th>Unidades</th>
                             <th>Foto</th> 
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -76,7 +79,9 @@ include('dbconnection.php');
                                     <td><?php echo $row['nombre']; ?> 
                                     <td><?php echo $row['cantidad']; ?></td>
                                     <td><?php echo $row['precio']; ?></td>
+                                    <td><?php echo $row['precio_promedio']; ?></td>
                                     <td><?php echo $row['fecha'];?></td>
+                                    <td><?php echo $row['Unidades']; ?></td>
                                     <td><img src="<?php echo $row['foto']; ?>" width=80px $heigh=auto><td>
 
                                     <td>

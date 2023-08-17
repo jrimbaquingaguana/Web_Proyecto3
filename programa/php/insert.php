@@ -13,7 +13,7 @@ if (isset($_POST['submit2'])) {
     $valorPrecio = $_POST['precio1'];
     $valorEscogido=$_POST['codigo1'];
     $codigo_Usuario=$_POST['codigo2'];
-    $unidad=$_POST['unidad'];
+    
 
     
     // Crear conexión
@@ -68,7 +68,7 @@ if (isset($_POST['submit2'])) {
 }
 $imagen='';
     if(isset($_FILES["foto"])){
-      $unidades=$_POST["unidad"]
+      $uni=$_POST['unidad'];
       $nombre1=$_POST["nombre"];
       $cantidad=$_POST["cantidad4"];
       $precio=$_POST["precio4"];
@@ -95,7 +95,7 @@ $imagen='';
             move_uploaded_file($ruta_provicional, $src);
             $imagen="../fotos/".$nombre;
             
-            $query=mysqli_query($con, "INSERT INTO inventario (nombre,cantidad,precio,foto,unidad) VALUES ('$nombre1','$cantidad','$precio','$imagen','$unidad)");
+            $query=mysqli_query($con, "INSERT INTO inventario (nombre,cantidad,precio,foto,Unidades) VALUES ('$nombre1','$cantidad','$precio','$imagen','$uni')");
             if ($query) {
             echo "<script>alert('You have successfully inserted the data');</script>";
             echo "<script type='text/javascript'> document.location ='index.php'; </script>";
@@ -127,7 +127,7 @@ $imagen='';
 <div class="signup-form">
 <h1>Selección de Formulario</h1>
     <select id="opcion" onchange="mostrarFormulario()">
-    <option value="default">Selecciona una opción</option>
+    
         <option value="opcion1">Comprar producto nuevo</option>
         <option value="opcion2">Comprar producto existente</option>
         <option value="opcion3"selected >Consultar compra</option>
@@ -192,7 +192,7 @@ $imagen='';
     
     </select>
     <br>
-  <label for="unidad">Selecciona la unidad:</label>
+  <label >Selecciona la unidad:</label>
   <select id="unidad" name="unidad">
     <optgroup label="Volumen">
       <option value="litros">Litros</option>
@@ -217,8 +217,7 @@ $imagen='';
 
 
 
-    <select id="codigo2" name="codigo2">
-    <option value="0">Nueva Compra</option>
+   
 
     </select>
 
@@ -286,15 +285,17 @@ $imagen='';
         }
 
         // Obtener códigos existentes desde la base de datos
-        $sql = "SELECT ID,nombre FROM inventario";
+        $sql = "SELECT ID,nombre,Unidades FROM inventario";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 echo '<option value="' . $row['ID'] . '">' . $row['nombre'] . '</option>';
+                
+
             }
         }
-
+        
         // Cerrar la conexión
         $conn->close();
         ?>
@@ -303,6 +304,25 @@ $imagen='';
     
     
     </select>
+
+    <script>
+        const codigo1Select = document.getElementById('codigo1');
+        const resultadoConsultaDiv = document.getElementById('resultado_consulta');
+
+        codigo1Select.addEventListener('change', () => {
+            const valorSeleccionado = codigo1Select.value;
+
+            // Hacer una solicitud AJAX para obtener los resultados de la consulta
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', `consulta.php?valor=${valorSeleccionado}`, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    resultadoConsultaDiv.innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send();
+        });
+    </script>
     <label for="codigo">Selecciona la persona encargada de comprar el producto:</label>
     <select id="codigo2" name="codigo2">
 
@@ -338,7 +358,9 @@ $imagen='';
     
     
     </select>
-		
+    
+
+    
     
 	        <div class="form-group">
             <button type="submit" class="btn btn-success btn-lg btn-block" name="submit2">Enviar</button>
@@ -354,8 +376,19 @@ $imagen='';
           <p>Fecha actual: <?php echo $fecha_actual; ?></p>
         </div>
     </form>
+    
 </div>
    
+
+
+
+
+
+
+
+
+
+
 
     <div id="formulario3" >
         
@@ -372,19 +405,62 @@ $imagen='';
         <div class="form-group">
         </div>
         <div class="form-group">
-        <label for="numero">Ingresa un número:</label>
-        <input type="text" id="numero" name="consulta" oninput="validarNumeros(event)">
+        <label for="unidad">Selecciona un codigo de compra:</label>
+
+        <select id="consulta" name="consulta">
+
+
+    <?php
+        $servername = "localhost";
+        $username = "jose";
+        $password = "040500";
+        $dbname = "proyecto_web";
+
+        // Crear conexión
+        $conn = new mysqli($servername, $username, $password, $dbname);
+
+        // Verificar la conexión
+        if ($conn->connect_error) {
+            die("Conexión fallida: " . $conn->connect_error);
+        }
+
+        // Obtener códigos existentes desde la base de datos
+        $sql = "SELECT ID_compra FROM compra ORDER BY ID_compra ASC ";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo '<option value="' . $row['ID_compra'] . '">' . $row['ID_compra'] . '</option>';
+            }
+        }
+
+        // Cerrar la conexión
+        $conn->close();
+        ?>
+        
+
+        
+    
+    
+    </select>
 		</div>
 		
     
 		      
       
 		<div class="form-group">
-   
+
+
+
+        
         </div>
         <div class="form-group">
         <button  class="btn btn-success btn-lg btn-block" name="submit3">Consultar</button>
         </div>
+        
+       
+
+        
 		<div class="form-group">
         <?php
 
@@ -403,9 +479,11 @@ $imagen='';
                             <th>Nombre del producto</th>
                             <th>Cantidad comprada </th>
                             <th>Precio unitario </th>
+                            <th>Unidades</th>
                             <th>Fecha de la compra</th>
                             <th>Persona que compro</th>
                             <th>Rol de la persona</th>
+                        
                         </tr>
                     </thead>
                     <tbody>
@@ -430,6 +508,7 @@ $imagen='';
                                         <td><?php echo $row['nombre']; ?></td>
                                         <td><?php echo $row['cantidadc']; ?></td>
                                         <td><?php echo $row['precioc']; ?></td>
+                                        <td><?php echo $row['Unidades']; ?></td>
                                         <td><?php echo $row['fechac']; ?></td>
                                         <td><?php echo $row['nombreu']; ?></td>
                                         <td><?php echo $row['rol']; ?></td>
