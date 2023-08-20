@@ -26,7 +26,7 @@
         </thead>
         <tbody>
             <?php
-            $conexion = mysqli_connect("localhost", "admin", "admin", "productos_hogar");
+            $conexion = mysqli_connect("localhost", "jose", "040500", "proyecto_web");
             if (!$conexion) {
                 die("Error de conexión: " . mysqli_connect_error());
             }
@@ -42,7 +42,7 @@
 
                 // Comprobamos si hay cantidad pendiente para ser confirmada
                 if ($fila['pendiente'] > 0) {
-                    echo "<td><a href='confirmar.php?id=" . $fila['id'] . "'>Confirmar</a></td>";
+                    echo "<td><a href='confirmar.php?id=" . $fila['ID'] . "'>Confirmar</a></td>";
                 } else {
                     echo "<td>No hay ningún producto para actualizar</td>";
                 }
@@ -50,7 +50,7 @@
                 // Columna de acciones
                 echo "<td>
                         <form action='procesar.php' method='post'>
-                            <input type='hidden' name='producto_id' value='".$fila['id']."'>
+                            <input type='hidden' name='producto_id' value='".$fila['ID']."'>
                             <input type='submit' name='eliminarProducto' value='Eliminar'>
                         </form>
                       </td>";
@@ -58,7 +58,7 @@
                 // Columna para reducir cantidad
                 echo "<td>
                         <form action='procesar.php' method='post'>
-                            <input type='hidden' name='producto_id' value='".$fila['id']."'>
+                            <input type='hidden' name='producto_id' value='".$fila['ID']."'>
                             <input type='number' name='cantidad_eliminar' value='1' min='1' max='".$fila['cantidad']."' style='width: 50px;'>
                             <input type='submit' name='reducirProducto' value='Reducir'>
                         </form>
@@ -72,7 +72,7 @@
     </table>
 
     <!-- Enlace para regresar y crear un nuevo producto -->
-    <a href="index.php" class="create-product-btn">Crear Producto</a>
+    <a href="index_despacho.php" class="create-product-btn">Crear Producto</a>
 
     <!-- Mostramos un mensaje si no se ha creado un producto recientemente -->
     <?php 

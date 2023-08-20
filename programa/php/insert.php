@@ -25,7 +25,7 @@ if (isset($_POST['submit2'])) {
     }
     
     // Obtener el valor existente desde la base de datos
-    $sql = "SELECT cantidad,precio FROM inventario WHERE ID = $valorEscogido"; // Cambiar esto al ID correcto
+    $sql = "SELECT cantidad,precio FROM inventario WHERE ID = $valorEscogido and tipo='MATERIAL'"; // Cambiar esto al ID correcto
     $result = $conn->query($sql);
     
     if ($result->num_rows > 0) {
@@ -38,7 +38,7 @@ if (isset($_POST['submit2'])) {
         $sumaTotalPrecio= ($valorPrecio1+$valorPrecio)/2;
         
         // Actualizar la base de datos con el nuevo valor
-        $sqlActualizar = "UPDATE inventario SET cantidad = $sumaTotalCantidad, precio_promedio = $sumaTotalPrecio WHERE ID = $valorEscogido";
+        $sqlActualizar = "UPDATE inventario SET cantidad = $sumaTotalCantidad, precio_promedio = $sumaTotalPrecio WHERE ID = $valorEscogido and tipo='MATERIAL'";
 
         if ($conn->query($sqlActualizar) === TRUE) {
         } else {
@@ -54,7 +54,8 @@ if (isset($_POST['submit2'])) {
     $valorPrecio = $_POST['precio1'];
     $valorEscogido=$_POST['codigo1'];
     $codigo_Usuario=$_POST['codigo2'];
-        $query=mysqli_query($con, "insert into compra(codigo_usuario,codigo_inventario, cantidadc, precioc) value('$codigo_Usuario','$valorEscogido', '$valorNuevo', '$valorPrecio')");
+   
+        $query=mysqli_query($con, "insert into compra(codigo_usuario,codigo_inventario, cantidadc, precio) value('$codigo_Usuario','$valorEscogido', '$valorNuevo', '$valorPrecio')");
         
         if ($query) {
         echo "<script>alert('You have successfully inserted the data');</script>";
@@ -95,10 +96,9 @@ $imagen='';
             move_uploaded_file($ruta_provicional, $src);
             $imagen="../fotos/".$nombre;
             
-            $query=mysqli_query($con, "INSERT INTO inventario (nombre,cantidad,precio,foto,Unidades) VALUES ('$nombre1','$cantidad','$precio','$imagen','$uni')");
+            $query=mysqli_query($con, "INSERT INTO inventario (nombre,cantidad,precio,foto,Unidades,tipo) VALUES ('$nombre1','$cantidad','$precio','$imagen','$uni','MATERIAL')");
             if ($query) {
             echo "<script>alert('You have successfully inserted the data');</script>";
-            echo "<script type='text/javascript'> document.location ='index.php'; </script>";
           }
   
   }
@@ -125,7 +125,7 @@ $imagen='';
 </head>
 <body>
 <div class="signup-form">
-<h1>Selección de Formulario</h1>
+<h1>Ingreso de material</h1>
     <select id="opcion" onchange="mostrarFormulario()">
     
         <option value="opcion1">Comprar producto nuevo</option>
@@ -137,7 +137,7 @@ $imagen='';
     <div id="formulario1" style="display: none;">
         
     <form  method="post" enctype="multipart/form-data" onsubmit="return validarNombre()">
-		<h2>Comprar</h2>
+		<h2>Nuevo Producto</h2>
         <label for="nombre">Nombre:</label>
     <input type="text" id="nombre" name="nombre" required>
     <br><br>
@@ -246,7 +246,7 @@ $imagen='';
     <div id="formulario2" style="display: none;">
         
     <form  method="post" enctype="multipart/form-data">
-		<h2>Comprar</h2>
+		<h2>Producto Existente</h2>
 		<p class="hint-text">Fill below form.</p>
         <div class="form-group">
 			<div class="row">
@@ -285,7 +285,7 @@ $imagen='';
         }
 
         // Obtener códigos existentes desde la base de datos
-        $sql = "SELECT ID,nombre,Unidades FROM inventario";
+        $sql = "SELECT ID,nombre,Unidades FROM inventario WHERE tipo='MATERIAL'";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -393,7 +393,7 @@ $imagen='';
     <div id="formulario3" >
         
     <form  method="post" enctype="multipart/form-data">
-		<h2>Comprar</h2>
+		<h2>Consultas Compra</h2>
 		<p class="hint-text">Fill below form.</p>
         <div class="form-group">
 			<div class="row">

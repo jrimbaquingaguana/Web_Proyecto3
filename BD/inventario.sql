@@ -37,7 +37,7 @@ CREATE TABLE `inventario` (
   `codigo_registro` varchar(255) DEFAULT NULL,
   `pendiente` int(11) DEFAULT '0',
   `precio` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+)  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `inventario`

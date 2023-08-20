@@ -61,7 +61,7 @@ include('dbconnection.php');
                     </thead>
                     <tbody>
                         <?php
-                        $ret = mysqli_query($con, "SELECT * FROM inventario");
+                        $ret = mysqli_query($con, "SELECT * FROM inventario WHERE tipo='MATERIAL'");
                         $cnt = 1;
                         $row = mysqli_num_rows($ret);
                         if ($row > 0) {

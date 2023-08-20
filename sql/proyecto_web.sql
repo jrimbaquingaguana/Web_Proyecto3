@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-08-2023 a las 06:45:44
+-- Tiempo de generación: 20-08-2023 a las 23:32:40
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -79,21 +79,33 @@ CREATE TABLE `inventario` (
   `precio_promedio` double NOT NULL,
   `foto` varchar(200) NOT NULL,
   `fecha` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `Unidades` varchar(255) NOT NULL
+  `Unidades` varchar(255) NOT NULL,
+  `cantidad_necesaria` int(11) NOT NULL DEFAULT 0,
+  `codigo_registro` varchar(255) DEFAULT NULL,
+  `pendiente` int(11) NOT NULL DEFAULT 0,
+  `precio_despacho` decimal(10,2) DEFAULT NULL,
+  `tipo` enum('PRODUCTO','MATERIAL') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `inventario`
 --
 
-INSERT INTO `inventario` (`ID`, `nombre`, `cantidad`, `precio`, `precio_promedio`, `foto`, `fecha`, `Unidades`) VALUES
-(1, 'Madera Triplex', 103, 57.32, 0, '../fotos/marvel.jpg', '2023-08-16 23:35:09', 'pepe'),
-(3, 'Madera normal', 89, 11.5, 8.255, '../fotos/foto.jpg', '2023-08-16 22:17:31', ''),
-(13, 'pepa.jpg', 9, 1, 0.52, '../fotos/pepa.jpg', '2023-08-16 22:33:13', ''),
-(14, 'pepa', 3, 1, 1, '../fotos/pepa.jpg', '2023-08-16 22:58:13', ''),
-(15, 'Llavero', 15, 5, 0, '../fotos/hulk.png', '2023-08-16 22:20:58', ''),
-(16, 'Jose', 382, 0.01, 61.505, '../fotos/hulk.png', '2023-08-16 23:34:52', 'mililitros'),
-(17, 'Pablito', 15, 15, 0, '', '2023-08-16 23:21:16', 'hola');
+INSERT INTO `inventario` (`ID`, `nombre`, `cantidad`, `precio`, `precio_promedio`, `foto`, `fecha`, `Unidades`, `cantidad_necesaria`, `codigo_registro`, `pendiente`, `precio_despacho`, `tipo`) VALUES
+(1, 'Madera Triplex', 103, 57.32, 0, '../fotos/marvel.jpg', '2023-08-20 16:13:29', 'pepe', 0, NULL, 0, 0.00, 'MATERIAL'),
+(3, 'Madera normal', 89, 11.5, 8.255, '../fotos/foto.jpg', '2023-08-20 16:13:29', '', 0, NULL, 0, 0.00, 'MATERIAL'),
+(13, 'pepa.jpg', 9, 1, 0.52, '../fotos/pepa.jpg', '2023-08-20 16:13:29', '', 0, NULL, 0, 0.00, 'MATERIAL'),
+(14, 'pepa', 3, 1, 1, '../fotos/pepa.jpg', '2023-08-20 16:13:29', '', 0, NULL, 0, 0.00, 'MATERIAL'),
+(15, 'Llavero', 15, 5, 0, '../fotos/hulk.png', '2023-08-20 16:13:29', '', 0, NULL, 0, 0.00, 'MATERIAL'),
+(16, 'Jose', 382, 0.01, 61.505, '../fotos/hulk.png', '2023-08-20 16:13:29', 'mililitros', 0, NULL, 0, 0.00, 'MATERIAL'),
+(17, 'Pablito', 15, 15, 0, '', '2023-08-20 16:13:29', 'hola', 0, NULL, 0, 0.00, 'MATERIAL'),
+(18, 'Taladro', 0, 0.05, 0, '../fotos/images.jpeg', '2023-08-20 16:07:48', 'Entero', 0, NULL, 0, 0.00, 'MATERIAL'),
+(19, 'Marco', 45, 10, 0, '../fotos/images.jpeg', '2023-08-20 16:13:29', 'mililitros', 0, NULL, 0, NULL, 'MATERIAL'),
+(20, 'Jose', 1, 0.02, 0, '../fotos/images.jpeg', '2023-08-20 15:48:56', 'litros', 0, NULL, 0, NULL, ''),
+(21, 'PUTO', 2, 0.02, 0, '../fotos/images.jpeg', '2023-08-20 15:49:43', 'mililitros', 0, NULL, 0, NULL, ''),
+(22, 'PUTO', 2, 0.02, 0, '../fotos/images.jpeg', '2023-08-20 16:14:47', 'mililitros', 0, NULL, 0, NULL, 'PRODUCTO'),
+(23, 'Jose', 1, 0.01, 0, '../fotos/images.jpeg', '2023-08-20 15:53:16', 'mililitros', 0, NULL, 0, NULL, 'MATERIAL'),
+(25, '1', 0, -2, 0, '', '2023-08-20 16:23:21', '', 0, '64e28449ebde1', 1, NULL, 'PRODUCTO');
 
 -- --------------------------------------------------------
 
@@ -156,7 +168,7 @@ ALTER TABLE `compra`
 -- AUTO_INCREMENT de la tabla `inventario`
 --
 ALTER TABLE `inventario`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
