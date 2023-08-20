@@ -21,17 +21,52 @@
             
             <div class="input-group">
                 <label for="material">Material necesario:</label>
-                <input type="text" name="material" id="material" required>
+                <select id="material" name="material">
+
+    <?php
+        $servername = "localhost";
+        $username = "jose";
+        $password = "040500";
+        $dbname = "proyecto_web";
+
+        // Crear conexión
+        $conn = new mysqli($servername, $username, $password, $dbname);
+
+        // Verificar la conexión
+        if ($conn->connect_error) {
+            die("Conexión fallida: " . $conn->connect_error);
+        }
+
+        // Obtener códigos existentes desde la base de datos
+        $sql = "SELECT nombre FROM inventario WHERE tipo='MATERIAL' ";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo '<option value="' . $row['nombre'] . '">' . $row['nombre'] . '</option>';
+            }
+        }
+
+        // Cerrar la conexión
+        $conn->close();
+        ?>
+        
+
+        
+    
+    
+    </select>
+                
             </div>
             
             <div class="input-group">
                 <label for="cantidad">Cantidad de material necesaria:</label>
-                <input type="number" name="cantidad_eliminar" value="1" min="1" max="<?php echo $fila['cantidad']; ?>" style="width: 50px;">
+                <input type="number" name="cantidad" id="cantidad" value="1" min="1" max="<?php echo $fila['cantidad']; ?>" style="width: 50px;">
             </div>
 			
 			<div class="input-group">
     <label for="precio">Precio:</label>
-    <input type="number" id="precio" name="precio" min="0.01" step="0.01" required>
+    <input type="number" id="precio"  name="precio" id="precio" min="0.01" step="0.01" required>
 </div>
 			
 			<div class="input-group">
@@ -73,33 +108,7 @@
         } else if (urlParams.get('error') === 'codigo_no_encontrado') {
             alert('Código no encontrado.');
         }
-    }
-    function validarFormulario(formulario) {
-    var cantidadInput = formulario.cantidad_eliminar;
-
-    if (isNaN(cantidadInput.value) || cantidadInput.value <= 0 || cantidadInput.value > <?php echo $fila['cantidad']; ?>) {
-        alert("Por favor, ingrese una cantidad válida.");
-        cantidadInput.focus();
-        return false;
-    }
-
-    return true;
-    }
-    document.addEventListener("DOMContentLoaded", function() {
-    var precioInput = document.getElementById("precio");
-    
-    precioInput.addEventListener("input", function() {
-        var inputValue = precioInput.value.trim();
-        
-        var regex = /^\d+(\.\d{1,2})?$/;
-        
-        if (!regex.test(inputValue) || parseFloat(inputValue) <= 0) {
-            precioInput.setCustomValidity("Ingrese un número decimal válido mayor que cero.");
-        } else {
-            precioInput.setCustomValidity("");
-        }
-    });
-});
+    }    
 </script>
 	
 </body>

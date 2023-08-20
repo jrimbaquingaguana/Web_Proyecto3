@@ -43,7 +43,7 @@ if (isset($_POST['crearProducto'])) {
             $consultaAgregar = "INSERT INTO inventario (nombre, pendiente, tipo, codigo_registro, precio) VALUES ('$nombreProducto', $numProductos, 'PRODUCTO', '$codigo', $precio * $numProductos)";
             
             if (mysqli_query($conexion, $consultaAgregar)) {
-                header("Location: index.php?success=producto_creado");
+                header("Location: index_despacho.php?success=producto_creado");
             } else {
                 die("Error al registrar el producto: " . mysqli_error($conexion));
             }
