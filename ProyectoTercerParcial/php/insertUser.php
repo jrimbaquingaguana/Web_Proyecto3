@@ -280,7 +280,7 @@ if($_SESSION["id_cargo"]==1){
                                     <button type="submit" class="btn btn-success btn-lg btn-block" name="submit">Registrar</button>
                                 </div>
                             </form>
-                            <a href="usersCrud.php">REGRESAR</a>
+                            <a href="usersCrud.php" style="color: cornflowerblue">REGRESAR</a>
                         </div>
 
                     </div><!-- End Bordered Tabs -->
