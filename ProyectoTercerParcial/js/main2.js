@@ -1,4 +1,4 @@
-var contador = true;
+var contador = false;
 function vista() {
     var texto = document.getElementById("verPassword");
     if (contador == true) {
