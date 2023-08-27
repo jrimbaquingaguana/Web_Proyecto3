@@ -1,13 +1,15 @@
+<?php
+session_start();
+if(empty($_SESSION["id"])){
+    header("location: ../login.php");
+}
+?>
 <?php 
 //Databse Connection file
 include('dbconnection.php');
 
 if (isset($_POST['submit2'])) {
-    $servername = "localhost";
-    $username = "jose";
-    $password = "040500";
-    $dbname = "rol";
-    
+  include ('conexion1.php');
     // Obtener el valor a sumar desde el formulario
     $valorNuevo = $_POST['cantidad1'];
     $valorPrecio = $_POST['precio1'];
@@ -69,6 +71,7 @@ if (isset($_POST['submit2'])) {
 }
 $imagen='';
     if(isset($_FILES["foto"])){
+      include ('conexion1.php');
       $uni=$_POST['unidad'];
       $nombre1=$_POST["nombre"];
       $cantidad=$_POST["cantidad4"];
@@ -121,12 +124,6 @@ $imagen='';
 </html>
 
 
-<?php
-session_start();
-if(empty($_SESSION["id"])){
-    header("location: ../login.php");
-}
-?>
 
 
 <!DOCTYPE html>
@@ -347,18 +344,7 @@ if(empty($_SESSION["id"])){
     <select id="codigo2" name="codigo2">
 
     <?php
-        $servername = "localhost";
-        $username = "jose";
-        $password = "040500";
-        $dbname = "rol";
-
-        // Crear conexión
-        $conn = new mysqli($servername, $username, $password, $dbname);
-
-        // Verificar la conexión
-        if ($conn->connect_error) {
-            die("Conexión fallida: " . $conn->connect_error);
-        }
+         include ('conexion1.php');
 
         // Obtener códigos existentes desde la base de datos
         $sql = "SELECT id,nombre FROM usuarios WHERE  id_cargo='2' ";
@@ -459,18 +445,7 @@ if(empty($_SESSION["id"])){
     <select id="codigo1" name="codigo1">
 
     <?php
-        $servername = "localhost";
-        $username = "jose";
-        $password = "040500";
-        $dbname = "rol";
-
-        // Crear conexión
-        $conn = new mysqli($servername, $username, $password, $dbname);
-
-        // Verificar la conexión
-        if ($conn->connect_error) {
-            die("Conexión fallida: " . $conn->connect_error);
-        }
+         include ('conexion1.php');
 
         // Obtener códigos existentes desde la base de datos
         $sql = "SELECT ID,nombre,Unidades FROM inventario WHERE tipo='MATERIAL'";
@@ -516,18 +491,7 @@ if(empty($_SESSION["id"])){
     <select id="codigo2" name="codigo2">
 
     <?php
-        $servername = "localhost";
-        $username = "jose";
-        $password = "040500";
-        $dbname = "rol";
-
-        // Crear conexión
-        $conn = new mysqli($servername, $username, $password, $dbname);
-
-        // Verificar la conexión
-        if ($conn->connect_error) {
-            die("Conexión fallida: " . $conn->connect_error);
-        }
+          include ('conexion1.php');
 
         // Obtener códigos existentes desde la base de datos
         $sql = "SELECT id,nombre FROM usuarios WHERE id_cargo='2' ";
@@ -589,18 +553,8 @@ if(empty($_SESSION["id"])){
 
 
     <?php
-        $servername = "localhost";
-        $username = "jose";
-        $password = "040500";
-        $dbname = "rol";
-
-        // Crear conexión
-        $conn = new mysqli($servername, $username, $password, $dbname);
-
-        // Verificar la conexión
-        if ($conn->connect_error) {
-            die("Conexión fallida: " . $conn->connect_error);
-        }
+       
+       include ('conexion1.php');
 
         // Obtener códigos existentes desde la base de datos
         $sql = "SELECT ID_compra FROM compra ORDER BY ID_compra ASC  ";
@@ -735,6 +689,7 @@ if(empty($_SESSION["id"])){
 
 </div>
     </div>
+    <a href="descargar_inserts.php" class="btn btn-primary">Descargar Ingreso de material</a>
 
 
     </div>
@@ -745,6 +700,7 @@ if(empty($_SESSION["id"])){
  <!-- ======= Footer ======= -->
  <footer id="footer" class="footer">
     <div class="copyright">
+
       &copy; Copyright <strong><span>JALD COMPANY</span></strong>. Todos los derechos reservados
     </div>
     <div class="credits">

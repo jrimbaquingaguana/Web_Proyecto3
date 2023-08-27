@@ -1,7 +1,7 @@
 <?php
 $usuario = $_POST['usuario'];
 $contraseña = $_POST['contraseña'];
-$conexion = mysqli_connect("localhost", "root", "Dark230900.", "rol");
+$conexion = mysqli_connect("localhost", "jose", "040500", "rol");
 
 $consulta = "SELECT * FROM usuarios WHERE usuario='$usuario'";
 $resultado = mysqli_query($conexion, $consulta);

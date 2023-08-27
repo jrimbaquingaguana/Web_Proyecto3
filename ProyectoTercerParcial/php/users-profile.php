@@ -91,7 +91,7 @@ if(empty($_SESSION["id"])){
                       <li class="dropdown-header">
                           <h6><?php
                               echo $_SESSION["nombre"]." ".$_SESSION["apellido"];
-                              
+
                             if($_SESSION["id_cargo"]==1){
                                 echo " <br>Administrador";
                             }else if($_SESSION["id_cargo"]==2){
@@ -175,14 +175,14 @@ if(empty($_SESSION["id"])){
 
           <?php if($_SESSION["id_cargo"]==1):?>
               <li class="nav-item">
-                  <a class="nav-link collapsed" href="../html/pages-register.html">
+                  <a class="nav-link collapsed" href="usersCrud.php">
                       <i class="bi bi-card-list"></i>
                       <span>Registrar Nuevos Usuarios</span>
                   </a>
               </li><!-- End Register Page Nav -->
           <?php endif; ?>
 
-          
+
 
       </ul>
 
