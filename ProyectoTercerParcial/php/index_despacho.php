@@ -84,6 +84,13 @@ if(empty($_SESSION["id"])){
             <li class="dropdown-header">
               <h6><?php
                   echo $_SESSION["nombre"]." ".$_SESSION["apellido"];
+                  if($_SESSION["id_cargo"]==1){
+                    echo "<br>Administrador";
+                }else if($_SESSION["id_cargo"]==2){
+                    echo "<br>Bodeguero";
+                }else{
+                    echo "<br>Productor";
+                }
                   ?></h6>
             </li>
             <li>

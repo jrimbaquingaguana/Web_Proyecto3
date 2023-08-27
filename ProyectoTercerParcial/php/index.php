@@ -262,6 +262,8 @@ if(empty($_SESSION["id"])){
 
                     </tbody>
                 </table>
+
+<a href="descargar_inventario.php" class="btn btn-primary">Descargar Inventario en Excel</a>
                 <div class="col-sm-5">
                             <h3>Inventario <b>Original</b></h3>
                         </div>
@@ -320,7 +322,7 @@ if(empty($_SESSION["id"])){
 
                     </tbody>
                 </table>
-                <a href="descargar_inventario.php" class="btn btn-primary">Descargar Inventario en Excel</a>
+                <a href="descargar_inventario_original.php" class="btn btn-primary">Descargar Inventario en Excel</a>
             </div>
         </div>
     </div>

@@ -86,11 +86,11 @@ if(empty($_SESSION["id"])){
               <h6><?php
                   echo $_SESSION["nombre"]." ".$_SESSION["apellido"];
                   if($_SESSION["id_cargo"]==1){
-                    echo " Administrador";
+                    echo " <br>Administrador";
                 }else if($_SESSION["id_cargo"]==2){
-                    echo "Bodeguero";
+                    echo "<br>Bodeguero";
                 }else{
-                    echo "Productor";
+                    echo "<br>Productor";
                 }
                   ?></h6>
             </li>
