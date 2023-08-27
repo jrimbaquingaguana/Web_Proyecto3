@@ -102,7 +102,7 @@ $imagen='';
             
             $query=mysqli_query($con, "INSERT INTO inventario (nombre,cantidad,precio,foto,Unidades,tipo) VALUES ('$nombre1','$cantidad','$precio','$imagen','$uni','MATERIAL')");
             $query=mysqli_query($con, "INSERT INTO inventario_original (nombre,cantidad,precio_inicial,foto,Unidades) VALUES ('$nombre1','$cantidad','$precio','$imagen','$uni')");
-            $query=mysqli_query($con, "INSERT INTO compra(codigo_usuario, cantidadc, precioc,nombrec) VALUES ('$codigo_Usuario', '$cantidad', '$precio','$nombre1')");
+            $query=mysqli_query($con, "INSERT INTO compra(codigo_usuario, cantidadc, precioc,nombrec,unidadesc) VALUES ('$codigo_Usuario', '$cantidad', '$precio','$nombre1','$uni')");
 
             if ($query) {
             echo "<script>alert('You have successfully inserted the data');</script>";
@@ -341,30 +341,21 @@ $imagen='';
 		<div class="form-group">
     <input type="file" name="foto"><br><br>
     <label for="codigo">Persona encargada:</label>
+
     <select id="codigo2" name="codigo2">
-
+      
     <?php
-         include ('conexion1.php');
+    include ('conexion1.php');
 
-        // Obtener códigos existentes desde la base de datos
-        $sql = "SELECT id,nombre FROM usuarios WHERE  id_cargo='2' ";
-        $result = $conn->query($sql);
+    // Imprimir la opción con el valor de $_SESSION["nombre"]
+    echo '<option value="' . $_SESSION["id"] . '">' . $_SESSION["nombre"] . '</option>';
 
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo '<option value="' . $row['id'] . '">' . $row['nombre'] . '</option>';
-            }
-        }
-
-        // Cerrar la conexión
-        $conn->close();
-        ?>
-        
-
-        
+    // Cerrar la conexión
+    $conn->close();
+    ?>
+</select>
     
     
-    </select>
     <br><br>
   <label >Selecciona la unidad:</label>
   <select id="unidad" name="unidad">
@@ -489,28 +480,17 @@ $imagen='';
     <br><br>
     <label for="codigo">Persona encargada:</label>
     <select id="codigo2" name="codigo2">
-
     <?php
-          include ('conexion1.php');
+    include ('conexion1.php');
 
-        // Obtener códigos existentes desde la base de datos
-        $sql = "SELECT id,nombre FROM usuarios WHERE id_cargo='2' ";
-        $result = $conn->query($sql);
+    // Imprimir la opción con el valor de $_SESSION["nombre"]
+    echo '<option value="' . $_SESSION["id"] . '">' . $_SESSION["nombre"] . '</option>';
 
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo '<option value="' . $row['id'] . '">' . $row['nombre'] . '</option>';
-            }
-        }
+    // Cerrar la conexión
+    $conn->close();
+    ?>
+</select>
 
-        // Cerrar la conexión
-        $conn->close();
-        ?>
-
-        
-    
-    
-    </select>
     
 
     
@@ -607,6 +587,7 @@ $imagen='';
                         <tr>
                             <th>#</th>
                             <th>Codigo compra </th>
+                            <th>Persona encargada</th>
                             <th>Codigo del producto </th>
                             <th>Nombre del producto</th>
                             <th>Cantidad comprada </th>
@@ -634,6 +615,7 @@ $imagen='';
                                     <tr>
                                         <td><?php echo $cnt; ?></td>
                                         <td><?php echo $row['ID_compra']; ?></td>
+                                        <th><?php echo $row['apellido'];?></th>
                                         <td><?php echo $row['codigo_inventario']; ?></td>
                                         <td><?php echo $row['nombre']; ?></td>
                                         <td><?php echo $row['cantidadc']; ?></td>
@@ -660,11 +642,12 @@ $imagen='';
                                     <tr>
                                         <td><?php echo $cnt; ?></td>
                                         <td><?php echo $row['ID_compra']; ?></td>
+                                        <th><?php echo $row['apellido'];?></th>
                                         <td>Primera Vez</td>
-                                        <td><?php echo $row['nombre']; ?></td>
+                                        <td><?php echo $row['nombrec']; ?></td>
                                         <td><?php echo $row['cantidadc']; ?></td>
                                         <td><?php echo $row['precioc']; ?></td>
-                                        <td><?php echo $row['unidades']; ?></td>
+                                        <td><?php echo $row['unidadesc']; ?></td>
                                         <td><?php echo $row['fechac']; ?></td>
 
                                     </tr>
