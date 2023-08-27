@@ -22,9 +22,17 @@
          <img src="img/logo.png">
       </div>
       <div class="login-content">
+         <?php
+          session_start();
+          $error_message = isset($_SESSION['error_message']) ? $_SESSION['error_message'] : "";
+          unset($_SESSION['error_message']); // Elimina el mensaje de error para futuras autenticaciones
+          ?>
          <form method="post" action="php/validar.php">
             <img src="img/avatar.svg">
             <h2 class="title">BIENVENIDO</h2>
+            <?php if (!empty($error_message)) : ?>
+                 <p class="error-message"><?php echo $error_message; ?></p>
+             <?php endif; ?>
             <div class="input-div one">
                <div class="i">
                   <i class="fas fa-user"></i>
@@ -40,11 +48,11 @@
                </div>
                <div class="div">
                   <h5>Contraseña</h5>
-                  <input type="password" id="contraseña" class="input" name="contraseña" required>
+                  <input type="password" id="input" class="input" name="contraseña" required>
                </div>
             </div>
             <div class="view">
-               <div class="fas fa-eye verPassword" onclick="vista()" id="verPassword"></div>
+               <div class="fas fa-eye-slash verPassword" onclick="vista()" id="verPassword"></div>
             </div>
             <input name="btningresar" class="btn" type="submit" value="INICIAR SESION">
          </form>
