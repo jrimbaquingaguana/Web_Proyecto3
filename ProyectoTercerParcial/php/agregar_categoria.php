@@ -1,4 +1,12 @@
 <?php
+session_start();
+if(empty($_SESSION["id"])){
+    header("location: ../login.php");
+}
+?>
+
+
+<?php
 require 'dbconnection.php';
 $imagen='';
 if(isset($_FILES["foto"])){

@@ -1,4 +1,12 @@
 <?php
+session_start();
+if(empty($_SESSION["id"])){
+    header("location: ../login.php");
+}
+?>
+
+
+<?php
 if (isset($_GET['id'])) {
     $idProducto = $_GET['id'];
 

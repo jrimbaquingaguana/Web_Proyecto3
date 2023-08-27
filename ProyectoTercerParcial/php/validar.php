@@ -1,4 +1,12 @@
 <?php
+session_start();
+if(empty($_SESSION["id"])){
+    header("location: ../login.php");
+}
+?>
+
+
+<?php
 $usuario = $_POST['usuario'];
 $contraseña = $_POST['contraseña'];
 $conexion = mysqli_connect("localhost", "jose", "040500", "rol");
