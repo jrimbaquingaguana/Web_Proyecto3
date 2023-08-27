@@ -148,7 +148,7 @@ if(empty($_SESSION["id"])){
         <?php endif; ?>
 
 
-        <?php if($_SESSION["id_cargo"]==3):?>
+        <?php if($_SESSION["id_cargo"]==3 or $_SESSION["id_cargo"]==1):?>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="index_despacho.php">
                     <i class="bi bi-bag-check"></i>

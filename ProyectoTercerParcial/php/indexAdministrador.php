@@ -83,6 +83,13 @@ if(empty($_SESSION["id"])){
             <li class="dropdown-header">
               <h6><?php
                   echo $_SESSION["nombre"]." ".$_SESSION["apellido"];
+                  if($_SESSION["id_cargo"]==1){
+                    echo "<br>Administrador";
+                }else if($_SESSION["id_cargo"]==2){
+                    echo "<br>Bodeguero";
+                }else{
+                    echo "<br>Productor";
+                }
                   ?></h6>
             </li>
             <li>
@@ -147,7 +154,7 @@ if(empty($_SESSION["id"])){
         <?php endif; ?>
 
 
-        <?php if($_SESSION["id_cargo"]==3):?>
+        <?php if($_SESSION["id_cargo"]==3 or $_SESSION["id_cargo"]==1  ):?>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="index_despacho.php">
                     <i class="bi bi-bag-check"></i>
@@ -179,8 +186,16 @@ if(empty($_SESSION["id"])){
 
   <main id="main" class="main">
 
-  BIENVENIDO USUARIO ADMINISTRADOR
-
+  <h1>Bienvenido/a a nuestra página</h1>
+  <?php if($_SESSION["id_cargo"] == 1): ?>
+            <p>Bienvenido/a administrador. Aqui puedes crear nuevas cuentas y crear nuevos productos.</p>
+        <?php endif; ?>
+        <?php if($_SESSION["id_cargo"] == 2): ?>
+            <p>Bienvenido/a bodeguero. Aqui puedes ingresar nuevos productos al inventario y gestionarlo.</p>
+        <?php endif; ?>
+        <?php if($_SESSION["id_cargo"] == 3 ): ?>
+            <p>Bienvenido/a productor. Aqui puedes crear nuevos productos.</p>
+        <?php endif; ?>
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->

@@ -90,6 +90,13 @@ if(empty($_SESSION["id"])){
             <li class="dropdown-header">
               <h6><?php
                   echo $_SESSION["nombre"]." ".$_SESSION["apellido"];
+                  if($_SESSION["id_cargo"]==1){
+                    echo " <br>Administrador";
+                }else if($_SESSION["id_cargo"]==2){
+                    echo "<br>Bodeguero";
+                }else{
+                    echo "<br>Productor";
+                }
                   ?></h6>
             </li>
             <li>
@@ -193,7 +200,7 @@ if(empty($_SESSION["id"])){
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-5">
-                            <h2>Administrador de <b>Inventario</b></h2>
+                            <h2>Inventario <b>Actualizado</b></h2>
                         </div>
                         
                     </div>
@@ -313,6 +320,7 @@ if(empty($_SESSION["id"])){
 
                     </tbody>
                 </table>
+                <a href="descargar_inventario.php" class="btn btn-primary">Descargar Inventario en Excel</a>
             </div>
         </div>
     </div>

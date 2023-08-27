@@ -4,6 +4,15 @@ if(empty($_SESSION["id"])){
     header("location: ../login.php");
 }
 ?>
+<?php
+      if($_SESSION["id_cargo"]==1){
+          echo "Administrador";
+      }else if($_SESSION["id_cargo"]==2){
+          echo "Bodeguero";
+      }else{
+          echo "Productor";
+      }
+      ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -82,6 +91,14 @@ if(empty($_SESSION["id"])){
                       <li class="dropdown-header">
                           <h6><?php
                               echo $_SESSION["nombre"]." ".$_SESSION["apellido"];
+                              
+                            if($_SESSION["id_cargo"]==1){
+                                echo " <br>Administrador";
+                            }else if($_SESSION["id_cargo"]==2){
+                                echo "<br>Bodeguero";
+                            }else{
+                                echo "<br>Productor";
+                            }
                               ?></h6>
                       </li>
                       <li>
@@ -146,7 +163,7 @@ if(empty($_SESSION["id"])){
           <?php endif; ?>
 
 
-          <?php if($_SESSION["id_cargo"]==3):?>
+          <?php if($_SESSION["id_cargo"]==3 or $_SESSION["id_cargo"]==1):?>
               <li class="nav-item">
                   <a class="nav-link collapsed" href="index_despacho.php">
                       <i class="bi bi-bag-check"></i>
