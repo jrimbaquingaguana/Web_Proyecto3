@@ -176,12 +176,7 @@ if(empty($_SESSION["id"])){
       </li><!-- End Register Page Nav -->
         <?php endif; ?>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
-          <i class="bi bi-box-arrow-right"></i>
-          <span>Cerrar Sesión</span>
-        </a>
-      </li><!-- End Login Page Nav -->
+     
 
     </ul>
 
@@ -252,6 +247,8 @@ if(empty($_SESSION["id"])){
         ?>
     </tbody>
 </table>
+<a href="generar_csv.php" class="download-link">Descargar Registro de Compras</a>
+
 
 <!-- Enlace para regresar y crear un nuevo producto -->
 <a href="index_despacho.php" class="create-product-btn">Crear Producto</a>

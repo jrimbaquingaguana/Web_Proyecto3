@@ -161,7 +161,7 @@ if(empty($_SESSION["id"])){
         <?php endif; ?>
 
 
-        <?php if($_SESSION["id_cargo"]==3):?>
+        <?php if($_SESSION["id_cargo"]==3 or$_SESSION["id_cargo"]==1 ):?>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="index_despacho.php">
                     <i class="bi bi-bag-check"></i>
@@ -181,10 +181,7 @@ if(empty($_SESSION["id"])){
         <?php endif; ?>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="../controladores/controlador_cerrar_sesion.php">
-          <i class="bi bi-box-arrow-right"></i>
-          <span>Cerrar Sesión</span>
-        </a>
+        
       </li><!-- End Login Page Nav -->
 
     </ul>
@@ -263,7 +260,7 @@ if(empty($_SESSION["id"])){
                     </tbody>
                 </table>
 
-<a href="descargar_inventario.php" class="btn btn-primary">Descargar Inventario en Excel</a>
+<a href="descargar_inventario.php" class="btn btn-primary">Descargar Inventario Actualizado en Excel</a>
                 <div class="col-sm-5">
                             <h3>Inventario <b>Original</b></h3>
                         </div>
@@ -322,7 +319,7 @@ if(empty($_SESSION["id"])){
 
                     </tbody>
                 </table>
-                <a href="descargar_inventario_original.php" class="btn btn-primary">Descargar Inventario en Excel</a>
+                <a href="descargar_inventario_original.php" class="btn btn-primary">Descargar Inventario Original en Excel</a>
             </div>
         </div>
     </div>

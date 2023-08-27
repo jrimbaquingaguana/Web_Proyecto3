@@ -173,12 +173,7 @@ if(empty($_SESSION["id"])){
       </li><!-- End Register Page Nav -->
         <?php endif; ?>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="../controladores/controlador_cerrar_sesion.php">
-          <i class="bi bi-box-arrow-right"></i>
-          <span>Cerrar Sesión</span>
-        </a>
-      </li><!-- End Login Page Nav -->
+      
 
     </ul>
 

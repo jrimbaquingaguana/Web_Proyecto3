@@ -2,7 +2,7 @@
 if (isset($_GET['id'])) {
     $idProducto = $_GET['id'];
 
-    $conexion = mysqli_connect("localhost", "jose", "040500", "proyecto_web");
+    $conexion = mysqli_connect("localhost", "jose", "040500", "rol");
     if (!$conexion) {
         die("Error de conexión: " . mysqli_connect_error());
     }

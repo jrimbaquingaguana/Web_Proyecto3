@@ -247,7 +247,7 @@ $imagen='';
         
     <form  method="post" enctype="multipart/form-data">
 		<h2>Producto Existente</h2>
-		<p class="hint-text">Fill below form.</p>
+		<p class="hint-text"></p>
         <div class="form-group">
 			<div class="row">
 			
@@ -518,11 +518,26 @@ $imagen='';
                                     $cnt = $cnt + 1;
                                 }
                             } else {
+                                while ($row = mysqli_fetch_array($ret)) {
+                                    // Obtener el ID de la fila actual
+                                    $usuarioID = $row['ID_compra'];
                         ?>
-                                <tr>
-                                    <td colspan="6" style="text-align:center; color:red;">No hay productos registrados</td>
-                                </tr>
+                                    <tr>
+                                        <td><?php echo $cnt; ?></td>
+                                        <td><?php echo $row['ID_compra']; ?></td>
+                                        <td><?php echo $row['codigo_inventario']; ?></td>
+                                        <td><?php echo $row['nombre']; ?></td>
+                                        <td><?php echo $row['cantidadc']; ?></td>
+                                        <td><?php echo $row['precioc']; ?></td>
+                                        <td><?php echo $row['Unidades']; ?></td>
+                                        <td><?php echo $row['fechac']; ?></td>
+                                        <td><?php echo $row['nombreu']; ?></td>
+                                        <td><?php echo $row['rol']; ?></td>
+
+                                    </tr>
                         <?php
+                                    $cnt = $cnt + 1;
+                                }
                             }
                         }
                         
