@@ -1,5 +1,5 @@
 <?php
-$conexion = mysqli_connect("localhost", "admin", "admin", "proyecto_web");
+$conexion = mysqli_connect("localhost", "admin", "admin", "rol");
 if (!$conexion) {
     die("Error de conexión: " . mysqli_connect_error());
 }

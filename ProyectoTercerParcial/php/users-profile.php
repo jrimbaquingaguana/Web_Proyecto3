@@ -126,7 +126,7 @@ if(empty($_SESSION["id"])){
           </li><!-- End Profile Page Nav -->
 
 
-          <?php if($_SESSION["id_cargo"] == 2 || $_SESSION["id_cargo"] == 3):?>
+          <?php if($_SESSION["id_cargo"] == 2):?>
               <li class="nav-item">
                   <a class="nav-link collapsed" href="index.php">
                       <i class="bi bi-pencil-square"></i>
@@ -150,7 +150,7 @@ if(empty($_SESSION["id"])){
               <li class="nav-item">
                   <a class="nav-link collapsed" href="index_despacho.php">
                       <i class="bi bi-bag-check"></i>
-                      <span>Hacer compra</span>
+                      <span>Crear productos</span>
                   </a>
               </li><!-- End Registro a Bodega Page Nav -->
           <?php endif; ?>
@@ -158,7 +158,7 @@ if(empty($_SESSION["id"])){
 
           <?php if($_SESSION["id_cargo"]==1):?>
               <li class="nav-item">
-                  <a class="nav-link collapsed" href="pages-register.html">
+                  <a class="nav-link collapsed" href="../html/pages-register.html">
                       <i class="bi bi-card-list"></i>
                       <span>Registrar Nuevos Usuarios</span>
                   </a>
@@ -166,7 +166,7 @@ if(empty($_SESSION["id"])){
           <?php endif; ?>
 
           <li class="nav-item">
-              <a class="nav-link collapsed" href="#">
+              <a class="nav-link collapsed" href="../controladores/controlador_cerrar_sesion.php">
                   <i class="bi bi-box-arrow-right"></i>
                   <span>Cerrar Sesión</span>
               </a>
