@@ -81,7 +81,7 @@ while ($row=mysqli_fetch_array($ret)) {
             <button type="submit" class="btn btn-success btn-lg btn-block" name="submit">Actualizar</button>
         </div>
     </form>
-    <a href="usersCrud.php">REGRESAR</a>
+    <a href="usersCrud.php" style="color: cornflowerblue">REGRESAR</a>
 </div>
 </body>
 </html>
