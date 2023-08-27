@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-08-2023 a las 10:15:30
+-- Tiempo de generación: 27-08-2023 a las 23:47:41
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -63,19 +63,19 @@ CREATE TABLE `compra` (
 --
 
 INSERT INTO `compra` (`ID_compra`, `codigo_usuario`, `codigo_inventario`, `cantidadc`, `precioc`, `fechac`, `nombrec`, `unidades`) VALUES
-(1, 2, NULL, 50, 15, '2023-08-27 02:49:50', 'Tornillos', ''),
-(2, 2, NULL, 100, 10.5, '2023-08-27 02:51:02', 'Madera Triplex', ''),
-(3, 4, NULL, 45, 10, '2023-08-27 02:52:33', 'Madera de Pino', ''),
-(4, 4, NULL, 12, 15, '2023-08-27 02:53:33', 'Madera roble', ''),
-(5, 4, NULL, 165, 12, '2023-08-27 02:55:03', 'Tableros Densidad Media', ''),
-(6, 4, NULL, 100, 7.45, '2023-08-27 02:55:56', 'Telas de Muebles', ''),
-(7, 4, NULL, 15, 15, '2023-08-27 03:09:41', 'Relleno de Goma', ''),
-(8, 4, NULL, 14, 7.5, '2023-08-27 03:10:19', 'Bisagras', ''),
-(9, 4, NULL, 4, 17.5, '2023-08-27 03:12:13', 'Barniz', ''),
-(10, 4, NULL, 67, 2.5, '2023-08-27 03:12:50', 'Sujetadores', ''),
-(11, 4, NULL, 20, 4.5, '2023-08-27 03:13:15', 'Pegamento', ''),
-(12, 4, NULL, 75, 6.5, '2023-08-27 03:13:47', 'Vidrio', ''),
-(13, 4, NULL, 14, 8, '2023-08-27 03:14:14', 'Acero', '');
+(1, 2, NULL, 50, 15, '2023-08-27 21:37:23', 'Tornillos', ''),
+(2, 2, NULL, 100, 10.5, '2023-08-27 21:37:23', 'Madera Triplex', ''),
+(3, 4, NULL, 45, 10, '2023-08-27 21:37:23', 'Madera de Pino', ''),
+(4, 4, NULL, 12, 15, '2023-08-27 21:37:23', 'Madera roble', ''),
+(5, 4, NULL, 165, 12, '2023-08-27 21:37:23', 'Tableros Densidad Media', ''),
+(6, 4, NULL, 100, 7.45, '2023-08-27 21:37:23', 'Telas de Muebles', ''),
+(7, 4, NULL, 15, 15, '2023-08-27 21:37:23', 'Relleno de Goma', ''),
+(8, 4, NULL, 14, 7.5, '2023-08-27 21:37:23', 'Bisagras', ''),
+(9, 4, NULL, 4, 17.5, '2023-08-27 21:37:23', 'Barniz', ''),
+(10, 4, NULL, 67, 2.5, '2023-08-27 21:37:23', 'Sujetadores', ''),
+(11, 4, NULL, 20, 4.5, '2023-08-27 21:37:23', 'Pegamento', ''),
+(12, 4, NULL, 75, 6.5, '2023-08-27 21:37:23', 'Vidrio', ''),
+(13, 4, NULL, 14, 8, '2023-08-27 21:37:23', 'Acero', '');
 
 -- --------------------------------------------------------
 
@@ -104,20 +104,20 @@ CREATE TABLE `inventario` (
 --
 
 INSERT INTO `inventario` (`ID`, `nombre`, `cantidad`, `precio`, `precio_promedio`, `foto`, `fecha`, `Unidades`, `cantidad_necesaria`, `codigo_registro`, `pendiente`, `precio_despacho`, `tipo`) VALUES
-(1, 'Tornillos', 40, 15, 0, '../fotos/tipos-de-cabeza-de-tornillos.jpg', '2023-08-27 02:57:19', 'litros', 0, NULL, 0, NULL, 'MATERIAL'),
-(2, 'Madera Triplex', 80, 10.5, 0, '../fotos/madera_triplex.jpeg', '2023-08-27 02:57:19', 'Entero', 0, NULL, 0, NULL, 'MATERIAL'),
-(3, 'Madera de Pino', 45, 10, 0, '../fotos/madera_pino.jpeg', '2023-08-27 02:52:33', 'Entero', 0, NULL, 0, NULL, 'MATERIAL'),
-(4, 'Madera roble', 12, 15, 0, '../fotos/madera_roble.jpeg', '2023-08-27 02:53:33', 'Entero', 0, NULL, 0, NULL, 'MATERIAL'),
-(5, 'Tableros Densidad Media', 165, 12, 0, '../fotos/tableros_fibra_media.jpg', '2023-08-27 02:55:03', 'Entero', 0, NULL, 0, NULL, 'MATERIAL'),
-(6, 'Telas de Muebles', 100, 7.45, 0, '../fotos/telas_muebles.jpg', '2023-08-27 02:55:56', 'Entero', 0, NULL, 0, NULL, 'MATERIAL'),
-(7, 'Mesa', 2, 100, 0, '', '2023-08-27 02:58:53', '', 0, '64eb01df6997e', 0, NULL, 'PRODUCTO'),
-(8, 'Relleno de Goma', 15, 15, 0, '../fotos/relleno_tapiceria.jpg', '2023-08-27 03:09:41', 'litros', 0, NULL, 0, NULL, 'MATERIAL'),
-(9, 'Bisagras', 14, 7.5, 0, '../fotos/imagen_2023-08-27_031009567.png', '2023-08-27 03:10:19', 'Entero', 0, NULL, 0, NULL, 'MATERIAL'),
-(10, 'Barniz', 4, 17.5, 0, '../fotos/barniz.jpeg', '2023-08-27 03:12:13', 'Entero', 0, NULL, 0, NULL, 'MATERIAL'),
-(11, 'Sujetadores', 67, 2.5, 0, '../fotos/sujetadores.jpg', '2023-08-27 03:12:50', 'Entero', 0, NULL, 0, NULL, 'MATERIAL'),
-(12, 'Pegamento', 20, 4.5, 0, '../fotos/pegamento.jpg', '2023-08-27 03:13:15', 'Entero', 0, NULL, 0, NULL, 'MATERIAL'),
-(13, 'Vidrio', 75, 6.5, 0, '../fotos/vidrio.jpeg', '2023-08-27 03:13:47', 'Entero', 0, NULL, 0, NULL, 'MATERIAL'),
-(14, 'Acero', 14, 8, 0, '../fotos/acero.jpg', '2023-08-27 03:14:14', 'Entero', 0, NULL, 0, NULL, 'MATERIAL');
+(1, 'Tornillos', 40, 15, 0, '../fotos/tipos-de-cabeza-de-tornillos.jpg', '2023-08-27 21:37:23', 'litros', 0, NULL, 0, NULL, 'MATERIAL'),
+(2, 'Madera Triplex', 80, 10.5, 0, '../fotos/madera_triplex.jpeg', '2023-08-27 21:37:23', 'Entero', 0, NULL, 0, NULL, 'MATERIAL'),
+(3, 'Madera de Pino', 45, 10, 0, '../fotos/madera_pino.jpeg', '2023-08-27 21:37:23', 'Entero', 0, NULL, 0, NULL, 'MATERIAL'),
+(4, 'Madera roble', 12, 15, 0, '../fotos/madera_roble.jpeg', '2023-08-27 21:37:23', 'Entero', 0, NULL, 0, NULL, 'MATERIAL'),
+(5, 'Tableros Densidad Media', 165, 12, 0, '../fotos/tableros_fibra_media.jpg', '2023-08-27 21:37:23', 'Entero', 0, NULL, 0, NULL, 'MATERIAL'),
+(6, 'Telas de Muebles', 100, 7.45, 0, '../fotos/telas_muebles.jpg', '2023-08-27 21:37:23', 'Entero', 0, NULL, 0, NULL, 'MATERIAL'),
+(7, 'Mesa', 2, 100, 0, '', '2023-08-27 21:37:23', '', 0, '64eb01df6997e', 0, NULL, 'PRODUCTO'),
+(8, 'Relleno de Goma', 15, 15, 0, '../fotos/relleno_tapiceria.jpg', '2023-08-27 21:37:23', 'litros', 0, NULL, 0, NULL, 'MATERIAL'),
+(9, 'Bisagras', 14, 7.5, 0, '../fotos/imagen_2023-08-27_031009567.png', '2023-08-27 21:37:23', 'Entero', 0, NULL, 0, NULL, 'MATERIAL'),
+(10, 'Barniz', 4, 17.5, 0, '../fotos/barniz.jpeg', '2023-08-27 21:37:23', 'Entero', 0, NULL, 0, NULL, 'MATERIAL'),
+(11, 'Sujetadores', 67, 2.5, 0, '../fotos/sujetadores.jpg', '2023-08-27 21:37:23', 'Entero', 0, NULL, 0, NULL, 'MATERIAL'),
+(12, 'Pegamento', 20, 4.5, 0, '../fotos/pegamento.jpg', '2023-08-27 21:37:23', 'Entero', 0, NULL, 0, NULL, 'MATERIAL'),
+(13, 'Vidrio', 75, 6.5, 0, '../fotos/vidrio.jpeg', '2023-08-27 21:37:23', 'Entero', 0, NULL, 0, NULL, 'MATERIAL'),
+(14, 'Acero', 14, 8, 0, '../fotos/acero.jpg', '2023-08-27 21:37:23', 'Entero', 0, NULL, 0, NULL, 'MATERIAL');
 
 -- --------------------------------------------------------
 
@@ -140,19 +140,19 @@ CREATE TABLE `inventario_original` (
 --
 
 INSERT INTO `inventario_original` (`ID`, `nombre`, `cantidad`, `precio_inicial`, `fecha`, `Unidades`, `foto`) VALUES
-(1, 'Tornillos', 50, 15, '2023-08-27 02:49:50', 'litros', '../fotos/tipos-de-cabeza-de-tornillos.jpg'),
-(2, 'Madera Triplex', 100, 10.5, '2023-08-27 02:51:02', 'Entero', '../fotos/madera_triplex.jpeg'),
-(3, 'Madera de Pino', 45, 10, '2023-08-27 02:52:33', 'Entero', '../fotos/madera_pino.jpeg'),
-(4, 'Madera roble', 12, 15, '2023-08-27 02:53:33', 'Entero', '../fotos/madera_roble.jpeg'),
-(5, 'Tableros Densidad Media', 165, 12, '2023-08-27 02:55:03', 'Entero', '../fotos/tableros_fibra_media.jpg'),
-(6, 'Telas de Muebles', 100, 7.45, '2023-08-27 02:55:56', 'Entero', '../fotos/telas_muebles.jpg'),
-(7, 'Relleno de Goma', 15, 15, '2023-08-27 03:09:41', 'litros', '../fotos/relleno_tapiceria.jpg'),
-(8, 'Bisagras', 14, 7.5, '2023-08-27 03:10:19', 'Entero', '../fotos/imagen_2023-08-27_031009567.png'),
-(9, 'Barniz', 4, 17.5, '2023-08-27 03:12:13', 'Entero', '../fotos/barniz.jpeg'),
-(10, 'Sujetadores', 67, 2.5, '2023-08-27 03:12:50', 'Entero', '../fotos/sujetadores.jpg'),
-(11, 'Pegamento', 20, 4.5, '2023-08-27 03:13:15', 'Entero', '../fotos/pegamento.jpg'),
-(12, 'Vidrio', 75, 6.5, '2023-08-27 03:13:47', 'Entero', '../fotos/vidrio.jpeg'),
-(13, 'Acero', 14, 8, '2023-08-27 03:14:14', 'Entero', '../fotos/acero.jpg');
+(1, 'Tornillos', 50, 15, '2023-08-27 21:37:23', 'litros', '../fotos/tipos-de-cabeza-de-tornillos.jpg'),
+(2, 'Madera Triplex', 100, 10.5, '2023-08-27 21:37:23', 'Entero', '../fotos/madera_triplex.jpeg'),
+(3, 'Madera de Pino', 45, 10, '2023-08-27 21:37:23', 'Entero', '../fotos/madera_pino.jpeg'),
+(4, 'Madera roble', 12, 15, '2023-08-27 21:37:23', 'Entero', '../fotos/madera_roble.jpeg'),
+(5, 'Tableros Densidad Media', 165, 12, '2023-08-27 21:37:23', 'Entero', '../fotos/tableros_fibra_media.jpg'),
+(6, 'Telas de Muebles', 100, 7.45, '2023-08-27 21:37:23', 'Entero', '../fotos/telas_muebles.jpg'),
+(7, 'Relleno de Goma', 15, 15, '2023-08-27 21:37:23', 'litros', '../fotos/relleno_tapiceria.jpg'),
+(8, 'Bisagras', 14, 7.5, '2023-08-27 21:37:23', 'Entero', '../fotos/imagen_2023-08-27_031009567.png'),
+(9, 'Barniz', 4, 17.5, '2023-08-27 21:37:23', 'Entero', '../fotos/barniz.jpeg'),
+(10, 'Sujetadores', 67, 2.5, '2023-08-27 21:37:23', 'Entero', '../fotos/sujetadores.jpg'),
+(11, 'Pegamento', 20, 4.5, '2023-08-27 21:37:23', 'Entero', '../fotos/pegamento.jpg'),
+(12, 'Vidrio', 75, 6.5, '2023-08-27 21:37:23', 'Entero', '../fotos/vidrio.jpeg'),
+(13, 'Acero', 14, 8, '2023-08-27 21:37:23', 'Entero', '../fotos/acero.jpg');
 
 -- --------------------------------------------------------
 
@@ -168,6 +168,7 @@ CREATE TABLE `usuarios` (
   `telefono` int(10) NOT NULL,
   `usuario` varchar(250) NOT NULL,
   `contraseña` varchar(250) NOT NULL,
+  `Active` int(11) NOT NULL DEFAULT 1,
   `id_cargo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -175,11 +176,13 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `direccion`, `telefono`, `usuario`, `contraseña`, `id_cargo`) VALUES
-(1, 'Danny', 'Quingaluisa', 'Paute S7-295 y Sangay', 995064852, 'dsquingaluisa1@espe.edu.ec', 'Dark230900.', 1),
-(2, 'Alisson', 'Caiza', 'Palmar de Solanda OE2E y Quimiag', 999874054, 'alcaiza3@espe.edu.ec', 'AlissonCaiza', 2),
-(3, 'Camila', 'Balseca', 'Apostol Miqueas y Calle 5', 963035620, 'clbalseca@uce.edu.ec', 'Morado1', 3),
-(4, 'Jose', 'imbaquinga', 'av.mariana de jesus y venezuela', 999819224, 'jose', 'Y6FjomCT', 2);
+INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `direccion`, `telefono`, `usuario`, `contraseña`, `Active`, `id_cargo`) VALUES
+(1, 'Danny', 'Quingaluisa', 'Paute S7-295 y Sangay', 995064852, 'dsquingaluisa1@espe.edu.ec', '$2y$10$PbrWTUtD/ksrPiv9Kvv.l.waqLUnLhGWEWRTT7dk5xe3t5m1wB63q', 1, 1),
+(2, 'Alisson', 'Caiza', 'Palmar de Solanda OE2E y Quimiag', 999874054, 'alcaiza3@espe.edu.ec', '$2y$10$Ps.tS3d2B19Jk.t9JhSo7ucn.f.V2HnLWWKNXzvyfws350IukewFm', 0, 2),
+(3, 'Camila', 'Balseca', 'Apostol Miqueas y Calle 5', 963035620, 'clbalseca@uce.edu.ec', '$2y$10$gONtlwJII9IEt6hhV/G/H.2a8wM20GcoAd8kKMpjTHF7CDh3yo4yi', 1, 3),
+(4, 'Jose', 'imbaquinga', 'av.mariana de jesus y venezuela', 999819224, 'jose', 'Y6FjomCT', 1, 2),
+(5, 'Diego', 'Portilla', 'Luluncoto', 984542347, 'daportilla1@espe.edu.ec', '$2y$10$/CO9HdjKGcJHLrijKI51u.OEWUoAt65Hoa7BeD9Q6jAsM7gS5otS6', 1, 1),
+(6, 'Jose', 'Imbaquinga', 'Av.Mariana de Jesus y Venezuela', 99819224, 'ricardoimbaquinga@gmail.com', '$2y$10$BacbomzSLRg9WqiaJ7UbzOk502PbY3Dz3G9U6YxAPlFYbUsUsmT8O', 1, 2);
 
 --
 -- Índices para tablas volcadas
@@ -250,7 +253,7 @@ ALTER TABLE `inventario_original`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
