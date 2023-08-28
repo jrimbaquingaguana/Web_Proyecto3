@@ -2,7 +2,7 @@
 include('dbconnection.php');
 
 // Consulta para obtener los datos del inventario
-$result = mysqli_query($con, "SELECT * FROM compra ");
+$result = mysqli_query($con, "SELECT * FROM compra  INNER JOIN usuarios ON usuarios.id=compra.ID_compra");
 
 
 if (!$result) {
@@ -21,7 +21,7 @@ echo '<body>';
 // Crear tabla
 
 echo '<table border="1">';
-echo '<tr><th>#</th>><th>Id compra</th><th>Nombre</th><th>Codigo del usuario</th><th>Cantidad</th><th>Precio unitario</th><th>Fecha</th></tr>';
+echo '<tr><th>#</th>><th>Id compra</th><th>Nombre</th><th>Codigo del usuario</th><th>Cantidad</th><th>Precio unitario</th><th>Fecha</th><th>Persona encargada</th></tr>';
 
 $counter = 1;
 while ($row = mysqli_fetch_assoc($result)) {
@@ -33,6 +33,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo '<td>' . $row['cantidadc'] . '</td>';
     echo '<td>' . $row['precioc'] . '</td>';
     echo '<td>' . $row['fechac'] . '</td>';
+    echo '<td>' . $row['apellido'] . '</td>';
     echo '</tr>';
     $counter++;
 }
