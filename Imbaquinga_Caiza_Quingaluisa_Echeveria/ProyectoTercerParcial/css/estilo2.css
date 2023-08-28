@@ -1,0 +1,155 @@
+@charset "utf-8";
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 8px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+.view-inventory-btn,
+.create-product-btn,
+.materials-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.view-inventory-btn {
+    background-color: #007BFF;
+}
+
+.view-inventory-btn:hover {
+    background-color: #0056b3;
+}
+
+.create-product-btn {
+    background-color: #34c634;
+}
+
+.create-product-btn:hover {
+    background-color: #28a528;
+}
+
+.materials-btn {
+    background-color: #f2a640;
+}
+
+.materials-btn:hover {
+    background-color: #c78428;
+}
+
+table form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrar elementos en el eje horizontal */
+}
+
+table input[type="number"] {
+    width: 50px; /* Ancho fijo para los campos de entrada de números */
+    margin-bottom: 5px; /* Un pequeño espacio entre el campo de entrada y el botón */
+}
+
+table input[type="submit"] {
+    width: auto; /* Restablecer el ancho del botón para que no ocupe todo el espacio */
+    font-size: 14px; /* Tamaño de fuente más pequeño para que encaje bien */
+}
+
+/* Estilos para los encabezados de la tabla */
+table th {
+    padding: 10px;
+    text-align: center; /* Alineación central para encabezados */
+}
+
+/* Estilos para las celdas de la tabla */
+table td {
+    padding: 10px;
+    vertical-align: middle; /* Alinea el contenido verticalmente al centro */
+}
+
+.buttons-group {
+    display: flex;
+    justify-content: space-between; /* Separar los botones */
+    width: 100%; /* Ocupar todo el ancho disponible */
+    margin-top: 20px; /* Espacio superior */
+}
