@@ -73,6 +73,7 @@ if($_SESSION["id_cargo"]==1){
             <img src="../img/logo.png" alt="">
             <span class="d-none d-lg-block">JALD COMPANY</span>
         </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
     <nav class="header-nav ms-auto">
@@ -247,15 +248,15 @@ if($_SESSION["id_cargo"]==1){
                                 <h2>Datos Personales</h2>
                                 <div class="form-group">
                                     <div class="row">
-                                        <div class="col"><input type="text" class="form-control" name="fname" placeholder="Nombre"  required></div>
-                                        <div class="col"><input type="text" class="form-control" name="lname" placeholder="Apellido" required></div>
+                                        <div class="col"><input type="text" class="form-control" name="fname" placeholder="Nombre ejm: Juan" pattern="^\S+$" title="Ingresa solo un nombre sin espacios" required></div>
+                                        <div class="col"><input type="text" class="form-control" name="lname" placeholder="Apellido ejm: Lopez" pattern="^\S+$" title="Ingresa solo un apellido sin espacios" required></div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="contacto" placeholder="Ingresa tu numero de celular" required maxlength="10" pattern="[0-9]+">
+                                    <input type="text" class="form-control" name="contacto" placeholder="Ingresa tu numero de celular ejm: 0995064852" title="Ingresa exactamente 10 numeros que constan como numero celular" required maxlength="10" pattern="^[0-9]{10}$">
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control" name="usuario" placeholder="Ingresa tu correo electronico" required>
+                                    <input type="email" class="form-control" name="usuario" placeholder="Ingresa tu correo: clbalseca@uce.edu.ec" title="Ingresa un correo valido porfavor" pattern="^\S+@\S+\.\S+$" required>
                                 </div>
 
                                 <div class="form-group">
