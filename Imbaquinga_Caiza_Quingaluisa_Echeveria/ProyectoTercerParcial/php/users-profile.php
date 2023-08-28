@@ -166,7 +166,7 @@ if(empty($_SESSION["id"])){
               <li class="nav-item">
                   <a class="nav-link collapsed" href="index_despacho.php">
                       <i class="bi bi-bag-check"></i>
-                      <span>Crear productos</span>
+                      <span>Crear Hoja tecnica</span>
                   </a>
               </li><!-- End Registro a Bodega Page Nav -->
           <?php endif; ?>
@@ -180,6 +180,14 @@ if(empty($_SESSION["id"])){
                   </a>
               </li><!-- End Register Page Nav -->
           <?php endif; ?>
+          <?php if($_SESSION["id_cargo"]==3 or $_SESSION["id_cargo"]==1):?>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="index_despacho.php">
+                    <i class="bi bi-bag-check"></i>
+                    <span>Crear Productos</span>
+                </a>
+            </li><!-- End Registro a Bodega Page Nav -->
+        <?php endif; ?>
 
 
 

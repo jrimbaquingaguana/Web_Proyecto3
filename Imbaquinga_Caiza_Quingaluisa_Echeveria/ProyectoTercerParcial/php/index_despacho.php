@@ -159,7 +159,15 @@ if(empty($_SESSION["id"])){
             <li class="nav-item">
                 <a class="nav-link collapsed" href="index_despacho.php">
                     <i class="bi bi-bag-check"></i>
-                    <span>Crear productos</span>
+                    <span>Crear Hoja tecnica</span>
+                </a>
+            </li><!-- End Registro a Bodega Page Nav -->
+        <?php endif; ?>
+        <?php if($_SESSION["id_cargo"]==3 ):?>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="ver_inventario.php">
+                    <i class="bi bi-bag-check"></i>
+                    <span>Crear Productos</span>
                 </a>
             </li><!-- End Registro a Bodega Page Nav -->
         <?php endif; ?>
@@ -186,7 +194,7 @@ if(empty($_SESSION["id"])){
 
 <!-- Formulario para crear un producto -->
 <div class="form-section">
-        <h2>Crear Producto</h2>
+        <h2>Hoja Tecnica</h2>
         <form action="procesar.php" method="post">
             <div class="input-group">
                 <label for="producto">Nombre del Producto:</label>

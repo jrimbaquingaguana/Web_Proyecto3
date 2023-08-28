@@ -340,6 +340,8 @@ $imagen='';
 		      
       
 		<div class="form-group">
+    <label for="codigo">Inserte foto:</label>
+
     <input type="file" name="foto"><br><br>
     <label for="codigo">Persona encargada:</label>
 
@@ -551,6 +553,31 @@ $imagen='';
             $conn->close();
         ?>
     </select>
+    <br>
+    <br>
+    <label for="unidad">Selecciona cuando registro la compra:</label>
+
+<select id="consulta2" name="consulta2">
+
+
+
+<?php
+    include('conexion1.php');
+
+    // Obtener nombres y apellidos desde la base de datos
+    $sql = "SELECT fechac,ID_compra FROM compra  ORDER BY fechac ";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo '<option value="' . $row['ID_compra'] . '">' . $row['fechac'] . '</option>';
+        }
+    }
+
+    // Cerrar la conexión
+    $conn->close();
+?>
+</select>
     
         
 
@@ -566,7 +593,7 @@ $imagen='';
 		<div class="form-group">
 
 
-
+          </forn>
         
         </div>
         <div class="form-group">
@@ -601,12 +628,15 @@ $imagen='';
                         </tr>
                     </thead>
                     <tbody>
+                      
                         <?php
                         if (isset($_POST['submit3'])) {
     
                             $consulta = $_POST['consulta'];
+                            $consulta1=$_POST['consulta2'];
                             $condicion = "codigo_usuario = '$consulta'";
-                            $ret = mysqli_query($con, "SELECT * FROM compra INNER JOIN usuarios ON usuarios.id=compra.codigo_usuario INNER JOIN inventario ON compra.codigo_inventario=inventario.ID WHERE $condicion  ");
+                            $condicionf="ID_compra='$consulta1'";
+                            $ret = mysqli_query($con, "SELECT * FROM compra INNER JOIN usuarios ON usuarios.id=compra.codigo_usuario INNER JOIN inventario ON compra.codigo_inventario=inventario.ID WHERE $condicion and $condicionf ");
                             
                             $cnt = 1;
                             $row = mysqli_num_rows($ret);
@@ -635,7 +665,7 @@ $imagen='';
                             else  {
                                 $consulta = $_POST['consulta'];
                                 $condicion = "codigo_usuario = '$consulta'";
-                                $ret = mysqli_query($con, "SELECT * FROM compra INNER JOIN usuarios ON usuarios.id=compra.codigo_usuario  WHERE $condicion  ");
+                                $ret = mysqli_query($con, "SELECT * FROM compra INNER JOIN usuarios ON usuarios.id=compra.codigo_usuario  WHERE $condicion and $condicionf  ");
                                 
                                 $cnt = 1;
                                 $row = mysqli_num_rows($ret);
