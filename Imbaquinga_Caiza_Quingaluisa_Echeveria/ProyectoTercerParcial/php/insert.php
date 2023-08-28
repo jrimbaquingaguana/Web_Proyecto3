@@ -130,6 +130,8 @@ $imagen='';
 <html lang="en">
 
 <head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -320,7 +322,7 @@ $imagen='';
     
     <div id="formulario1" style="display: none;">
         
-    <form  method="post" enctype="multipart/form-data" onsubmit="return validarNombre()">
+    <form  method="post" enctype="multipart/form-data" >
 		<h2>Nuevo Material</h2>
         <label for="nombre">Nombre:</label>
     <input type="text" id="nombre" name="nombre" required>
@@ -438,7 +440,7 @@ $imagen='';
          include ('conexion1.php');
 
         // Obtener códigos existentes desde la base de datos
-        $sql = "SELECT ID,nombre,Unidades FROM inventario WHERE tipo='MATERIAL'";
+        $sql = "SELECT ID,nombre,Unidades FROM inventario WHERE tipo='MATERIAL' ORDER BY nombre ASC";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -526,28 +528,30 @@ $imagen='';
         <div class="form-group">
         </div>
         <div class="form-group">
-        <label for="unidad">Selecciona un codigo de compra:</label>
+        <label for="unidad">Selecciona por persona encarga de la compra:</label>
 
         <select id="consulta" name="consulta">
 
 
-    <?php
        
-       include ('conexion1.php');
+        <?php
+            include('conexion1.php');
 
-        // Obtener códigos existentes desde la base de datos
-        $sql = "SELECT ID_compra FROM compra ORDER BY ID_compra ASC  ";
-        $result = $conn->query($sql);
+            // Obtener nombres y apellidos desde la base de datos
+            $sql = "SELECT DISTINCT codigo_usuario, nombre, apellido FROM compra INNER JOIN usuarios ON usuarios.id = compra.codigo_usuario INNER JOIN cargo ON usuarios.id_cargo = cargo.id ORDER BY codigo_usuario ASC";
+            $result = $conn->query($sql);
 
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo '<option value="' . $row['ID_compra'] . '">' . $row['ID_compra'] . '</option>';
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo '<option value="' . $row['codigo_usuario'] . '">' . $row['nombre'] . ' ' . $row['apellido'] . '</option>';
+                }
             }
-        }
 
-        // Cerrar la conexión
-        $conn->close();
+            // Cerrar la conexión
+            $conn->close();
         ?>
+    </select>
+    
         
 
         
@@ -601,12 +605,13 @@ $imagen='';
                         if (isset($_POST['submit3'])) {
     
                             $consulta = $_POST['consulta'];
-                            $condicion = "ID_compra = '$consulta'";
+                            $condicion = "codigo_usuario = '$consulta'";
                             $ret = mysqli_query($con, "SELECT * FROM compra INNER JOIN usuarios ON usuarios.id=compra.codigo_usuario INNER JOIN inventario ON compra.codigo_inventario=inventario.ID WHERE $condicion  ");
                             
                             $cnt = 1;
                             $row = mysqli_num_rows($ret);
                             if ($row > 0) {
+                              
                                 while ($row = mysqli_fetch_array($ret)) {
                                     // Obtener el ID de la fila actual
                                     $usuarioID = $row['ID_compra'];
@@ -629,7 +634,7 @@ $imagen='';
                             } 
                             else  {
                                 $consulta = $_POST['consulta'];
-                                $condicion = "ID_compra = '$consulta'";
+                                $condicion = "codigo_usuario = '$consulta'";
                                 $ret = mysqli_query($con, "SELECT * FROM compra INNER JOIN usuarios ON usuarios.id=compra.codigo_usuario  WHERE $condicion  ");
                                 
                                 $cnt = 1;
@@ -705,6 +710,30 @@ $imagen='';
   <script src="../vendor/simple-datatables/simple-datatables.js"></script>
   <script src="../vendor/tinymce/tinymce.min.js"></script>
   <script src="../vendor/php-email-form/validate.js"></script>
+  <script>
+        $(document).ready(function() {
+            $('#consulta').select2({
+                ajax: {
+                    url: 'autocomplete.php', // Cambia esto a la URL de tu servidor
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        return {
+                            query: params.term
+                        };
+                    },
+                    processResults: function(data) {
+                        return {
+                            results: data
+                        };
+                    },
+                    cache: true
+                },
+                placeholder: 'Selecciona un usuario',
+                minimumInputLength: 1
+            });
+        });
+    </script>
 
   <!-- Template Main JS File -->
   <script src="../js/main.js"></script>
