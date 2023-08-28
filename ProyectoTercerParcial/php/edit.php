@@ -74,6 +74,7 @@ if($_SESSION["id_cargo"]==1){
             <img src="../img/logo.png" alt="">
             <span class="d-none d-lg-block">JALD COMPANY</span>
         </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
     <nav class="header-nav ms-auto">
@@ -186,7 +187,7 @@ if($_SESSION["id_cargo"]==1){
             <li class="nav-item">
                 <a class="nav-link collapsed" href="usersCrud.php">
                     <i class="bi bi-card-list"></i>
-                    <span>Administración de Usuarios</span>
+                    <span>Registrar Nuevos Usuarios</span>
                 </a>
             </li><!-- End Register Page Nav -->
         <?php endif; ?>
@@ -248,18 +249,18 @@ if($_SESSION["id_cargo"]==1){
                                     <h2>Actualizar </h2>
                                     <div class="form-group">
                                         <div class="row">
-                                            <div class="col"><input type="text" class="form-control" name="fname" value="<?php  echo $row['nombre'];?>" required="true"></div>
-                                            <div class="col"><input type="text" class="form-control" name="lname" value="<?php  echo $row['apellido'];?>" required="true"></div>
+                                            <div class="col"><input type="text" class="form-control" name="fname"  pattern="^\S+$" title="Ingresa solo un nombre sin espacios" value="<?php  echo $row['nombre'];?>" required="true"></div>
+                                            <div class="col"><input type="text" class="form-control" name="lname" pattern="^\S+$" title="Ingresa solo un apellido sin espacios" value="<?php  echo $row['apellido'];?>" required="true"></div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <textarea class="form-control" name="direccion" required="true"><?php  echo $row['direccion'];?></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="contacto" value="<?php  echo $row['telefono'];?>" required="true" maxlength="10" pattern="[0-9]+">
+                                        <input type="text" class="form-control" name="contacto" title="Ingresa exactamente 10 numeros que constan como numero celular" maxlength="10" pattern="^[0-9]{9,10}$" value="<?php  echo $row['telefono'];?>" required="true">
                                     </div>
                                     <div class="form-group">
-                                        <input type="email" class="form-control" name="usuario" value="<?php  echo $row['usuario'];?>" required="true">
+                                        <input type="email" class="form-control" name="usuario" title="Ingresa un correo valido porfavor" pattern="^\S+@\S+\.\S+$" value="<?php  echo $row['usuario'];?>" required="true">
                                     </div>
 
                                     <div class="form-group">
