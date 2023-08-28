@@ -207,22 +207,15 @@ if(empty($_SESSION["id"])){
                 <div id="materials-list">
                     <div class="material-item">
                         <input type="text" name="material[]" placeholder="Material" required>
-                        <input type="number" name="cantidad[]" placeholder="Cantidad" required min="0.1">
+                        <input type="number" name="cantidad[]" placeholder="Cantidad" required min="1">
                     </div>
                 </div>
                 <button type="button" onclick="addMaterialField()">Agregar otro material</button>
             </div>
 
-            <div class="input-group">
-                <label for="precio">Precio:</label>
-                <input type="number" min="0.1" step="0.01" name="precio" id="precio" required>
-            </div>
+            
 
-            <div class="input-group">
-                <label for="numProductos">Número de productos a crear:</label>
-                <input type="number" name="numProductos" id="numProductos" value="1" min="1" required>
-            </div>
-
+            
             <input type="submit" name="crearProducto" value="Crear Producto">
         </form>
     </div>

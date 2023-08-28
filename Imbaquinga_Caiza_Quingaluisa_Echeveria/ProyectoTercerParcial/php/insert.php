@@ -40,7 +40,7 @@ if (isset($_POST['submit2'])) {
         $sumaTotalPrecio= ($valorPrecio1+$valorPrecio)/2;
         
         // Actualizar la base de datos con el nuevo valor
-        $sqlActualizar = "UPDATE inventario SET cantidad = $sumaTotalCantidad, precio_promedio = $sumaTotalPrecio WHERE ID = $valorEscogido and tipo='MATERIAL'";
+        $sqlActualizar = "UPDATE inventario SET cantidad = $sumaTotalCantidad, precio_promedio = $sumaTotalPrecio, precio=$sumaTotalPrecio WHERE ID = $valorEscogido and tipo='MATERIAL'";
 
         if ($conn->query($sqlActualizar) === TRUE) {
         } else {
@@ -530,7 +530,7 @@ $imagen='';
         <div class="form-group">
         </div>
         <div class="form-group">
-        <label for="unidad">Selecciona por persona encarga de la compra:</label>
+        <label for="unidad">Selecciona la persona encarga del ingreso:</label>
 
         <select id="consulta" name="consulta">
 
@@ -555,7 +555,7 @@ $imagen='';
     </select>
     <br>
     <br>
-    <label for="unidad">Selecciona cuando registro la compra:</label>
+    <label for="unidad">Selecciona cuando realizo el ingreso:</label>
 
 <select id="consulta2" name="consulta2">
 

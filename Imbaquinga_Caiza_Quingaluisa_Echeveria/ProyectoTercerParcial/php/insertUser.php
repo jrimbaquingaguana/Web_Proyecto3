@@ -28,6 +28,7 @@ if($_SESSION["id_cargo"]==1){
     <!-- Favicons -->
     <link href="../img/favicon.png" rel="icon">
     <link href="../img/apple-touch-icon.png" rel="apple-touch-icon">
+    <script src="../js/insert.js"></script>
 
     <!-- Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
@@ -152,7 +153,7 @@ if($_SESSION["id_cargo"]==1){
         </li><!-- End Profile Page Nav -->
 
 
-        <?php if($_SESSION["id_cargo"] == 2):?>
+        <?php if($_SESSION["id_cargo"] == 2 || strpos($_SESSION["roles"], '2') !== false):?>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="index.php">
                     <i class="bi bi-pencil-square"></i>
@@ -162,7 +163,7 @@ if($_SESSION["id_cargo"]==1){
         <?php endif; ?>
 
 
-        <?php if($_SESSION["id_cargo"]==2):?>
+        <?php if($_SESSION["id_cargo"] == 2 || strpos($_SESSION["roles"], '2') !== false ):?>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="insert.php">
                     <i class="bi bi-bag-plus"></i>
@@ -200,9 +201,11 @@ if($_SESSION["id_cargo"]==1){
 <main id="main" class="main">
 
     <section class="section profile">
+    
         <div class="row">
             <div class="card">
                 <div class="card-body pt-3">
+                    
                     <!-- Bordered Tabs -->
                     <div class="tab-content pt-2">
 
@@ -222,7 +225,7 @@ if($_SESSION["id_cargo"]==1){
                             $email = $_POST['usuario'];
                             $contraseña = $_POST['pass'];
                             $idCargo = $_POST['id_cargo'];
-
+                            $roles = implode(", ", $_POST["privilegios"]);
                             // Check if the user already exists
                             $checkQuery = mysqli_query($con, "SELECT * FROM usuarios WHERE usuario = '$email'");
                             if (mysqli_num_rows($checkQuery) > 0) {
@@ -233,7 +236,7 @@ if($_SESSION["id_cargo"]==1){
                                 $hashedPassword = password_hash($contraseña, PASSWORD_BCRYPT);
 
                                 // Query for data insertion
-                                $query = mysqli_query($con, "INSERT INTO usuarios(nombre, apellido, direccion, telefono, usuario, contraseña, id_cargo) VALUES ('$fname','$lname', '$add', '$contno', '$email', '$hashedPassword', '$idCargo')");
+                                $query = mysqli_query($con, "INSERT INTO usuarios(nombre, apellido, direccion, telefono, usuario, contraseña, id_cargo,roles_adicionales) VALUES ('$fname','$lname', '$add', '$contno', '$email', '$hashedPassword', '$idCargo','$roles')");
                                 if ($query) {
                                     echo "<script>alert('Los datos se registraron correctamente');</script>";
                                     echo "<script type='text/javascript'> document.location ='usersCrud.php'; </script>";
@@ -273,14 +276,29 @@ if($_SESSION["id_cargo"]==1){
                                     <textarea class="form-control" name="pass" placeholder="Ejemplo: Asd3KSA231sakda1.1321" required></textarea>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="opciones">Selecciona una cargo:</label>
-                                    <select class="form-control" name="id_cargo" id="opciones" required>
-                                        <option value="1">Administrador</option>
-                                        <option value="2">Bodeguero</option>
-                                        <option value="3">Productor</option>
-                                    </select>
-                                </div>
+                                                            <div class="form-group">
+                                <label for="opciones">Selecciona un cargo:(Tome encuenta que tiene que escoger el usuario de acuerdo a el rol principal que va a desempeñar caso contrario no tendra los beneficios exlucisivos de cara rol)</label>
+                                <select class="form-control" name="id_cargo" id="opciones" required>
+                                    <option value="1">Administrador</option>
+                                    <option value="2">Bodeguero</option>
+                                    <option value="3">Productor</option>
+                                </select>
+                            
+
+                            <div class="row">
+                            <div id="privilegios">
+
+                    <label><input type="checkbox" name="privilegios[1]" value="2"> Ingresar material</label><br>
+                    <label><input type="checkbox" name="privilegios[2]" value="2"> Ver material</label><br>
+                    <label><input type="checkbox" name="privilegios[3]" value="3"> Crear productos</label><br>
+                    <label><input type="checkbox" name="privilegios[4]" value="1"> Administrar Usuarios</label><br>
+                    </div>
+
+                </div>
+            </div>
+                                                            
+    
+    
 
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-success btn-lg btn-block" name="submit">Registrar</button>
@@ -327,6 +345,42 @@ if($_SESSION["id_cargo"]==1){
 
 <!-- Template Main JS File -->
 <script src="../js/main.js"></script>
+<script>
+document.getElementById("opciones").addEventListener("change", function() {
+    var selectedCargo = this.value;
+    var privilegiosDiv = document.getElementById("privilegios");
+    
+    // Ocultar todos los checkboxes
+    var checkboxes = privilegiosDiv.getElementsByTagName("input");
+    for (var i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].style.display = "none";
+    }
+    
+    // Mostrar los checkboxes correspondientes al cargo seleccionado
+    if (selectedCargo === "1") {
+        checkboxes[0].style.display = "inline";
+        checkboxes[1].style.display = "inline";
+        checkboxes[2].style.display = "inline";
+
+    } else if (selectedCargo === "2") {
+        checkboxes[1].style.display = "inline";
+        checkboxes[2].style.display = "inline";
+        checkboxes[3].style.display = "inline";
+
+    } else if (selectedCargo === "3") {
+        checkboxes[1].style.display = "inline";
+        checkboxes[3].style.display = "inline";
+        checkboxes[0].style.display = "inline";
+
+        
+    }
+});
+</script>
+
+
+
+
+
 
 </body>
 

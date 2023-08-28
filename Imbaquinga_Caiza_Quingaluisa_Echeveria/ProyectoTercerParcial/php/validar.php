@@ -18,7 +18,7 @@ $filas = mysqli_fetch_array($resultado);
 if ($filas && password_verify($contraseña, $filas['contraseña'])) { // Si las credenciales son correctas
     session_start();
     $_SESSION['usuario'] = $usuario;
-
+    $_SESSION['roles'] = $filas['roles'];
     $_SESSION['id'] = $filas['id'];
     $_SESSION['nombre'] = $filas['nombre'];
     $_SESSION['apellido'] = $filas['apellido'];
@@ -26,6 +26,7 @@ if ($filas && password_verify($contraseña, $filas['contraseña'])) { // Si las 
     $_SESSION['telefono'] = $filas['telefono'];
     $_SESSION['usuario'] = $filas['usuario'];
     $_SESSION['id_cargo'] = $filas['id_cargo'];
+
 
     if ($filas['id_cargo'] == 1) { // Administrador
         header("location: ../php/indexAdministrador.php");

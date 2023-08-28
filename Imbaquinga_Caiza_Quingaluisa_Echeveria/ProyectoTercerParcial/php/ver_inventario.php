@@ -169,7 +169,7 @@ if(empty($_SESSION["id"])){
 
         <?php if($_SESSION["id_cargo"]==1):?>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="usersCrud.php"">
+        <a class="nav-link collapsed" href="usersCrud.php">
           <i class="bi bi-card-list"></i>
           <span>Administración de Usuarios</span>
         </a>
@@ -202,12 +202,10 @@ if(empty($_SESSION["id"])){
     <thead>
         <tr>
             <th>Producto</th>
-            <th>Cantidad</th>
-            <th>Precio</th> 
+            <th>Cantidad</th> 
             <th>Actualizar</th>
             <th>Confirmar</th>
-            <th>Acciones</th>
-            <th>Reducir</th>
+            <th>Cantidad</th>
         </tr>
     </thead>
     <tbody>
@@ -223,7 +221,6 @@ if(empty($_SESSION["id"])){
             echo "<tr>";
             echo "<td>" . $fila['nombre'] . "</td>";
             echo "<td>" . $fila['cantidad'] . "</td>";
-            echo "<td>" . $fila['precio'] . "</td>";
             echo "<td>" . $fila['pendiente'] . "</td>";
 
             // Comprobamos si hay cantidad pendiente para ser confirmada
@@ -234,19 +231,13 @@ if(empty($_SESSION["id"])){
             }
 
             // Columna de acciones
-            echo "<td>
-                    <form action='procesar.php' method='post'>
-                        <input type='hidden' name='producto_id' value='".$fila['ID']."'>
-                        <input type='submit' name='eliminarProducto' value='Eliminar'>
-                    </form>
-                  </td>";
-
+            
             // Columna para reducir cantidad
             echo "<td>
                     <form action='procesar.php' method='post'>
                         <input type='hidden' name='producto_id' value='".$fila['ID']."'>
-                        <input type='number' name='cantidad_eliminar' value='1' min='1' max='".$fila['cantidad']."' style='width: 50px;'>
-                        <input type='submit' name='reducirProducto' value='Reducir'>
+                        <input type='number' name='cantidad_eliminar' value='1' min='1'' style='width: 50px;'>
+                        <input type='submit' name='crearProducto' value='Reducir'>
                     </form>
                   </td>";
 
