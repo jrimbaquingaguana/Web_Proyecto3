@@ -248,22 +248,27 @@ if($_SESSION["id_cargo"]==1){
                                     ?>
                                     <h2>Actualizar </h2>
                                     <div class="form-group">
+                                        <label for="fname">Nombre y Apellido:</label>
                                         <div class="row">
-                                            <div class="col"><input type="text" class="form-control" name="fname"  pattern="^\S+$" title="Ingresa solo un nombre sin espacios" value="<?php  echo $row['nombre'];?>" required="true"></div>
-                                            <div class="col"><input type="text" class="form-control" name="lname" pattern="^\S+$" title="Ingresa solo un apellido sin espacios" value="<?php  echo $row['apellido'];?>" required="true"></div>
+                                            <div class="col"><input type="text" class="form-control" name="fname"  pattern="[A-Za-z]+" title="Ingresa solo un nombre sin numeros ni espacios" value="<?php  echo $row['nombre'];?>" required="true"></div>
+                                            <div class="col"><input type="text" class="form-control" name="lname" pattern="[A-Za-z]+"  title="Ingresa solo un apellido sin numeros ni espacios" value="<?php  echo $row['apellido'];?>" required="true"></div>
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label for="direccion">Dirección:</label>
                                         <textarea class="form-control" name="direccion" required="true"><?php  echo $row['direccion'];?></textarea>
                                     </div>
                                     <div class="form-group">
+                                        <label for="contacto">Número de Celular:</label>
                                         <input type="text" class="form-control" name="contacto" title="Ingresa exactamente 10 numeros que constan como numero celular" maxlength="10" pattern="^[0-9]{9,10}$" value="<?php  echo $row['telefono'];?>" required="true">
                                     </div>
                                     <div class="form-group">
+                                        <label for="usuario">Correo Electrónico:</label>
                                         <input type="email" class="form-control" name="usuario" title="Ingresa un correo valido porfavor" pattern="^\S+@\S+\.\S+$" value="<?php  echo $row['usuario'];?>" required="true">
                                     </div>
 
                                     <div class="form-group">
+                                        <label for="pass">Contraseña:</label>
                                         <input type="text" class="form-control" name="pass" value="<?php  echo $row['contraseña'];?>" required="true">
                                     </div>
 
