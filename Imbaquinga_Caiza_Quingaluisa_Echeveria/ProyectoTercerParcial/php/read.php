@@ -164,7 +164,7 @@ if($_SESSION["id_cargo"]==1){
         <?php endif; ?>
 
 
-        <?php if($_SESSION["id_cargo"]==3 or $_SESSION["id_cargo"]==1):?>
+        <?php if($_SESSION["id_cargo"]==3):?>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="index_despacho.php">
                     <i class="bi bi-bag-check"></i>

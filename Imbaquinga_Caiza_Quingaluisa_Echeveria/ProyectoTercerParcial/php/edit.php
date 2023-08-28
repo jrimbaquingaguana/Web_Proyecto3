@@ -30,6 +30,7 @@ if($_SESSION["id_cargo"]==1){
     <link href="../img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
     <link href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
@@ -53,6 +54,14 @@ if($_SESSION["id_cargo"]==1){
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/editStyle.css">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -65,6 +74,7 @@ if($_SESSION["id_cargo"]==1){
             <img src="../img/logo.png" alt="">
             <span class="d-none d-lg-block">JALD COMPANY</span>
         </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
     <nav class="header-nav ms-auto">
@@ -163,7 +173,7 @@ if($_SESSION["id_cargo"]==1){
         <?php endif; ?>
 
 
-        <?php if($_SESSION["id_cargo"]==3 or $_SESSION["id_cargo"]==1):?>
+        <?php if($_SESSION["id_cargo"]==3 ):?>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="index_despacho.php">
                     <i class="bi bi-bag-check"></i>
@@ -198,113 +208,77 @@ if($_SESSION["id_cargo"]==1){
                     <div class="tab-content pt-2">
 
                         <?php
-                        //database conection  file
+                        //Database Connection
                         include('dbconnection.php');
-                        //Code for deletion
-                        if(isset($_GET['delid']))
+                        if(isset($_POST['submit']))
                         {
-                            $rid=intval($_GET['delid']);
-                            $sql=mysqli_query($con,"UPDATE `usuarios` SET `Active`= '0' where ID=$rid");
-                            echo "<script>alert('Registro Inactivo');</script>";
-                            echo "<script>window.location.href = 'usersCrud.php'</script>";
-                        }
+                            $eid=$_GET['editid'];
+                            //Getting Post Values
+                            $fname=$_POST['fname'];
+                            $lname=$_POST['lname'];
+                            $add=$_POST['direccion'];
+                            $contno=$_POST['contacto'];
+                            $email=$_POST['usuario'];
+                            $contraseña=$_POST['pass'];
 
-                        // code active
-                        if(isset($_GET['activacionID']))
-                        {
-                            $rid=intval($_GET['activacionID']);
-                            $sql=mysqli_query($con,"UPDATE `usuarios` SET `Active`= '1' where ID=$rid");
-                            echo "<script>alert('Registro Activo');</script>";
-                            echo "<script>window.location.href = 'usersCrud.php'</script>";
-                        }
 
+                            // Generar el hash de la contraseña
+                            $hashedPassword = password_hash($contraseña, PASSWORD_BCRYPT);
+
+                            // Query for data updation
+                            $query = mysqli_query($con, "UPDATE usuarios SET nombre='$fname', apellido='$lname', direccion='$add', telefono='$contno', usuario='$email', contraseña='$hashedPassword' WHERE ID='$eid'");
+
+
+                            if ($query) {
+                                echo "<script>alert('Se actualizo la información correctamente');</script>";
+                                echo "<script type='text/javascript'> document.location ='usersCrud.php'; </script>";
+                            }
+                            else
+                            {
+                                echo "<script>alert('Algo salio mal, intenta nuevamente.');</script>";
+                            }
+                        }
                         ?>
-                        <div class="container-xl">
-                            <div class="table-responsive">
-                                <div class="table-wrapper">
-                                    <div class="table-title">
+                        <div class="signup-form">
+                            <form  method="POST">
+                                <?php
+                                $eid=$_GET['editid'];
+                                $ret=mysqli_query($con,"select * from usuarios where ID='$eid'");
+                                while ($row=mysqli_fetch_array($ret)) {
+                                    ?>
+                                    <h2>Actualizar </h2>
+                                    <div class="form-group">
+                                        <label for="fname">Nombre y Apellido:</label>
                                         <div class="row">
-                                            <div class="col-sm-5">
-                                                <h2><b>Manejo De Usuarios</b></h2>
-                                            </div>
-                                            <div class="col-sm-7" align="right">
-                                                <a href="insertUser.php" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Agregar Nuevo Usuario</span></a>
-
-                                            </div>
+                                            <div class="col"><input type="text" class="form-control" name="fname"  pattern="[A-Za-z]+" title="Ingresa solo un nombre sin numeros ni espacios" value="<?php  echo $row['nombre'];?>" required="true"></div>
+                                            <div class="col"><input type="text" class="form-control" name="lname" pattern="[A-Za-z]+"  title="Ingresa solo un apellido sin numeros ni espacios" value="<?php  echo $row['apellido'];?>" required="true"></div>
                                         </div>
                                     </div>
-                                    <table class="table table-striped table-hover">
-                                        <thead>
-                                        <tr>
-                                            <th>id</th>
-                                            <th>Nombre y Apellido</th>
-                                            <th>Dirección</th>
-                                            <th>Teléfono</th>
-                                            <th>Usuario</th>
-                                            <th>Cargo</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
+                                    <div class="form-group">
+                                        <label for="direccion">Dirección:</label>
+                                        <textarea class="form-control" name="direccion" required="true"><?php  echo $row['direccion'];?></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contacto">Número de Celular:</label>
+                                        <input type="text" class="form-control" name="contacto" title="Ingresa exactamente 10 numeros que constan como numero celular" maxlength="10" pattern="^[0-9]{9,10}$" value="<?php  echo $row['telefono'];?>" required="true">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="usuario">Correo Electrónico:</label>
+                                        <input type="email" class="form-control" name="usuario" title="Ingresa un correo valido porfavor" pattern="^\S+@\S+\.\S+$" value="<?php  echo $row['usuario'];?>" required="true">
+                                    </div>
 
-                                        <?php
-                                        $ret=mysqli_query($con,"select * from usuarios");
-                                        $cnt=1;
-                                        $row=mysqli_num_rows($ret);
-                                        if($row > 0){
-                                            while ($row=mysqli_fetch_array($ret)) {
-                                                $inactiveClass = ($row['Active'] == 0) ? 'inactive-row' : '';
-                                                ?>
-                                                <!--Fetch the Records -->
-                                                <tr class="<?php echo $inactiveClass; ?>">
+                                    <div class="form-group">
+                                        <label for="pass">Contraseña:</label>
+                                        <input type="text" class="form-control" name="pass" value="<?php  echo $row['contraseña'];?>" required="true">
+                                    </div>
 
-                                                    <td><?php echo $row['id'];?></td>
-                                                    <td><?php  echo $row['nombre'];?> <?php  echo $row['apellido'];?></td>
-                                                    <td><?php  echo $row['direccion'];?></td>
-                                                    <td><?php  echo $row['telefono'];?></td>
-                                                    <td> <?php  echo $row['usuario'];?></td>
-                                                    <td> <?php
-                                                        if($row['id_cargo']==1){
-                                                            echo "Administrador";
-                                                        }else if($row['id_cargo']==2){
-                                                            echo "Bodeguero";
-                                                        }else {
-                                                            echo "Productor";
-                                                        }?></td>
-                                                    <td><?php if ($row['Active'] == 0) {
-                                                            echo 'Inactivo';
-                                                        } else {
-                                                            echo 'Activo';
-                                                        }?>
-                                                    </td>
-                                                    <td>
-                                                        <?php if ($row['Active'] == 0) { ?>
-                                                            <a href="read.php?viewid=<?php echo htmlentities ($row['id']);?>" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
-                                                            <a href="usersCrud.php?activacionID=<?php echo $row['id']; ?>" class="activate" title="Activar" data-toggle="tooltip"><i class="material-icons">&#xe9f6;</i></a>
-                                                        <?php } ?>
-
-                                                        <?php if ($row['Active'] == 1) { ?>
-                                                            <a href="read.php?viewid=<?php echo htmlentities ($row['id']);?>" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
-                                                            <a href="edit.php?editid=<?php echo htmlentities ($row['id']);?>" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                                            <a href="usersCrud.php?delid=<?php echo ($row['id']);?>" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                                                            <a href="usersCrud.php?activacionID=<?php echo $row['id']; ?>" class="activate" title="Activar" data-toggle="tooltip"><i class="material-icons">&#xe9f6;</i></a>
-
-                                                        <?php } ?>
-                                                    </td>
-                                                </tr>
-                                                <?php
-                                                $cnt=$cnt+1;
-                                            } } else {?>
-                                            <tr>
-                                                <th style="text-align:center; color:red;" colspan="6">No Record Found</th>
-                                            </tr>
-                                        <?php } ?>
-
-                                        </tbody>
-                                    </table>
-
+                                    <?php
+                                }?>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success btn-lg btn-block" name="submit">Actualizar</button>
                                 </div>
-                            </div>
+                            </form>
+                            <a href="usersCrud.php" style="color: cornflowerblue">REGRESAR</a>
                         </div>
 
                     </div><!-- End Bordered Tabs -->
@@ -313,6 +287,7 @@ if($_SESSION["id_cargo"]==1){
             </div>
         </div>
     </section>
+
 
 </main><!-- End #main -->
 

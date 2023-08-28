@@ -57,8 +57,7 @@ if($_SESSION["id_cargo"]==1){
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/editStyle.css">
-
+    <link rel="stylesheet" href="../css/insertStyle.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
@@ -173,7 +172,7 @@ if($_SESSION["id_cargo"]==1){
         <?php endif; ?>
 
 
-        <?php if($_SESSION["id_cargo"]==3 or $_SESSION["id_cargo"]==1):?>
+        <?php if($_SESSION["id_cargo"]==3 ):?>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="index_despacho.php">
                     <i class="bi bi-bag-check"></i>
@@ -208,74 +207,83 @@ if($_SESSION["id_cargo"]==1){
                     <div class="tab-content pt-2">
 
                         <?php
-                        //Database Connection
+                        // Database Connection file
                         include('dbconnection.php');
+
+                        $error_message = "";
+
                         if(isset($_POST['submit']))
                         {
-                            $eid=$_GET['editid'];
-                            //Getting Post Values
-                            $fname=$_POST['fname'];
-                            $lname=$_POST['lname'];
-                            $add=$_POST['direccion'];
-                            $contno=$_POST['contacto'];
-                            $email=$_POST['usuario'];
-                            $contraseña=$_POST['pass'];
+                            // Getting the post values
+                            $fname = $_POST['fname'];
+                            $lname = $_POST['lname'];
+                            $add = $_POST['direccion'];
+                            $contno = $_POST['contacto'];
+                            $email = $_POST['usuario'];
+                            $contraseña = $_POST['pass'];
+                            $idCargo = $_POST['id_cargo'];
 
+                            // Check if the user already exists
+                            $checkQuery = mysqli_query($con, "SELECT * FROM usuarios WHERE usuario = '$email'");
+                            if (mysqli_num_rows($checkQuery) > 0) {
+                                echo "<script>alert('Usuario Registrado, porfavor intente con otro');</script>";
+                            } else {
 
-                            // Generar el hash de la contraseña
-                            $hashedPassword = password_hash($contraseña, PASSWORD_BCRYPT);
+                                // Generar el hash de la contraseña
+                                $hashedPassword = password_hash($contraseña, PASSWORD_BCRYPT);
 
-                            // Query for data updation
-                            $query = mysqli_query($con, "UPDATE usuarios SET nombre='$fname', apellido='$lname', direccion='$add', telefono='$contno', usuario='$email', contraseña='$hashedPassword' WHERE ID='$eid'");
-
-
-                            if ($query) {
-                                echo "<script>alert('Se actualizo la información correctamente');</script>";
-                                echo "<script type='text/javascript'> document.location ='usersCrud.php'; </script>";
-                            }
-                            else
-                            {
-                                echo "<script>alert('Algo salio mal, intenta nuevamente.');</script>";
+                                // Query for data insertion
+                                $query = mysqli_query($con, "INSERT INTO usuarios(nombre, apellido, direccion, telefono, usuario, contraseña, id_cargo) VALUES ('$fname','$lname', '$add', '$contno', '$email', '$hashedPassword', '$idCargo')");
+                                if ($query) {
+                                    echo "<script>alert('Los datos se registraron correctamente');</script>";
+                                    echo "<script type='text/javascript'> document.location ='usersCrud.php'; </script>";
+                                } else {
+                                    echo "<script>alert('Algo salió mal, intenta nuevamente');</script>";
+                                }
                             }
                         }
                         ?>
                         <div class="signup-form">
                             <form  method="POST">
-                                <?php
-                                $eid=$_GET['editid'];
-                                $ret=mysqli_query($con,"select * from usuarios where ID='$eid'");
-                                while ($row=mysqli_fetch_array($ret)) {
-                                    ?>
-                                    <h2>Actualizar </h2>
-                                    <div class="form-group">
-                                        <label for="fname">Nombre y Apellido:</label>
-                                        <div class="row">
-                                            <div class="col"><input type="text" class="form-control" name="fname"  pattern="[A-Za-z]+" title="Ingresa solo un nombre sin numeros ni espacios" value="<?php  echo $row['nombre'];?>" required="true"></div>
-                                            <div class="col"><input type="text" class="form-control" name="lname" pattern="[A-Za-z]+"  title="Ingresa solo un apellido sin numeros ni espacios" value="<?php  echo $row['apellido'];?>" required="true"></div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="direccion">Dirección:</label>
-                                        <textarea class="form-control" name="direccion" required="true"><?php  echo $row['direccion'];?></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="contacto">Número de Celular:</label>
-                                        <input type="text" class="form-control" name="contacto" title="Ingresa exactamente 10 numeros que constan como numero celular" maxlength="10" pattern="^[0-9]{9,10}$" value="<?php  echo $row['telefono'];?>" required="true">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="usuario">Correo Electrónico:</label>
-                                        <input type="email" class="form-control" name="usuario" title="Ingresa un correo valido porfavor" pattern="^\S+@\S+\.\S+$" value="<?php  echo $row['usuario'];?>" required="true">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="pass">Contraseña:</label>
-                                        <input type="text" class="form-control" name="pass" value="<?php  echo $row['contraseña'];?>" required="true">
-                                    </div>
-
-                                    <?php
-                                }?>
+                                <h2>Datos Personales</h2>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-success btn-lg btn-block" name="submit">Actualizar</button>
+                                    <label for="fname">Nombre y Apellido:</label>
+                                    <div class="row">
+                                        <div class="col"><input type="text" class="form-control" name="fname" placeholder="Ejemplo: Juan" pattern="[A-Za-z]+" title="Ingresa solo un nombre sin numeros ni espacios" required></div>
+
+                                        <div class="col"><input type="text" class="form-control" name="lname" placeholder="Ejemplo: Lopez" pattern="[A-Za-z]+" title="Ingresa solo un apellido sin numeros ni espacios" required></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contacto">Número de Celular:</label>
+                                    <input type="text" class="form-control" name="contacto" placeholder="Ejemplo: 0995064852" title="Ingresa exactamente 10 numeros que constan como numero celular" required maxlength="10" pattern="^[0-9]{10}$">
+                                </div>
+                                <div class="form-group">
+                                    <label for="usuario">Correo Electrónico:</label>
+                                    <input type="email" class="form-control" name="usuario" placeholder="Ejemplo: clbalseca@uce.edu.ec" title="Ingresa un correo valido porfavor" pattern="^\S+@\S+\.\S+$" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="direccion">Dirección:</label>
+                                    <textarea class="form-control" name="direccion" placeholder="Ejemplo: Paute S7-295 y Sangay" required></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="pass">Contraseña:</label>
+                                    <textarea class="form-control" name="pass" placeholder="Ejemplo: Asd3KSA231sakda1.1321" required></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="opciones">Selecciona una cargo:</label>
+                                    <select class="form-control" name="id_cargo" id="opciones" required>
+                                        <option value="1">Administrador</option>
+                                        <option value="2">Bodeguero</option>
+                                        <option value="3">Productor</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success btn-lg btn-block" name="submit">Registrar</button>
                                 </div>
                             </form>
                             <a href="usersCrud.php" style="color: cornflowerblue">REGRESAR</a>
