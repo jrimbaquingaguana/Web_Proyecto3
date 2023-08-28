@@ -663,16 +663,22 @@ $imagen='';
                                 }
                             } 
                             else  {
-                                $consulta = $_POST['consulta'];
-                                $condicion = "codigo_usuario = '$consulta'";
+                              $consulta = $_POST['consulta'];
+                              $consulta1=$_POST['consulta2'];
+                              $condicion = "codigo_usuario = '$consulta'";
+                              $condicionf="ID_compra='$consulta1'";
                                 $ret = mysqli_query($con, "SELECT * FROM compra INNER JOIN usuarios ON usuarios.id=compra.codigo_usuario  WHERE $condicion and $condicionf  ");
                                 
                                 $cnt = 1;
                                 $row = mysqli_num_rows($ret);
+                                
+
+
                                 while ($row = mysqli_fetch_array($ret)) {
                                     // Obtener el ID de la fila actual
                                     $usuarioID = $row['ID_compra'];
                         ?>
+
                                     <tr>
                                         <td><?php echo $cnt; ?></td>
                                         <td><?php echo $row['ID_compra']; ?></td>
@@ -683,7 +689,7 @@ $imagen='';
                                         <td><?php echo $row['precioc']; ?></td>
                                         <td><?php echo $row['unidadesc']; ?></td>
                                         <td><?php echo $row['fechac']; ?></td>
-
+                                    
                                     </tr>
                         <?php
                                     $cnt = $cnt + 1;
