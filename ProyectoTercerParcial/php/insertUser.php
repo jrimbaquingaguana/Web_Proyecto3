@@ -186,7 +186,7 @@ if($_SESSION["id_cargo"]==1){
             <li class="nav-item">
                 <a class="nav-link collapsed" href="usersCrud.php">
                     <i class="bi bi-card-list"></i>
-                    <span>Administración de Usuarios</span>
+                    <span>Registrar Nuevos Usuarios</span>
                 </a>
             </li><!-- End Register Page Nav -->
         <?php endif; ?>
@@ -247,24 +247,30 @@ if($_SESSION["id_cargo"]==1){
                             <form  method="POST">
                                 <h2>Datos Personales</h2>
                                 <div class="form-group">
+                                    <label for="fname">Nombre y Apellido:</label>
                                     <div class="row">
-                                        <div class="col"><input type="text" class="form-control" name="fname" placeholder="Nombre ejm: Juan" pattern="^\S+$" title="Ingresa solo un nombre sin espacios" required></div>
-                                        <div class="col"><input type="text" class="form-control" name="lname" placeholder="Apellido ejm: Lopez" pattern="^\S+$" title="Ingresa solo un apellido sin espacios" required></div>
+                                        <div class="col"><input type="text" class="form-control" name="fname" placeholder="Ejemplo: Juan" pattern="[A-Za-z]+" title="Ingresa solo un nombre sin numeros ni espacios" required></div>
+
+                                        <div class="col"><input type="text" class="form-control" name="lname" placeholder="Ejemplo: Lopez" pattern="[A-Za-z]+" title="Ingresa solo un apellido sin numeros ni espacios" required></div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="contacto" placeholder="Ingresa tu numero de celular ejm: 0995064852" title="Ingresa exactamente 10 numeros que constan como numero celular" required maxlength="10" pattern="^[0-9]{10}$">
+                                    <label for="contacto">Número de Celular:</label>
+                                    <input type="text" class="form-control" name="contacto" placeholder="Ejemplo: 0995064852" title="Ingresa exactamente 10 numeros que constan como numero celular" required maxlength="10" pattern="^[0-9]{10}$">
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control" name="usuario" placeholder="Ingresa tu correo: clbalseca@uce.edu.ec" title="Ingresa un correo valido porfavor" pattern="^\S+@\S+\.\S+$" required>
-                                </div>
-
-                                <div class="form-group">
-                                    <textarea class="form-control" name="direccion" placeholder="Ingresa tu direccion" required></textarea>
+                                    <label for="usuario">Correo Electrónico:</label>
+                                    <input type="email" class="form-control" name="usuario" placeholder="Ejemplo: clbalseca@uce.edu.ec" title="Ingresa un correo valido porfavor" pattern="^\S+@\S+\.\S+$" required>
                                 </div>
 
                                 <div class="form-group">
-                                    <textarea class="form-control" name="pass" placeholder="Ingresa tu contraseña" required></textarea>
+                                    <label for="direccion">Dirección:</label>
+                                    <textarea class="form-control" name="direccion" placeholder="Ejemplo: Paute S7-295 y Sangay" required></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="pass">Contraseña:</label>
+                                    <textarea class="form-control" name="pass" placeholder="Ejemplo: Asd3KSA231sakda1.1321" required></textarea>
                                 </div>
 
                                 <div class="form-group">
