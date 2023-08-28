@@ -167,7 +167,7 @@ if(empty($_SESSION["id"])){
       <li class="nav-item">
         <a class="nav-link collapsed" href="usersCrud.php">
           <i class="bi bi-card-list"></i>
-          <span>Registrar Nuevos Usuarios</span>
+          <span>Administración de Usuarios</span>
         </a>
       </li><!-- End Register Page Nav -->
         <?php endif; ?>
