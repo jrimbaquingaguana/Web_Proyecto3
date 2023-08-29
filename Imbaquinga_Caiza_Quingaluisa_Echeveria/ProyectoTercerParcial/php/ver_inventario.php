@@ -4,7 +4,12 @@ if(empty($_SESSION["id"])){
     header("location: ../login.php");
 }
 ?>
+<?php
+//database connection file
+include('dbconnection.php');
+//Code for deletion
 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -204,62 +209,66 @@ if(empty($_SESSION["id"])){
     <input type="text" name="nombre" id="nombre" placeholder="Ingrese un nombre">
     <button type="submit" class="create-product-btn">Buscar Producto</button>
 </form>
-    <thead>
-        <tr>
-          <th>ID</th>
-            <th>Producto</th>
-            <th>Precio</th>
-            <th>Materiales a utilizar</th>
-            <th>Cantidad</th> 
-            <th>Fecha de creacion del producto</th>
+<table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Codigo </th>
+                            <th>Nombre </th>
+                            <th>Cantidad </th>
+                            <th>Precio unitario </th>
+                            <th>Fecha de ingreso</th>
+                             
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $filtro = ""; // Variable para almacenar el filtro de búsqueda
+                        if (isset($_GET['nombre'])) {
+                          $nombre = mysqli_real_escape_string($con, $_GET['nombre']); // Evitar SQL injection
+                          $filtro = " WHERE nombre_producto LIKE '%$nombre%'";
+       }
+          $consulta = "SELECT * FROM inventario_produccion" . $filtro;
+            $ret = mysqli_query($con, $consulta);
 
-           
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-                $filtro = ""; // Variable para almacenar el filtro de búsqueda
-                if (isset($_GET['nombre'])) {
-   $filtro = " AND nombre LIKE '%" . $_GET['nombre'] . "%'";
-}
-        $conexion = mysqli_connect("localhost", "jose", "040500", "rol");
-        
-        if (!$conexion) {
-            die("Error de conexión: " . mysqli_connect_error());
-        }
+       $cnt = 1;
+               $row = mysqli_num_rows($ret);
+                        if ($row > 0) {
+                            while ($row = mysqli_fetch_array($ret)) {
 
-        $consulta = "SELECT * FROM inventario_produccion ";
-        $resultado = mysqli_query($conexion, $consulta);
-        while ($fila = mysqli_fetch_assoc($resultado)) {
-            echo "<tr>";
-            echo "<th>" . $fila['id_producto'] . "</th>";
-            echo "<th>" . $fila['nombre_producto'] . "</th>";
-            echo "<th>" . $fila['precio'] . "</th>";
-            echo "<th>" . $fila['nombre_material'] . "</th>";
-            echo "<th>" . $fila['cantidad'] . "</th>";
-            echo "<th>" . $fila['fecha'] . "</th>";
+                               
+                                // Obtener el ID de la fila actual
+                                $usuarioID = $row['id_producto'];
 
+                              
+                        ?>
+                                <tr class="<?php echo $fila_clase; ?>">
+                                    <td><?php echo $cnt; ?></td>
+                                    <td><?php echo $row['id_producto']; ?></td>
+                                    <td><?php echo $row['nombre_producto']; ?> 
+                                    <td><?php echo $row['cantidad']; ?></td>
+                                    <td><?php echo $row['precio']; ?></td>
+                                    <td><?php echo $row['fecha'];?></td>
+                                  
 
+                                    <td>
+                                    
+                                                                                                         
+                                    </td>
+                                </tr>
+                        <?php
+                                $cnt = $cnt + 1;
+                            }
+                        } else {
+                        ?>
+                            <tr>
+                                <th style="text-align:center; color:red;" colspan="6">No hay productos registrados </th>
+                            </tr>
+                        <?php } ?>
 
-
-
-
-
-            
-
-            
-
-            // Columna de acciones
-            
-            
-
-            // Columna para reducir cantidad
-           
-        }
-        mysqli_close($conexion);
-        ?>
-    </tbody>
-</table>
+                    </tbody>
+                </table>
 <a href="generar_csv.php" class="download-link">Descargar Registro de Compras</a>
 
 
