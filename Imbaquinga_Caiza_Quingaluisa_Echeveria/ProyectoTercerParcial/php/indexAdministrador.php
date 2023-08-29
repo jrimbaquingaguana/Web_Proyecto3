@@ -170,19 +170,20 @@ if(empty($_SESSION["id"])){
           <span>Administración de Usuarios</span>
         </a>
       </li><!-- End Register Page Nav -->
-        <?php endif; ?>
-        <?php if($_SESSION["id_cargo"]==3):?>
-      <li class="nav-item">
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="ver_inventario.php">
-          <i class="bi bi-card-list"></i>
-          <span>Ver los productos</span>
-        <a class="nav-link collapsed" href="index_tecnico.php">
-          <i class="bi bi-card-list"></i>
-          <span>Crear Productos</span>
-        </a>
-      </li><!-- End Register Page Nav -->
-        <?php endif; ?>
+          <?php endif; ?>
+          
+          <?php if($_SESSION["id_cargo"]==3):?>
+        <li class="nav-item">
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="ver_inventario.php">
+            <i class="bi bi-card-list"></i>
+            <span>Ver los productos</span>
+          <a class="nav-link collapsed" href="index_tecnico.php">
+            <i class="bi bi-card-list"></i>
+            <span>Crear Productos</span>
+          </a>
+        </li><!-- End Register Page Nav -->
+          <?php endif; ?>
 
       
 

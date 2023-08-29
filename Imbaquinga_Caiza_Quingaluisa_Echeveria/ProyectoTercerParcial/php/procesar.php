@@ -1,3 +1,4 @@
+
 <?php
 
 ini_set('display_errors', 1);
@@ -11,7 +12,7 @@ if (!$conexion) {
 
 echo "Intentando conectar...";
 
-function registrarCompra($nombreProducto, $cantidad, $tipo) {
+function registrarCompra($nombreProducto, $cantidad,$tipo) {
     $archivo = 'registro_compras.json';
     $compras = [];
 
@@ -35,6 +36,7 @@ if (isset($_POST['crearProducto'])) {
     $nombreProducto = $_POST['nombre'];
     $materiales = $_POST['material'];
     $cantidades = $_POST['cantidad'];
+    $precio = $_POST['precio'];
     $numProductos = isset($_POST['numProductos']) ? intval($_POST['numProductos']) : 1;
     $materialesAgrupados = implode(', ', $materiales);
     $cantidadesAgrupadas = implode(', ', $cantidades);
@@ -42,19 +44,18 @@ if (isset($_POST['crearProducto'])) {
 
 
     $precioTotal = 0; // Inicializar el precio total
-
+    
     foreach($materiales as $index => $material) {
         $cantidadNecesaria = $cantidades[$index];
-
-        $consultaMaterial = "SELECT cantidad, precio FROM inventario WHERE nombre = '$material' AND tipo = 'MATERIAL'";
+        
+        $consultaMaterial = "SELECT cantidad,precio FROM inventario WHERE nombre = '$material' AND tipo = 'MATERIAL'";
         $resultadoMaterial = mysqli_query($conexion, $consultaMaterial);
         $dataMaterial = mysqli_fetch_assoc($resultadoMaterial);
-
+        
         if ($dataMaterial['cantidad'] < ($cantidadNecesaria * $numProductos)) {
             header("Location: index_despacho.php?error=insuficiente_material&material=$material");
             exit;
         }
-
         $precioMaterialPorUnidad = $dataMaterial['precio'];
         $precioTotal += $precioMaterialPorUnidad * $cantidadNecesaria * $numProductos;
     }
@@ -65,13 +66,13 @@ if (isset($_POST['crearProducto'])) {
         mysqli_query($conexion, $consultaDescontar);
     }
 */
-    registrarCompra($nombreProducto, $numProductos, "creacion");
+    registrarCompra($nombreProducto, $numProductos, $precio * $numProductos, "creacion");
 
     $consultaExistencia = "SELECT * FROM inventario WHERE nombre = '$nombreProducto' AND tipo = 'PRODUCTO'";
     $resultadoExistencia = mysqli_query($conexion, $consultaExistencia);
 
     if(mysqli_num_rows($resultadoExistencia) > 0) {
-        $consultaActualizar = "UPDATE inventario SET pendiente = pendiente + $numProductos WHERE nombre = '$nombreProducto' AND tipo = 'PRODUCTO'";
+        $consultaActualizar = "UPDATE inventario SET pendiente = pendiente + $numProductos, precio = precio + ($precio * $numProductos) WHERE nombre = '$nombreProducto' AND tipo = 'PRODUCTO'";
         if(mysqli_query($conexion, $consultaActualizar)) {
             header("Location: index_despacho.php?success=producto_actualizado");
         } else {
@@ -79,7 +80,7 @@ if (isset($_POST['crearProducto'])) {
         }
     } else {
         $codigo = uniqid();
-        $consultaAgregar = "INSERT INTO inventario (nombre,precio, pendiente,tipo, codigo_registro) VALUES ('$nombreProducto','$precioTotal', $numProductos, 'PRODUCTO', '$codigo')";
+        $consultaAgregar = "INSERT INTO inventario (nombre, pendiente, tipo, codigo_registro, precio) VALUES ('$nombreProducto', $numProductos, 'PRODUCTO', '$codigo', '$precioTotal')";
         $consultaAgregar = "INSERT INTO inventario_produccion (nombre_producto,nombre_material,cantidad) VALUES ('$nombreProducto','$materialesAgrupados','$cantidadesAgrupadas')";
 
         if (mysqli_query($conexion, $consultaAgregar)) {
@@ -103,17 +104,22 @@ if (isset($_POST['eliminarProducto'])) {
 if (isset($_POST['reducirProducto'])) {
     $productoId = $_POST['producto_id'];
     $cantidadAReducir = intval($_POST['cantidad_eliminar']);
-    registrarCompra($fila['nombre'], -$cantidadAReducir, "reduccion");
+    $consultaPrecio = "SELECT precio, cantidad FROM inventario WHERE id = '$productoId'";
+    $resultadoPrecio = mysqli_query($conexion, $consultaPrecio);
+    $filaPrecio = mysqli_fetch_assoc($resultadoPrecio);
+    $precioPorUnidad = $filaPrecio['precio'] / $filaPrecio['cantidad'];
 
-    $consultaReducir = "UPDATE inventario SET cantidad = cantidad - $cantidadAReducir WHERE id = '$productoId'";
+    registrarCompra($fila['nombre'], -$cantidadAReducir, -$precioPorUnidad * $cantidadAReducir, "reduccion");
+
+    $nuevoPrecio = $filaPrecio['precio'] - ($precioPorUnidad * $cantidadAReducir);
+    $consultaReducir = "UPDATE inventario SET cantidad = cantidad - $cantidadAReducir, precio = $nuevoPrecio WHERE id = '$productoId'";
     if (mysqli_query($conexion, $consultaReducir)) {
         header("Location: ver_inventario.php?success=producto_reducido");
     } else {
         header("Location: ver_inventario.php?error=error_reducir");
     }
 }
-*/
 
 mysqli_close($conexion);
-
+*/
 ?>

@@ -3,8 +3,7 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-$opcionesMaterialProductoA = array('MaterialA', 'MaterialB', 'MaterialC');
-$opcionesMaterialProductoB = array('MaterialX', 'MaterialY', 'MaterialZ');
+
 $conexion = mysqli_connect("localhost", "jose", "040500", "rol");
 if (!$conexion) {
     die("Error de conexión: " . mysqli_connect_error());
