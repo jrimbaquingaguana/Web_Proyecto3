@@ -202,6 +202,7 @@ if(empty($_SESSION["id"])){
     <thead>
         <tr>
             <th>Producto</th>
+            <th>Precio</th>
             <th>Cantidad</th> 
             <th>Actualizar</th>
             <th>Confirmar</th>
@@ -220,8 +221,10 @@ if(empty($_SESSION["id"])){
         while ($fila = mysqli_fetch_assoc($resultado)) {
             echo "<tr>";
             echo "<td>" . $fila['nombre'] . "</td>";
+            echo "<td>" . $fila['precio'] . "</td>";
             echo "<td>" . $fila['cantidad'] . "</td>";
             echo "<td>" . $fila['pendiente'] . "</td>";
+            
 
             // Comprobamos si hay cantidad pendiente para ser confirmada
             if ($fila['pendiente'] > 0) {

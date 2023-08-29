@@ -206,7 +206,27 @@ if(empty($_SESSION["id"])){
                 <label>Materiales necesarios:</label>
                 <div id="materials-list">
                     <div class="material-item">
-                        <input type="text" name="material[]" placeholder="Material" required>
+                      <select  name="material[]">
+                    <?php
+                    
+         include ('conexion1.php');
+
+        // Obtener códigos existentes desde la base de datos
+        $sql = "SELECT ID,nombre,Unidades FROM inventario WHERE tipo='MATERIAL' ORDER BY nombre ASC";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo '<option value="' . $row['nombre'] . '">' . $row['nombre'] . '</option>';
+                
+
+            }
+        }
+        
+        // Cerrar la conexión
+        $conn->close();
+        ?>
+        </select>
                         <input type="number" name="cantidad[]" placeholder="Cantidad" required min="1">
                     </div>
                 </div>
@@ -226,16 +246,36 @@ if(empty($_SESSION["id"])){
 </div>
 
 <script>
-    function addMaterialField() {
-        const materialsList = document.getElementById('materials-list');
-        const newItem = document.createElement('div');
-        newItem.classList.add('material-item');
-        newItem.innerHTML = `
-            <input type="text" name="material[]" placeholder="Material" required>
-            <input type="number" name="cantidad[]" placeholder="Cantidad" required>
-        `;
-        materialsList.appendChild(newItem);
-    }
+  function addMaterialField() {
+    const materialsList = document.getElementById('materials-list');
+    const newItem = document.createElement('div');
+    newItem.classList.add('material-item');
+    newItem.innerHTML = `
+        <select name="material[]" required>
+            <?php
+                include('conexion1.php');
+
+                // Obtener códigos existentes desde la base de datos
+                $sql = "SELECT ID, nombre, Unidades FROM inventario WHERE tipo='MATERIAL' ORDER BY nombre ASC";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<option value="' . $row['nombre'] . '">' . $row['nombre'] . '</option>';
+                    }
+                }
+
+                // Cerrar la conexión
+                $conn->close();
+            ?>
+        </select>
+        <input type="number" name="cantidad[]" placeholder="Cantidad" required>
+    `;
+    materialsList.appendChild(newItem);
+}
+
+
+
 
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has('success')) {

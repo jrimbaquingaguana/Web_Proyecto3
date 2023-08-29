@@ -173,7 +173,7 @@ if(empty($_SESSION["id"])){
         <?php endif; ?>
         <?php if($_SESSION["id_cargo"]==3):?>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="usersCrud.php">
+        <a class="nav-link collapsed" href="ver_inventario.php">
           <i class="bi bi-card-list"></i>
           <span>Crear Productos</span>
         </a>
