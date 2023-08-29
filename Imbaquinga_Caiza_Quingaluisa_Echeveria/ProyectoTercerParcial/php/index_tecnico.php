@@ -1,11 +1,49 @@
-
 <?php
 session_start();
 if(empty($_SESSION["id"])){
     header("location: ../login.php");
 }
+$servername = "localhost";
+$username = "jose";
+$password = "040500";
+$dbname = "rol";
 
+// Crear una conexión a la base de datos
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Verificar la conexión
+if ($conn->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
+}
+
+// Consulta SQL para obtener los valores
+$sql = "SELECT nombre_material,cantidad FROM inventario_produccion WHERE nombre_producto='$valorNuevo'";
+$result = $conn->query($sql);
+
+if (isset($_POST['consulta'])) {
+  $valorNuevo = $_POST['nombre'];
+
+// Configuración de la conexión a la base de datos
+$servername = "localhost";
+$username = "jose";
+$password = "040500";
+$dbname = "rol";
+
+// Crear una conexión a la base de datos
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Verificar la conexión
+if ($conn->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
+}
+
+// Consulta SQL para obtener los valores
+$sql = "SELECT nombre_material,cantidad FROM inventario_produccion WHERE nombre_producto='$valorNuevo'";
+$result = $conn->query($sql);
+}
 ?>
+
+
 
 
 <!DOCTYPE html>
@@ -167,7 +205,7 @@ if(empty($_SESSION["id"])){
         <?php endif; ?>
         <?php if($_SESSION["id_cargo"]==3 ):?>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="index_tecnico.php">
+                <a class="nav-link collapsed" href="ver_inventario.php">
                     <i class="bi bi-bag-check"></i>
                     <span>Crear Productos</span>
                 </a>
@@ -181,7 +219,6 @@ if(empty($_SESSION["id"])){
           <i class="bi bi-card-list"></i>
           <span>Administración de Usuarios</span>
         </a>
-        
       </li><!-- End Register Page Nav -->
         <?php endif; ?>
 
@@ -194,65 +231,68 @@ if(empty($_SESSION["id"])){
   <main id="main" class="main">
 
   <div class="container">
+  <form  method="post" enctype="multipart/form-data">
 
+  <div class="input-group">
+        <label for="producto">Nombre del Producto:</label>
+        <input type="text" name="nombre" id="producto" required>
+    </div>
+    <input type="submit" name="consulta" value="Consultar Materiales">
+
+    
+        </form>
 <!-- Formulario para crear un producto -->
 <div class="form-section">
         <h2>Hoja Tecnica</h2>
-        <form action="procesar.php" method="post">
-            <div class="input-group">
-                <label for="producto">Nombre del Producto:</label>
-                <input type="text" name="nombre" id="producto" required>
+        <form action="procesar1.php" method="post">
+  
+
+    <!-- Sección de Materiales -->
+    <div class="input-group">
+        <label>Materiales necesarios:</label>
+        <div id="materials-list">
+            <div class="material-item">
+                <?php while ($row = $result->fetch_assoc()) {
+                    $materiales = explode(',', $row['nombre_material']);
+                    for ($i = 0; $i < count($materiales); $i++) { ?>
+                        <select name="materiales[]">
+                            <option value="<?php echo $materiales[$i]; ?>">
+                                <?php echo $materiales[$i]; ?>
+                            </option>
+                        </select>
+                        <br>
+                    <?php }
+                } ?>
             </div>
+        </div>
+    </div>
 
-            <!-- Sección de Materiales -->
-            <div class="input-group">
-                <label>Materiales necesarios:</label>
-                <div id="materials-list">
-                    <div class="material-item">
-                      
-            
+    <!-- Sección de Cantidades -->
+    <div class="input-group">
+        <label>Cantidades necesarias:</label>
+        <div id="quantities-list">
+            <div class="quantity-item">
+                <?php
+                $result->data_seek(0); // Reiniciar el puntero del resultado a la posición inicial
 
-                    
-                      <select  name="material[]">
-                    <?php
-                    
-         include ('conexion1.php');
-
-        // Obtener códigos existentes desde la base de datos
-        $sql = "SELECT ID,nombre,Unidades FROM inventario WHERE tipo='MATERIAL' ORDER BY nombre ASC";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo '<option value="' . $row['nombre'] . '">' . $row['nombre'] . '</option>';
-                
-
-            }
-        }
-        
-        // Cerrar la conexión
-        $conn->close();
-
-
-        
-        ?>
-        </select>
-          
-
-
-
-
-                        <input type="number" name="cantidad[]" placeholder="Cantidad" required min="1">
-                    </div>
-                </div>
-                <button type="button" onclick="addMaterialField()">Agregar otro material</button>
+                while ($row = $result->fetch_assoc()) {
+                    $cantidades = explode(',', $row['cantidad']);
+                    for ($i = 0; $i < count($cantidades); $i++) { ?>
+                        <select name="cantidades[]">
+                            <option value="<?php echo $cantidades[$i]; ?>">
+                                <?php echo $cantidades[$i]; ?>
+                            </option>
+                        </select>
+                        <br>
+                    <?php }
+                } ?>
             </div>
+        </div>
+    </div>
 
-            
+    <input type="submit" name="crearProducto" value="Crear Producto">
+</form>
 
-            
-            <input type="submit" name="crearProducto" value="Crear Producto">
-        </form>
     </div>
 <div class="buttons-group">
     <a href="ver_inventario.php" class="view-inventory-btn">Ver Inventario</a>
