@@ -236,7 +236,7 @@ if($_SESSION["id_cargo"]==1){
                                 $hashedPassword = password_hash($contraseña, PASSWORD_BCRYPT);
 
                                 // Query for data insertion
-                                $query = mysqli_query($con, "INSERT INTO usuarios(nombre, apellido, direccion, telefono, usuario, contraseña, id_cargo,roles_adicionales) VALUES ('$fname','$lname', '$add', '$contno', '$email', '$hashedPassword', '$idCargo','$roles')");
+                                $query = mysqli_query($con, "INSERT INTO usuarios(nombre, apellido, direccion, telefono, usuario, contraseña, id_cargo,roles) VALUES ('$fname','$lname', '$add', '$contno', '$email', '$hashedPassword', '$idCargo','$roles')");
                                 if ($query) {
                                     echo "<script>alert('Los datos se registraron correctamente');</script>";
                                     echo "<script type='text/javascript'> document.location ='usersCrud.php'; </script>";
@@ -277,11 +277,13 @@ if($_SESSION["id_cargo"]==1){
                                 </div>
 
                                                             <div class="form-group">
-                                <label for="opciones">Selecciona un cargo:(Tome encuenta que tiene que escoger el usuario de acuerdo a el rol principal que va a desempeñar caso contrario no tendra los beneficios exlucisivos de cara rol)</label>
+                                <label for="opciones">Tome en cuenta que el rol de invitado no tiene ningun privilegio predefinito, solamente los que le asigne.</label>
                                 <select class="form-control" name="id_cargo" id="opciones" required>
                                     <option value="1">Administrador</option>
                                     <option value="2">Bodeguero</option>
                                     <option value="3">Productor</option>
+                                    <option value="4">Invitado</option>
+
                                 </select>
                             
 
@@ -370,9 +372,12 @@ document.getElementById("opciones").addEventListener("change", function() {
     } else if (selectedCargo === "3") {
         checkboxes[1].style.display = "inline";
         checkboxes[3].style.display = "inline";
+        checkboxes[0].style.display = "inline";  
+    }else if (selectedCargo === "4") {
         checkboxes[0].style.display = "inline";
-
-        
+        checkboxes[1].style.display = "inline";
+        checkboxes[2].style.display = "inline";
+        checkboxes[3].style.display = "inline";  
     }
 });
 </script>
