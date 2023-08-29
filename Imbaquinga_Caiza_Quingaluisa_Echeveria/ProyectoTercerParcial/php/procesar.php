@@ -81,7 +81,7 @@ if (isset($_POST['crearProducto'])) {
     } else {
         $codigo = uniqid();
         $consultaAgregar = "INSERT INTO inventario (nombre, pendiente, tipo, codigo_registro, precio) VALUES ('$nombreProducto', $numProductos, 'PRODUCTO', '$codigo', '$precioTotal')";
-        $consultaAgregar = "INSERT INTO inventario_produccion (nombre_producto,nombre_material,cantidad) VALUES ('$nombreProducto','$materialesAgrupados','$cantidadesAgrupadas')";
+        $consultaAgregar = "INSERT INTO inventario_produccion (nombre_producto,nombre_material,cantidad,precio) VALUES ('$nombreProducto','$materialesAgrupados','$cantidadesAgrupadas','$precioTotal')";
 
         if (mysqli_query($conexion, $consultaAgregar)) {
             header("Location: index_despacho.php?success=producto_creado");

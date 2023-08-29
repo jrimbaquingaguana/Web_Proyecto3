@@ -196,55 +196,65 @@ if(empty($_SESSION["id"])){
 
   <div class="container">
 
-<h2>Inventario</h2>
+<h2>Inventario de los productos disponibles para crear</h2>
 
 <table>
+<form method="GET">
+    <label for="nombre">Buscar por nombre: </label>
+    <input type="text" name="nombre" id="nombre" placeholder="Ingrese un nombre">
+    <button type="submit" class="create-product-btn">Buscar Producto</button>
+</form>
     <thead>
         <tr>
+          <th>ID</th>
             <th>Producto</th>
             <th>Precio</th>
+            <th>Materiales a utilizar</th>
             <th>Cantidad</th> 
-            <th>Actualizar</th>
-            <th>Confirmar</th>
-            <th>Cantidad</th>
+            <th>Fecha de creacion del producto</th>
+
+           
         </tr>
     </thead>
     <tbody>
         <?php
+                $filtro = ""; // Variable para almacenar el filtro de búsqueda
+                if (isset($_GET['nombre'])) {
+   $filtro = " AND nombre LIKE '%" . $_GET['nombre'] . "%'";
+}
         $conexion = mysqli_connect("localhost", "jose", "040500", "rol");
+        
         if (!$conexion) {
             die("Error de conexión: " . mysqli_connect_error());
         }
 
-        $consulta = "SELECT * FROM inventario WHERE tipo = 'PRODUCTO'";
+        $consulta = "SELECT * FROM inventario_produccion ";
         $resultado = mysqli_query($conexion, $consulta);
         while ($fila = mysqli_fetch_assoc($resultado)) {
             echo "<tr>";
-            echo "<td>" . $fila['nombre'] . "</td>";
-            echo "<td>" . $fila['precio'] . "</td>";
-            echo "<td>" . $fila['cantidad'] . "</td>";
-            echo "<td>" . $fila['pendiente'] . "</td>";
+            echo "<th>" . $fila['id_producto'] . "</th>";
+            echo "<th>" . $fila['nombre_producto'] . "</th>";
+            echo "<th>" . $fila['precio'] . "</th>";
+            echo "<th>" . $fila['nombre_material'] . "</th>";
+            echo "<th>" . $fila['cantidad'] . "</th>";
+            echo "<th>" . $fila['fecha'] . "</th>";
+
+
+
+
+
+
+
             
 
-            // Comprobamos si hay cantidad pendiente para ser confirmada
-            if ($fila['pendiente'] > 0) {
-                echo "<td><a href='confirmar.php?id=" . $fila['ID'] . "'>Confirmar</a></td>";
-            } else {
-                echo "<td>No hay ningún producto para actualizar</td>";
-            }
+            
 
             // Columna de acciones
             
-            // Columna para reducir cantidad
-            echo "<td>
-                    <form action='procesar.php' method='post'>
-                        <input type='hidden' name='producto_id' value='".$fila['ID']."'>
-                        <input type='number' name='cantidad_eliminar' value='1' min='1'' style='width: 50px;'>
-                        <input type='submit' name='crearProducto' value='Reducir'>
-                    </form>
-                  </td>";
+            
 
-            echo "</tr>";
+            // Columna para reducir cantidad
+           
         }
         mysqli_close($conexion);
         ?>
