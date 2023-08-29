@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-08-2023 a las 01:40:09
+-- Tiempo de generación: 29-08-2023 a las 06:56:01
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -157,6 +157,19 @@ INSERT INTO `inventario_original` (`ID`, `nombre`, `cantidad`, `precio_inicial`,
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `inventario_produccion`
+--
+
+CREATE TABLE `inventario_produccion` (
+  `id_producto` int(11) NOT NULL,
+  `nombre_producto` varchar(255) NOT NULL,
+  `nombre_material` varchar(255) NOT NULL,
+  `cantidad` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `usuarios`
 --
 
@@ -169,19 +182,20 @@ CREATE TABLE `usuarios` (
   `usuario` varchar(250) NOT NULL,
   `contraseña` varchar(250) NOT NULL,
   `Active` int(11) NOT NULL DEFAULT 1,
-  `id_cargo` int(11) NOT NULL
+  `id_cargo` int(11) NOT NULL,
+  `roles` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `direccion`, `telefono`, `usuario`, `contraseña`, `Active`, `id_cargo`) VALUES
-(1, 'Danny', 'Quingaluisa', 'Paute S7-295 y Sangay', 995064852, 'dsquingaluisa1@espe.edu.ec', '$2y$10$PbrWTUtD/ksrPiv9Kvv.l.waqLUnLhGWEWRTT7dk5xe3t5m1wB63q', 1, 1),
-(2, 'Alisson', 'Caiza', 'Palmar de Solanda OE2E y Quimiag', 999874054, 'alcaiza3@espe.edu.ec', '$2y$10$Ps.tS3d2B19Jk.t9JhSo7ucn.f.V2HnLWWKNXzvyfws350IukewFm', 0, 2),
-(3, 'Camila', 'Balseca', 'Apostol Miqueas y Calle 5', 963035620, 'clbalseca@uce.edu.ec', '$2y$10$gONtlwJII9IEt6hhV/G/H.2a8wM20GcoAd8kKMpjTHF7CDh3yo4yi', 1, 3),
-(4, 'Jose', 'imbaquinga', 'av.mariana de jesus y venezuela', 999819224, 'jose', 'Y6FjomCT', 1, 2),
-(5, 'Diego', 'Portilla', 'Luluncoto', 984542347, 'daportilla1@espe.edu.ec', '$2y$10$/CO9HdjKGcJHLrijKI51u.OEWUoAt65Hoa7BeD9Q6jAsM7gS5otS6', 1, 1);
+INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `direccion`, `telefono`, `usuario`, `contraseña`, `Active`, `id_cargo`, `roles`) VALUES
+(1, 'Danny', 'Quingaluisa', 'Paute S7-295 y Sangay', 995064852, 'dsquingaluisa1@espe.edu.ec', '$2y$10$PbrWTUtD/ksrPiv9Kvv.l.waqLUnLhGWEWRTT7dk5xe3t5m1wB63q', 1, 1, ''),
+(2, 'Alisson', 'Caiza', 'Palmar de Solanda OE2E y Quimiag', 999874054, 'alcaiza3@espe.edu.ec', '$2y$10$Ps.tS3d2B19Jk.t9JhSo7ucn.f.V2HnLWWKNXzvyfws350IukewFm', 0, 2, ''),
+(3, 'Camila', 'Balseca', 'Apostol Miqueas y Calle 5', 963035620, 'clbalseca@uce.edu.ec', '$2y$10$gONtlwJII9IEt6hhV/G/H.2a8wM20GcoAd8kKMpjTHF7CDh3yo4yi', 1, 3, ''),
+(4, 'Jose', 'imbaquinga', 'av.mariana de jesus y venezuela', 999819224, 'jose', 'Y6FjomCT', 1, 2, ''),
+(5, 'Diego', 'Portilla', 'Luluncoto', 984542347, 'daportilla1@espe.edu.ec', '$2y$10$/CO9HdjKGcJHLrijKI51u.OEWUoAt65Hoa7BeD9Q6jAsM7gS5otS6', 1, 1, '');
 
 --
 -- Índices para tablas volcadas
@@ -212,6 +226,12 @@ ALTER TABLE `inventario`
 --
 ALTER TABLE `inventario_original`
   ADD PRIMARY KEY (`ID`);
+
+--
+-- Indices de la tabla `inventario_produccion`
+--
+ALTER TABLE `inventario_produccion`
+  ADD PRIMARY KEY (`id_producto`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -247,6 +267,12 @@ ALTER TABLE `inventario`
 --
 ALTER TABLE `inventario_original`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT de la tabla `inventario_produccion`
+--
+ALTER TABLE `inventario_produccion`
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
