@@ -377,7 +377,7 @@ $imagen='';
       <option value="decigramos">Decigramos</option>
     </optgroup>
     <optgroup label="Peso">
-      <option value="Entero">Entero</option>
+      <option value="Unidades">Unidades</option>
     </optgroup>
     
   </select>

@@ -201,6 +201,11 @@ if(empty($_SESSION["id"])){
                         
                     </div>
                 </div>
+                <form method="GET">
+    <label for="nombre">Buscar por nombre: </label>
+    <input type="text" name="nombre" id="nombre" placeholder="Ingrese un nombre">
+    <button type="submit">Buscar</button>
+</form>
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
@@ -217,10 +222,17 @@ if(empty($_SESSION["id"])){
                         </tr>
                     </thead>
                     <tbody>
+                      
                         <?php
-                        $ret = mysqli_query($con, "SELECT * FROM inventario WHERE tipo='MATERIAL'");
-                        $cnt = 1;
-                        $row = mysqli_num_rows($ret);
+                                $filtro = ""; // Variable para almacenar el filtro de búsqueda
+                         if (isset($_GET['nombre'])) {
+            $filtro = " AND nombre LIKE '%" . $_GET['nombre'] . "%'";
+        }
+        $consulta = "SELECT * FROM inventario WHERE tipo='MATERIAL'" . $filtro;
+        $ret = mysqli_query($con, $consulta);
+        $cnt = 1;
+                $row = mysqli_num_rows($ret);
+
                         if ($row > 0) {
                             while ($row = mysqli_fetch_array($ret)) {
 
@@ -263,6 +275,8 @@ if(empty($_SESSION["id"])){
                 <div class="col-sm-5">
                             <h3>Inventario <b>Original</b></h3>
                         </div>
+                       
+
                         <table class="table table-striped table-hover">
                     <thead>
                         <tr>
@@ -279,9 +293,16 @@ if(empty($_SESSION["id"])){
                     </thead>
                     <tbody>
                         <?php
-                        $ret = mysqli_query($con, "SELECT * FROM inventario_original ");
-                        $cnt = 1;
-                        $row = mysqli_num_rows($ret);
+                        $filtro = ""; // Variable para almacenar el filtro de búsqueda
+                        if (isset($_GET['nombre'])) {
+                          $nombre = mysqli_real_escape_string($con, $_GET['nombre']); // Evitar SQL injection
+                          $filtro = " WHERE nombre LIKE '%$nombre%'";
+       }
+          $consulta = "SELECT * FROM inventario_original" . $filtro;
+            $ret = mysqli_query($con, $consulta);
+
+       $cnt = 1;
+               $row = mysqli_num_rows($ret);
                         if ($row > 0) {
                             while ($row = mysqli_fetch_array($ret)) {
 
@@ -358,7 +379,7 @@ if(empty($_SESSION["id"])){
 
   <!-- Template Main JS File -->
   <script src="../js/main.js"></script>
-
+        
 </body>
 
 </html>
