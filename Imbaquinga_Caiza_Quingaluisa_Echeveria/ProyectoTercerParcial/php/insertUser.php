@@ -277,7 +277,7 @@ if($_SESSION["id_cargo"]==1){
                                 </div>
 
                                                             <div class="form-group">
-                                <label for="opciones">Tome en cuenta que el rol de invitado no tiene ningun privilegio predefinito, solamente los que le asigne.</label>
+                                <label for="opciones">Tome en cuenta que el rol de invitado no tiene ningun privilegio predefinido, solamente los que le asigne.</label>
                                 <select class="form-control" name="id_cargo" id="opciones" required>
                                     <option value="1">Administrador</option>
                                     <option value="2">Bodeguero</option>
@@ -289,6 +289,9 @@ if($_SESSION["id_cargo"]==1){
 
                             <div class="row">
                             <div id="privilegios">
+
+                            <br>
+                                <p>Privilegios adicionales</p>
 
                     <label><input type="checkbox" name="privilegios[1]" value="2"> Ingresar material</label><br>
                     <label><input type="checkbox" name="privilegios[2]" value="2"> Ver material</label><br>
@@ -303,6 +306,7 @@ if($_SESSION["id_cargo"]==1){
     
 
                                 <div class="form-group">
+                                    <p>Tomar en cuenta que una vez registrado el usuario no se podra realizar cambios de privilegios</p>
                                     <button type="submit" class="btn btn-success btn-lg btn-block" name="submit">Registrar</button>
                                 </div>
                             </form>

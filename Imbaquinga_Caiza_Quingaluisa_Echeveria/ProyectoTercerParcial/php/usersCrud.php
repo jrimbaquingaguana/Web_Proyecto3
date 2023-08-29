@@ -268,7 +268,9 @@ if($_SESSION["id_cargo"]==1){
                                                             echo "Administrador";
                                                         }else if($row['id_cargo']==2){
                                                             echo "Bodeguero";
-                                                        }else {
+                                                        }else if ($row['id_cargo']==4){
+                                                            echo "Invitado";
+                                                        }else if ($row['id_cargo']==3){
                                                             echo "Productor";
                                                         }?></td>
                                                     <td><?php if ($row['Active'] == 0) {
