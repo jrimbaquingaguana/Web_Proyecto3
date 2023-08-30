@@ -2,8 +2,8 @@
 // config.php
 
 $servername = "localhost";
-$username = "root";
-$password = "Dark230900.";
+$username = "admin";
+$password = "admin";
 $database = "rol";
 
 // Crear la conexión
