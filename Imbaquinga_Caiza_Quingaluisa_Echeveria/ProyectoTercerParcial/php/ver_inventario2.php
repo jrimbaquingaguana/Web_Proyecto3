@@ -142,7 +142,7 @@ include('dbconnection.php');
           </li><!-- End Profile Page Nav -->
 
 
-          <?php if($_SESSION["id_cargo"] == 2 or $_SESSION["id_cargo"] == 3 or $_SESSION["id_cargo"] == 5 || strpos($_SESSION["roles"], '2') !== false or strpos($_SESSION["roles"], '3') !== false or strpos($_SESSION["roles"], '5') !== false):?>
+          <?php if($_SESSION["id_cargo"] == 2 or $_SESSION["id_cargo"] == 3 || strpos($_SESSION["roles"], '2') !== false or strpos($_SESSION["roles"], '3') !== false):?>
               <li class="nav-item">
                   <a class="nav-link collapsed" href="index.php">
                       <i class="bi bi-pencil-square"></i>
@@ -152,7 +152,7 @@ include('dbconnection.php');
           <?php endif; ?>
 
 
-          <?php if($_SESSION["id_cargo"]==2 or $_SESSION["id_cargo"] == 5 || strpos($_SESSION["roles"], '2') !== false or strpos($_SESSION["roles"], '5') !== false):?>
+          <?php if($_SESSION["id_cargo"]==2 || strpos($_SESSION["roles"], '2') !== false):?>
               <li class="nav-item">
                   <a class="nav-link collapsed" href="insert.php">
                       <i class="bi bi-bag-plus"></i>
@@ -161,7 +161,7 @@ include('dbconnection.php');
               </li><!-- End Registro a Bodega Page Nav -->
           <?php endif; ?>
 
-          <?php if($_SESSION["id_cargo"]==1 or $_SESSION["id_cargo"] == 5 || strpos($_SESSION["roles"], '1') !== false or strpos($_SESSION["roles"], '5') !== false):?>
+          <?php if($_SESSION["id_cargo"]==1 || strpos($_SESSION["roles"], '1') !== false):?>
               <li class="nav-item">
                   <a class="nav-link collapsed" href="usersCrud.php">
                       <i class="bi bi-card-list"></i>
@@ -170,7 +170,7 @@ include('dbconnection.php');
               </li><!-- End Register Page Nav -->
           <?php endif; ?>
 
-          <?php if($_SESSION["id_cargo"]==3 or $_SESSION["id_cargo"] == 5 || strpos($_SESSION["roles"], '3') !== false or strpos($_SESSION["roles"], '5') !== false):?>
+          <?php if($_SESSION["id_cargo"]==3 || strpos($_SESSION["roles"], '3') !== false):?>
               <li class="nav-item">
                   <a class="nav-link collapsed" href="index_despacho.php">
                       <i class="bi bi-card-list"></i>
@@ -179,7 +179,7 @@ include('dbconnection.php');
               </li><!-- End Registro a Bodega Page Nav -->
           <?php endif; ?>
 
-          <?php if($_SESSION["id_cargo"]==3 or $_SESSION["id_cargo"] == 5 || strpos($_SESSION["roles"], '3') !== false or strpos($_SESSION["roles"], '5') !== false):?>
+          <?php if($_SESSION["id_cargo"]==3 || strpos($_SESSION["roles"], '3') !== false):?>
               <li class="nav-item">
                   <a class="nav-link collapsed" href="ver_inventario.php">
                       <i class="bi bi-card-list"></i>
@@ -188,7 +188,7 @@ include('dbconnection.php');
               </li><!-- End Register Page Nav -->
           <?php endif; ?>
 
-          <?php if($_SESSION["id_cargo"]==3 or $_SESSION["id_cargo"] == 5 || strpos($_SESSION["roles"], '3') !== false or strpos($_SESSION["roles"], '5') !== false):?>
+          <?php if($_SESSION["id_cargo"]==3 || strpos($_SESSION["roles"], '3') !== false):?>
               <li class="nav-item">
                   <a class="nav-link collapsed" href="index_tecnico.php">
                       <i class="bi bi-card-list"></i>
@@ -197,7 +197,7 @@ include('dbconnection.php');
               </li><!-- End Register Page Nav -->
           <?php endif; ?>
 
-          <?php if($_SESSION["id_cargo"]==3 or $_SESSION["id_cargo"] == 5 || strpos($_SESSION["roles"], '3') !== false or strpos($_SESSION["roles"], '5') !== false):?>
+          <?php if($_SESSION["id_cargo"]==3 || strpos($_SESSION["roles"], '3') !== false):?>
               <li class="nav-item">
                   <a class="nav-link collapsed" href="ver_inventario2.php">
                       <i class="bi bi-card-list"></i>
@@ -227,11 +227,11 @@ include('dbconnection.php');
                         <tr>
                             <th>#</th>
                             <th>Codigo </th>
-                            <th>Nombre </th>
-                            <th>Creados</th>
+                            <th>Nombre del producto creado </th>
+                            <th>Cuantas veces se creo el producto</th>
                             <th>Precio unitario </th>
                             <th>Precio total</th>
-                            <th>Fecha de ingreso</th>
+                            <th>Fecha de creacion</th>
                              
                             
                         </tr>
@@ -243,7 +243,7 @@ include('dbconnection.php');
                           $nombre = mysqli_real_escape_string($con, $_GET['nombre']); // Evitar SQL injection
                           $filtro = " WHERE nombre_producto LIKE '%$nombre%'";
        }
-          $consulta = "SELECT * FROM inventario_produccion" . $filtro;
+          $consulta = "SELECT * FROM creación" . $filtro;
             $ret = mysqli_query($con, $consulta);
 
        $cnt = 1;
@@ -253,17 +253,17 @@ include('dbconnection.php');
 
                                
                                 // Obtener el ID de la fila actual
-                                $usuarioID = $row['id_producto'];
+                                $usuarioID = $row['id_creacion'];
 
                               
                         ?>
                                 <tr class="<?php echo $fila_clase; ?>">
                                     <td><?php echo $cnt; ?></td>
-                                    <td><?php echo $row['id_producto']; ?></td>
+                                    <td><?php echo $row['id_creacion']; ?></td>
                                     <td><?php echo $row['nombre_producto']; ?> 
-                                    <td><?php echo $row['cantidad_cad']; ?></td>
-                                    <td><?php echo $row['precio']; ?></td>
+                                    <td><?php echo $row['veces_creado']; ?></td>
                                     <td><?php echo $row['precio_total']; ?></td>
+                                    <td><?php echo $row['precio_invdividual']; ?></td>
                                     <td><?php echo $row['fecha'];?></td>
                                   
 
@@ -347,6 +347,8 @@ if (isset($_GET['error']) && $_GET['error'] == "no_creation") {
 </body>
 
 </html>
+
+
 
 
 
