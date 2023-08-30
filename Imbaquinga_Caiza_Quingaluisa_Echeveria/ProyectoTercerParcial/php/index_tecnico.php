@@ -289,6 +289,11 @@ $result = $conn->query($sql);
             </div>
         </div>
     </div>
+    <div class="input-group">
+                <label for="numProductos">Número de productos a crear:</label>
+                <input type="number" name="numProductos" id="numProductos" value="1" min="1" required>
+            </div>
+
 
     <input type="submit" name="crearProducto" value="Crear Producto">
 </form>

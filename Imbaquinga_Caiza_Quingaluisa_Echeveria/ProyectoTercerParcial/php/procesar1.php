@@ -36,7 +36,8 @@ if (isset($_POST['crearProducto'])) {
     $materiales = $_POST['materiales'];
     $cantidades = $_POST['cantidades'];
     $numProductos = isset($_POST['numProductos']) ? intval($_POST['numProductos']) : 1;
-
+    $materialesAgrupados = implode(', ', $materiales);
+    $cantidadesAgrupadas = implode(', ', $cantidades);
     $precioTotal = 0; // Inicializar el precio total
 
     foreach($materiales as $index => $material) {

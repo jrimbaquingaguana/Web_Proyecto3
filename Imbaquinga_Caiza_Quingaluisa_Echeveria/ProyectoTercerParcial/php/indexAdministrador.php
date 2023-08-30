@@ -133,7 +133,7 @@ if(empty($_SESSION["id"])){
         </li><!-- End Profile Page Nav -->
 
 
-        <?php if($_SESSION["id_cargo"] == 2 ):?>
+        <?php if($_SESSION["id_cargo"] == 2 || strpos($_SESSION["roles"], '2') !== false ):?>
         <li class="nav-item">
             <a class="nav-link collapsed" href="index.php">
                 <i class="bi bi-pencil-square"></i>
@@ -143,7 +143,7 @@ if(empty($_SESSION["id"])){
         <?php endif; ?>
 
 
-        <?php if($_SESSION["id_cargo"]==2):?>
+        <?php if($_SESSION["id_cargo"]==2 || strpos($_SESSION["roles"], '2') !== false):?>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="insert.php">
                     <i class="bi bi-bag-plus"></i>
@@ -156,7 +156,7 @@ if(empty($_SESSION["id"])){
         <?php if($_SESSION["id_cargo"]==3):?>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="index_despacho.php">
-                    <i class="bi bi-bag-check"></i>
+                    <i class="bi bi-card-list"></i>
                     <span>Crear Hoja tecnica</span>
                 </a>
             </li><!-- End Registro a Bodega Page Nav -->
@@ -167,7 +167,7 @@ if(empty($_SESSION["id"])){
       <li class="nav-item">
         <a class="nav-link collapsed" href="usersCrud.php">
           <i class="bi bi-card-list"></i>
-          <span>Administración de Usuarios</span>
+          <span>Administrador de Usuarios</span>
         </a>
       </li><!-- End Register Page Nav -->
           <?php endif; ?>
@@ -177,10 +177,15 @@ if(empty($_SESSION["id"])){
         <li class="nav-item">
           <a class="nav-link collapsed" href="ver_inventario.php">
             <i class="bi bi-card-list"></i>
-            <span>Ver los productos</span>
+            <span>Ver hoja tecnica</span>
           <a class="nav-link collapsed" href="index_tecnico.php">
-            <i class="bi bi-card-list"></i>
+            <i class="bi bi-bag-check"></i>
             <span>Crear Productos</span>
+
+          </a>
+          <a class="nav-link collapsed" href="ver_inventario2.php">
+            <i class="bi bi-bag-check"></i>
+            <span>Registro de creacion de  Productos</span>
           </a>
         </li><!-- End Register Page Nav -->
           <?php endif; ?>

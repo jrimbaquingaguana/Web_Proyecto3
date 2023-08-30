@@ -215,9 +215,10 @@ include('dbconnection.php');
                             <th>#</th>
                             <th>Codigo </th>
                             <th>Nombre </th>
+                            <th>Material a utilizar</th>
                             <th>Cantidad </th>
                             <th>Precio unitario </th>
-                            <th>Fecha de ingreso</th>
+                            <th>Fecha de creacion de producto</th>
                              
                             
                         </tr>
@@ -247,6 +248,7 @@ include('dbconnection.php');
                                     <td><?php echo $cnt; ?></td>
                                     <td><?php echo $row['id_producto']; ?></td>
                                     <td><?php echo $row['nombre_producto']; ?> 
+                                    <td><?php echo $row['nombre_material']; ?> 
                                     <td><?php echo $row['cantidad']; ?></td>
                                     <td><?php echo $row['precio']; ?></td>
                                     <td><?php echo $row['fecha'];?></td>
