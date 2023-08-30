@@ -264,10 +264,7 @@ $result = $conn->query($sql);
     // Procesar el formulario después del envío
     if (isset($_POST['consulta'])) {
         $nombre = $_POST['nombre'];
-        
-        // Aquí puedes realizar cualquier acción con el valor del producto
-        // Por ejemplo, mostrar un mensaje con el producto consultado
-        echo "Producto consultado: $nombre";
+   
         
         // Muestra el valor en otro campo de entrada
         echo '<div class="input-group">';
