@@ -99,13 +99,19 @@ if($_SESSION["id_cargo"]==1){
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
-                        <h6><?php
+                    <h6><?php
                             echo $_SESSION["nombre"]." ".$_SESSION["apellido"];
 
                             if($_SESSION["id_cargo"]==1){
                                 echo " <br>Administrador";
                             }else if($_SESSION["id_cargo"]==2){
                                 echo "<br>Bodeguero";
+                            }else if($_SESSION["id_cargo"]==5){
+                                echo "<br>Super Usuario";
+
+                            }else if($_SESSION["id_cargo"]==4){
+                                echo "<br>Invitado";
+
                             }else{
                                 echo "<br>Productor";
                             }

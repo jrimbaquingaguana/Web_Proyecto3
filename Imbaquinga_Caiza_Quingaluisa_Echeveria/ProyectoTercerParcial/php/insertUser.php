@@ -9,7 +9,12 @@ if($_SESSION["id_cargo"]==1){
     echo "Administrador";
 }else if($_SESSION["id_cargo"]==2){
     echo "Bodeguero";
-}else{
+}else if($_SESSION["id_cargo"]==4){
+    echo "Invitado";
+}else if($_SESSION["id_cargo"]==5){
+    echo "Super Administrador";
+}
+else{
     echo "Productor";
 }
 ?>
@@ -106,6 +111,12 @@ if($_SESSION["id_cargo"]==1){
                                 echo " <br>Administrador";
                             }else if($_SESSION["id_cargo"]==2){
                                 echo "<br>Bodeguero";
+                            }else if($_SESSION["id_cargo"]==5){
+                                echo "<br>Super Usuario";
+
+                            }else if($_SESSION["id_cargo"]==4){
+                                echo "<br>Invitado";
+
                             }else{
                                 echo "<br>Productor";
                             }
@@ -305,21 +316,26 @@ if($_SESSION["id_cargo"]==1){
                                     <option value="2">Bodeguero</option>
                                     <option value="3">Productor</option>
                                     <option value="4">Invitado</option>
+                                    <option value="5">Super Administrador</option>
+
 
                                 </select>
                             
 
                             <div class="row">
                             <div id="privilegios">
-
-                            <br>
-                                <p>Privilegios adicionales</p>
-
-                    <label><input type="checkbox" name="privilegios[1]" value="4"> Ingresar material</label><br>
-                    <label><input type="checkbox" name="privilegios[2]" value="2"> Ver material</label><br>
-                    <label><input type="checkbox" name="privilegios[3]" value="3"> Crear productos</label><br>
-                    <label><input type="checkbox" name="privilegios[4]" value="1"> Administrar Usuarios</label><br>
-                    </div>
+    <br>
+    <p>Privilegios adicionales</p>
+    <label><input type="checkbox" name="privilegios[1]" value="4"> Ingresar material</label><br>
+    <label><input type="checkbox" name="privilegios[2]" value="2"> Ver material</label><br>
+    <label><input type="checkbox" name="privilegios[3]" value="3"> Crear productos</label><br>
+    <label><input type="checkbox" name="privilegios[4]" value="1"> Administrar Usuarios</label><br>
+    <!-- Agregar checkboxes ocultos para los privilegios no seleccionados -->
+    <input type="hidden" name="privilegios[5]" value="0">
+    <input type="hidden" name="privilegios[6]" value="0">
+    <input type="hidden" name="privilegios[7]" value="0">
+    <!-- Agregar más según la cantidad de privilegios que tengas -->
+</div>
 
                 </div>
             </div>
