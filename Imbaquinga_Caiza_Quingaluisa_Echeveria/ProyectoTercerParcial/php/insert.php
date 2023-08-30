@@ -555,36 +555,13 @@ $imagen='';
     </select>
     <br>
     <br>
-    <label for="unidad">Selecciona cuando realizo el ingreso:</label>
-
-<select id="consulta2" name="consulta2">
-
-
-
-<?php
-    include('conexion1.php');
-
-    // Obtener nombres y apellidos desde la base de datos
-    $sql = "SELECT fechac,ID_compra FROM compra  ORDER BY fechac ";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            echo '<option value="' . $row['ID_compra'] . '">' . $row['fechac'] . '</option>';
-        }
-    }
-
-    // Cerrar la conexión
-    $conn->close();
-?>
-</select>
+  
     
         
 
         
     
     
-    </select>
 		</div>
 		
     
@@ -633,10 +610,8 @@ $imagen='';
                         if (isset($_POST['submit3'])) {
     
                             $consulta = $_POST['consulta'];
-                            $consulta1=$_POST['consulta2'];
                             $condicion = "codigo_usuario = '$consulta'";
-                            $condicionf="ID_compra='$consulta1'";
-                            $ret = mysqli_query($con, "SELECT * FROM compra INNER JOIN usuarios ON usuarios.id=compra.codigo_usuario INNER JOIN inventario ON compra.codigo_inventario=inventario.ID WHERE $condicion and $condicionf ");
+                            $ret = mysqli_query($con, "SELECT * FROM compra INNER JOIN usuarios ON usuarios.id=compra.codigo_usuario INNER JOIN inventario ON compra.codigo_inventario=inventario.ID WHERE $condicion  ");
                             
                             $cnt = 1;
                             $row = mysqli_num_rows($ret);
@@ -664,10 +639,8 @@ $imagen='';
                             } 
                             else  {
                               $consulta = $_POST['consulta'];
-                              $consulta1=$_POST['consulta2'];
                               $condicion = "codigo_usuario = '$consulta'";
-                              $condicionf="ID_compra='$consulta1'";
-                                $ret = mysqli_query($con, "SELECT * FROM compra INNER JOIN usuarios ON usuarios.id=compra.codigo_usuario  WHERE $condicion and $condicionf  ");
+                                $ret = mysqli_query($con, "SELECT * FROM compra INNER JOIN usuarios ON usuarios.id=compra.codigo_usuario  WHERE $condicion ");
                                 
                                 $cnt = 1;
                                 $row = mysqli_num_rows($ret);
