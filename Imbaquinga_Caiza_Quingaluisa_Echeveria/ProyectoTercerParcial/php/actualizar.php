@@ -10,7 +10,7 @@ if(empty($_SESSION["id"])){
 if (isset($_GET['id'])) {
     $idProducto = $_GET['id'];
 
-    $conexion = mysqli_connect("localhost", "jose", "040500", "rol");
+    $conexion = mysqli_connect("localhost", "admin", "admin", "rol");
     if (!$conexion) {
         die("Error de conexión: " . mysqli_connect_error());
     }
