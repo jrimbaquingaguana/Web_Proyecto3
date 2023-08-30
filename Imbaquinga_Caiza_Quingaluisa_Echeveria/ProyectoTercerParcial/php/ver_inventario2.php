@@ -162,7 +162,7 @@ include('dbconnection.php');
         <?php endif; ?>
 
 
-        <?php if($_SESSION["id_cargo"]==3 or $_SESSION["id_cargo"]==1 strpos($_SESSION["roles"], '3') !== false):?>
+        <?php if($_SESSION["id_cargo"]==3 strpos($_SESSION["roles"], '3') !== false):?>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="index_despacho.php">
                     <i class="bi bi-bag-check"></i>
@@ -181,7 +181,7 @@ include('dbconnection.php');
         
       </li><!-- End Register Page Nav -->
         <?php endif; ?>
-        <?php if($_SESSION["id_cargo"]==3 or $_SESSION["id_cargo"]==1 strpos($_SESSION["roles"], '3') !== false):?>
+        <?php if($_SESSION["id_cargo"]==3 strpos($_SESSION["roles"], '3') !== false):?>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="index_despacho.php">
                     <i class="bi bi-bag-check"></i>
