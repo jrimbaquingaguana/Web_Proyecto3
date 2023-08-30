@@ -142,7 +142,7 @@ if(empty($_SESSION["id"])){
           </li><!-- End Profile Page Nav -->
 
 
-          <?php if($_SESSION["id_cargo"] == 2) || strpos($_SESSION["roles"], '2') !== false:?>
+          <?php if($_SESSION["id_cargo"]==2 || strpos($_SESSION["roles"], '2') !== false):?>
               <li class="nav-item">
                   <a class="nav-link collapsed" href="index.php">
                       <i class="bi bi-pencil-square"></i>
@@ -152,7 +152,7 @@ if(empty($_SESSION["id"])){
           <?php endif; ?>
 
 
-          <?php if($_SESSION["id_cargo"]==2) || strpos($_SESSION["roles"], '2') !== false:?>
+          <?php if($_SESSION["id_cargo"]==2 || strpos($_SESSION["roles"], '2') !== false):?>
               <li class="nav-item">
                   <a class="nav-link collapsed" href="insert.php">
                       <i class="bi bi-bag-plus"></i>
