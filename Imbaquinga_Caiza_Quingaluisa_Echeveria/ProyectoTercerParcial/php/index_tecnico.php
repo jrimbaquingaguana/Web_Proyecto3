@@ -4,8 +4,8 @@ if(empty($_SESSION["id"])){
     header("location: ../login.php");
 }
 $servername = "localhost";
-$username = "jose";
-$password = "040500";
+$username = "admin";
+$password = "admin";
 $dbname = "rol";
 
 // Crear una conexión a la base de datos
