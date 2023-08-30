@@ -19,7 +19,7 @@ echo "</head><body>";
 
 // Crear tabla
 echo '<table border="1">';
-echo '<tr><th>Fecha</th><th>Nombre del Producto</th><th>Cantidad</th><th>Precio</th><th>Total</th></tr>';
+echo '<tr><th>Fecha</th><th>Nombre del Producto</th><th>Cantidad</th>';
 
 // Agregar los registros de compra al archivo XLS
 foreach ($data as $row) {
@@ -27,8 +27,7 @@ foreach ($data as $row) {
     echo '<td>' . $row['Fecha'] . '</td>';
     echo '<td>' . $row['Nombre del Producto'] . '</td>';
     echo '<td>' . $row['Cantidad'] . '</td>';
-    echo '<td>' . $row['Precio'] . '</td>';
-    echo '<td>' . $row['Total'] . '</td>';
+  
     echo '</tr>';
 }
 
