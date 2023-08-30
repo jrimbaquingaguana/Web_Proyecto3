@@ -125,74 +125,79 @@ if(empty($_SESSION["id"])){
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="users-profile.php">
-                <i class="bi bi-person"></i>
-                <span>Perfil</span>
-            </a>
-        </li><!-- End Profile Page Nav -->
+          <li class="nav-item">
+              <a class="nav-link collapsed" href="users-profile.php">
+                  <i class="bi bi-person"></i>
+                  <span>Perfil</span>
+              </a>
+          </li><!-- End Profile Page Nav -->
 
 
-        <?php if($_SESSION["id_cargo"] == 2 || strpos($_SESSION["roles"], '2') !== false ):?>
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="index.php">
-                <i class="bi bi-pencil-square"></i>
-                <span>Inventario</span>
-            </a>
-        </li><!-- End Inventario Page Nav -->
-        <?php endif; ?>
-
-
-        <?php if($_SESSION["id_cargo"]==2 || strpos($_SESSION["roles"], '2') !== false):?>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="insert.php">
-                    <i class="bi bi-bag-plus"></i>
-                    <span>Insertar Productos a bodega</span>
-                </a>
-            </li><!-- End Registro a Bodega Page Nav -->
-        <?php endif; ?>
-
-
-        <?php if($_SESSION["id_cargo"]==3 || strpos($_SESSION["roles"], '3') !== false):?>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="index_despacho.php">
-                    <i class="bi bi-card-list"></i>
-                    <span>Crear Hoja tecnica</span>
-                </a>
-            </li><!-- End Registro a Bodega Page Nav -->
-        <?php endif; ?>
-
-
-        <?php if($_SESSION["id_cargo"]==1 || strpos($_SESSION["roles"], '1') !== false):?>
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="usersCrud.php">
-          <i class="bi bi-card-list"></i>
-          <span>Administrador de Usuarios</span>
-        </a>
-      </li><!-- End Register Page Nav -->
+          <?php if($_SESSION["id_cargo"] == 2 or $_SESSION["id_cargo"] == 3 || strpos($_SESSION["roles"], '2') !== false or strpos($_SESSION["roles"], '3') !== false):?>
+              <li class="nav-item">
+                  <a class="nav-link collapsed" href="index.php">
+                      <i class="bi bi-pencil-square"></i>
+                      <span>Inventario</span>
+                  </a>
+              </li><!-- End Inventario Page Nav -->
           <?php endif; ?>
-          
+
+
+          <?php if($_SESSION["id_cargo"]==2 || strpos($_SESSION["roles"], '2') !== false):?>
+              <li class="nav-item">
+                  <a class="nav-link collapsed" href="insert.php">
+                      <i class="bi bi-bag-plus"></i>
+                      <span>Insertar Productos a bodega</span>
+                  </a>
+              </li><!-- End Registro a Bodega Page Nav -->
+          <?php endif; ?>
+
+          <?php if($_SESSION["id_cargo"]==1 || strpos($_SESSION["roles"], '1') !== false):?>
+              <li class="nav-item">
+                  <a class="nav-link collapsed" href="usersCrud.php">
+                      <i class="bi bi-card-list"></i>
+                      <span>Administrador de Usuarios</span>
+                  </a>
+              </li><!-- End Register Page Nav -->
+          <?php endif; ?>
+
           <?php if($_SESSION["id_cargo"]==3 || strpos($_SESSION["roles"], '3') !== false):?>
-        <li class="nav-item">
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="ver_inventario.php">
-            <i class="bi bi-card-list"></i>
-            <span>Ver hoja tecnica</span>
-          <a class="nav-link collapsed" href="index_tecnico.php">
-            <i class="bi bi-bag-check"></i>
-            <span>Crear Productos</span>
-
-          </a>
-          <a class="nav-link collapsed" href="ver_inventario2.php">
-            <i class="bi bi-bag-check"></i>
-            <span>Registro de creacion de  Productos</span>
-          </a>
-        </li><!-- End Register Page Nav -->
+              <li class="nav-item">
+                  <a class="nav-link collapsed" href="index_despacho.php">
+                      <i class="bi bi-card-list"></i>
+                      <span>Crear Hoja tecnica</span>
+                  </a>
+              </li><!-- End Registro a Bodega Page Nav -->
           <?php endif; ?>
 
-      
+          <?php if($_SESSION["id_cargo"]==3 || strpos($_SESSION["roles"], '3') !== false):?>
+              <li class="nav-item">
+                  <a class="nav-link collapsed" href="ver_inventario.php">
+                      <i class="bi bi-card-list"></i>
+                      <span>Ver hoja tecnica</span>
+                  </a>
+              </li><!-- End Register Page Nav -->
+          <?php endif; ?>
 
-    </ul>
+          <?php if($_SESSION["id_cargo"]==3 || strpos($_SESSION["roles"], '3') !== false):?>
+              <li class="nav-item">
+                  <a class="nav-link collapsed" href="index_tecnico.php">
+                      <i class="bi bi-card-list"></i>
+                      <span>Crear Productos</span>
+                  </a>
+              </li><!-- End Register Page Nav -->
+          <?php endif; ?>
+
+          <?php if($_SESSION["id_cargo"]==3 || strpos($_SESSION["roles"], '3') !== false):?>
+              <li class="nav-item">
+                  <a class="nav-link collapsed" href="ver_inventario2.php">
+                      <i class="bi bi-card-list"></i>
+                      <span>Registro de creacion de  Productos</span>
+                  </a>
+              </li><!-- End Register Page Nav -->
+          <?php endif; ?>
+
+      </ul>
 
   </aside><!-- End Sidebar-->
 
