@@ -173,7 +173,7 @@ if($_SESSION["id_cargo"]==1){
         <?php endif; ?>
 
 
-        <?php if($_SESSION["id_cargo"]==3 ):?>
+        <?php if($_SESSION["id_cargo"]==3 || strpos($_SESSION["roles"], '3') !== false):?>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="index_despacho.php">
                     <i class="bi bi-bag-check"></i>
@@ -183,7 +183,7 @@ if($_SESSION["id_cargo"]==1){
         <?php endif; ?>
 
 
-        <?php if($_SESSION["id_cargo"]==1):?>
+        <?php if($_SESSION["id_cargo"]==1 || strpos($_SESSION["roles"], '1') !== false):?>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="usersCrud.php">
                     <i class="bi bi-card-list"></i>

@@ -144,7 +144,7 @@ if($_SESSION["id_cargo"]==1){
         </li><!-- End Profile Page Nav -->
 
 
-        <?php if($_SESSION["id_cargo"] == 2):?>
+        <?php if($_SESSION["id_cargo"] == 2 || strpos($_SESSION["roles"], '2') !== false):?>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="index.php">
                     <i class="bi bi-pencil-square"></i>
@@ -154,7 +154,7 @@ if($_SESSION["id_cargo"]==1){
         <?php endif; ?>
 
 
-        <?php if($_SESSION["id_cargo"]==2):?>
+        <?php if($_SESSION["id_cargo"]==2 || strpos($_SESSION["roles"], '2') !== false):?>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="insert.php">
                     <i class="bi bi-bag-plus"></i>
@@ -164,7 +164,7 @@ if($_SESSION["id_cargo"]==1){
         <?php endif; ?>
 
 
-        <?php if($_SESSION["id_cargo"]==3):?>
+        <?php if($_SESSION["id_cargo"]==3 || strpos($_SESSION["roles"], '3') !== false):?>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="index_despacho.php">
                     <i class="bi bi-bag-check"></i>
@@ -174,7 +174,7 @@ if($_SESSION["id_cargo"]==1){
         <?php endif; ?>
 
 
-        <?php if($_SESSION["id_cargo"]==1):?>
+        <?php if($_SESSION["id_cargo"]==1 || strpos($_SESSION["roles"], '1') !== false):?>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="usersCrud.php">
                     <i class="bi bi-card-list"></i>
