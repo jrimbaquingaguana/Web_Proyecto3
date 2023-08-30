@@ -293,7 +293,7 @@ if($_SESSION["id_cargo"]==1){
                             <br>
                                 <p>Privilegios adicionales</p>
 
-                    <label><input type="checkbox" name="privilegios[1]" value="2"> Ingresar material</label><br>
+                    <label><input type="checkbox" name="privilegios[1]" value="4"> Ingresar material</label><br>
                     <label><input type="checkbox" name="privilegios[2]" value="2"> Ver material</label><br>
                     <label><input type="checkbox" name="privilegios[3]" value="3"> Crear productos</label><br>
                     <label><input type="checkbox" name="privilegios[4]" value="1"> Administrar Usuarios</label><br>

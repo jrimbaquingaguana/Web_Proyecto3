@@ -235,7 +235,7 @@ $result = $conn->query($sql);
 
   <div class="input-group">
         <label for="producto">Nombre del Producto:</label>
-        <input type="text" name="nombre" id="producto" required>
+        <input type="text" name="nombre" id="nombre" required>
     </div>
     <input type="submit" name="consulta" value="Consultar Materiales">
 
@@ -245,15 +245,29 @@ $result = $conn->query($sql);
 <div class="form-section">
         <h2>Hoja Tecnica</h2>
         <form action="procesar1.php" method="post">
-  
-
+        <?php
+    // Procesar el formulario después del envío
+    if (isset($_POST['consulta'])) {
+        $nombre = $_POST['nombre'];
+        
+        // Aquí puedes realizar cualquier acción con el valor del producto
+        // Por ejemplo, mostrar un mensaje con el producto consultado
+        echo "Producto consultado: $nombre";
+        
+        // Muestra el valor en otro campo de entrada
+        echo '<div class="input-group">';
+        echo '<label>Producto consultado:</label>';
+        echo '<input type="text" name="nombre" value="' . $nombre . '" readonly>';
+        echo '</div>';
+    }
+    ?>
     <!-- Sección de Materiales -->
     <div class="input-group">
         <label>Materiales necesarios:</label>
         <div id="materials-list">
             <div class="material-item">
                 <?php while ($row = $result->fetch_assoc()) {
-                    $materiales = explode(',', $row['nombre_material']);
+                    $materiales = explode(', ', $row['nombre_material']);
                     for ($i = 0; $i < count($materiales); $i++) { ?>
                         <select name="materiales[]">
                             <option value="<?php echo $materiales[$i]; ?>">
@@ -276,7 +290,7 @@ $result = $conn->query($sql);
                 $result->data_seek(0); // Reiniciar el puntero del resultado a la posición inicial
 
                 while ($row = $result->fetch_assoc()) {
-                    $cantidades = explode(',', $row['cantidad']);
+                    $cantidades = explode(', ', $row['cantidad']);
                     for ($i = 0; $i < count($cantidades); $i++) { ?>
                         <select name="cantidades[]">
                             <option value="<?php echo $cantidades[$i]; ?>">
@@ -388,7 +402,22 @@ $result = $conn->query($sql);
 
   <!-- Template Main JS File -->
   <script src="../js/main.js"></script>
+  <script>
+        // Obtener elementos del DOM
+        const formulario = document.getElementById('miFormulario');
+        const nombreInput = document.getElementById('nombre');
+        const nombreMostradoInput = document.getElementById('nombreMostrado');
 
+        // Escuchar el evento "submit" en el formulario
+        formulario.addEventListener('submit', function(event) {
+            event.preventDefault(); // Evitar que el formulario se envíe
+
+            // Copiar el valor del campo de entrada al campo no editable
+            nombreMostradoInput.value = nombreInput.value;
+        });
+    </script>
+
+    
 </body>
 
 </html>

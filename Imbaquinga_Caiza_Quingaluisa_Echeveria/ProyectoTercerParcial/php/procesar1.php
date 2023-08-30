@@ -39,6 +39,26 @@ if (isset($_POST['crearProducto'])) {
     $materialesAgrupados = implode(', ', $materiales);
     $cantidadesAgrupadas = implode(', ', $cantidades);
     $precioTotal = 0; // Inicializar el precio total
+    foreach($materiales as $index => $material) {
+        $cantidadNecesaria = $cantidades[$index];
+    
+        $consultaMaterial = "SELECT cantidad, precio FROM inventario WHERE nombre = '$material' AND tipo = 'MATERIAL'";
+        $resultadoMaterial = mysqli_query($conexion, $consultaMaterial);
+        $dataMaterial = mysqli_fetch_assoc($resultadoMaterial);
+    
+        $cantidadDisponible = $dataMaterial['cantidad'];
+        $precioMaterialPorUnidad = $dataMaterial['precio'];
+    
+        if ($cantidadDisponible < $cantidadNecesaria * $numProductos) {
+            $mensajeError = "No hay suficiente cantidad de $material disponible.";
+            echo "<p>$mensajeError</p>";
+            echo "<p>Redirigiendo en 2 segundos...</p>";
+            header("refresh:3;url=index_tecnico.php");
+            exit();
+        }
+    
+        $precioTotal += $precioMaterialPorUnidad * $cantidadNecesaria * $numProductos;
+    }
 
     foreach($materiales as $index => $material) {
         $cantidadNecesaria = $cantidades[$index];
