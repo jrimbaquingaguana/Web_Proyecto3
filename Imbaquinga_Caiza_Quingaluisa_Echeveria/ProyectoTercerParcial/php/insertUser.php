@@ -153,7 +153,7 @@ if($_SESSION["id_cargo"]==1){
           </li><!-- End Profile Page Nav -->
 
 
-          <?php if($_SESSION["id_cargo"] == 2 or $_SESSION["id_cargo"] == 3 || strpos($_SESSION["roles"], '2') !== false or strpos($_SESSION["roles"], '3') !== false):?>
+          <?php if($_SESSION["id_cargo"] == 2 or $_SESSION["id_cargo"] == 3 or $_SESSION["id_cargo"] == 5 || strpos($_SESSION["roles"], '2') !== false or strpos($_SESSION["roles"], '3') !== false or strpos($_SESSION["roles"], '5') !== false):?>
               <li class="nav-item">
                   <a class="nav-link collapsed" href="index.php">
                       <i class="bi bi-pencil-square"></i>
@@ -163,7 +163,7 @@ if($_SESSION["id_cargo"]==1){
           <?php endif; ?>
 
 
-          <?php if($_SESSION["id_cargo"]==2 || strpos($_SESSION["roles"], '2') !== false):?>
+          <?php if($_SESSION["id_cargo"]==2 or $_SESSION["id_cargo"] == 5 || strpos($_SESSION["roles"], '2') !== false or strpos($_SESSION["roles"], '5') !== false):?>
               <li class="nav-item">
                   <a class="nav-link collapsed" href="insert.php">
                       <i class="bi bi-bag-plus"></i>
@@ -172,7 +172,7 @@ if($_SESSION["id_cargo"]==1){
               </li><!-- End Registro a Bodega Page Nav -->
           <?php endif; ?>
 
-          <?php if($_SESSION["id_cargo"]==1 || strpos($_SESSION["roles"], '1') !== false):?>
+          <?php if($_SESSION["id_cargo"]==1 or $_SESSION["id_cargo"] == 5 || strpos($_SESSION["roles"], '1') !== false or strpos($_SESSION["roles"], '5') !== false):?>
               <li class="nav-item">
                   <a class="nav-link collapsed" href="usersCrud.php">
                       <i class="bi bi-card-list"></i>
@@ -181,7 +181,7 @@ if($_SESSION["id_cargo"]==1){
               </li><!-- End Register Page Nav -->
           <?php endif; ?>
 
-          <?php if($_SESSION["id_cargo"]==3 || strpos($_SESSION["roles"], '3') !== false):?>
+          <?php if($_SESSION["id_cargo"]==3 or $_SESSION["id_cargo"] == 5 || strpos($_SESSION["roles"], '3') !== false or strpos($_SESSION["roles"], '5') !== false):?>
               <li class="nav-item">
                   <a class="nav-link collapsed" href="index_despacho.php">
                       <i class="bi bi-card-list"></i>
@@ -190,7 +190,7 @@ if($_SESSION["id_cargo"]==1){
               </li><!-- End Registro a Bodega Page Nav -->
           <?php endif; ?>
 
-          <?php if($_SESSION["id_cargo"]==3 || strpos($_SESSION["roles"], '3') !== false):?>
+          <?php if($_SESSION["id_cargo"]==3 or $_SESSION["id_cargo"] == 5 || strpos($_SESSION["roles"], '3') !== false or strpos($_SESSION["roles"], '5') !== false):?>
               <li class="nav-item">
                   <a class="nav-link collapsed" href="ver_inventario.php">
                       <i class="bi bi-card-list"></i>
@@ -199,7 +199,7 @@ if($_SESSION["id_cargo"]==1){
               </li><!-- End Register Page Nav -->
           <?php endif; ?>
 
-          <?php if($_SESSION["id_cargo"]==3 || strpos($_SESSION["roles"], '3') !== false):?>
+          <?php if($_SESSION["id_cargo"]==3 or $_SESSION["id_cargo"] == 5 || strpos($_SESSION["roles"], '3') !== false or strpos($_SESSION["roles"], '5') !== false):?>
               <li class="nav-item">
                   <a class="nav-link collapsed" href="index_tecnico.php">
                       <i class="bi bi-card-list"></i>
@@ -208,7 +208,7 @@ if($_SESSION["id_cargo"]==1){
               </li><!-- End Register Page Nav -->
           <?php endif; ?>
 
-          <?php if($_SESSION["id_cargo"]==3 || strpos($_SESSION["roles"], '3') !== false):?>
+          <?php if($_SESSION["id_cargo"]==3 or $_SESSION["id_cargo"] == 5 || strpos($_SESSION["roles"], '3') !== false or strpos($_SESSION["roles"], '5') !== false):?>
               <li class="nav-item">
                   <a class="nav-link collapsed" href="ver_inventario2.php">
                       <i class="bi bi-card-list"></i>
@@ -218,7 +218,6 @@ if($_SESSION["id_cargo"]==1){
           <?php endif; ?>
 
       </ul>
-
 </aside><!-- End Sidebar-->
 
 <main id="main" class="main">
