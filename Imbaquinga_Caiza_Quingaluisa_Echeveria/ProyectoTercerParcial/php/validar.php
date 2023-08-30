@@ -30,7 +30,7 @@ if ($filas && password_verify($contraseña, $filas['contraseña'])) { // Si las 
 
     if ($filas['id_cargo'] == 1) { // Administrador
         header("location: ../php/indexAdministrador.php");
-    } else if ($filas['id_cargo'] == 2 || $filas['id_cargo'] == 3) { // Cliente
+    } else if ($filas['id_cargo'] == 2 || $filas['id_cargo'] == 3 || $filas['id_cargo'] == 4 || $filas['id_cargo'] == 5) { // Cliente
         header("location: ../php/indexAdministrador.php");
     }
 } else { // Credenciales incorrectas
